@@ -1,12 +1,13 @@
 using Gtk;
 using System;
 using SkiaSharp.Views.Gtk;
+using Pla.Lib;
 
 namespace Pla.Linux
 {
-    class PlaApp : Window {
+    public class App : Window {
     
-        public PlaApp() : base("Center")
+        public App(IPainter painter) : base("Center")
         {
             SetDefaultSize(250, 200);
             SetPosition(WindowPosition.Center);
@@ -25,10 +26,15 @@ namespace Pla.Linux
 
                 var canvas = surface.Canvas;
 
-                // draw on the canvas
-
-                canvas.Clear(new SkiaSharp.SKColor(255,255,255) );
-                canvas.Flush ();
+                
+                if(painter==null)
+                {
+                    canvas.Clear(new SkiaSharp.SKColor(255,255,255) );
+                    canvas.Flush ();
+                }else
+                {
+                    painter.Paint(canvas);
+                }
             };
 
 
@@ -37,10 +43,10 @@ namespace Pla.Linux
             ShowAll();
         }
         
-        public static void PlaMain()
+        public static void PlaMain(IPainter painter = null)
         {
             Application.Init();
-            new PlaApp();        
+            new App(painter);        
             Application.Run();
         }
     }

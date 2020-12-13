@@ -11,4 +11,8 @@
     <PackageReference Include="SkiaSharp.Views.Gtk3" Version="2.80.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pla.Lib\Pla.Lib.csproj" />
+  </ItemGroup>
+
 </Project>
