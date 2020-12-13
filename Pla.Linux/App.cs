@@ -5,10 +5,12 @@ using Pla.Lib;
 
 namespace Pla.Linux
 {
-    public class App : Window {
-    
-        public App(IPainter painter) : base("Center")
+    public class App : Window, IEngine {
+        private SKDrawingArea drawingArea;
+
+        public App(IContext context) : base("Center")
         {
+
             SetDefaultSize(250, 200);
             SetPosition(WindowPosition.Center);
             
@@ -17,7 +19,7 @@ namespace Pla.Linux
             VBox vbox = new VBox(false, 5);
             HBox hbox = new HBox(true, 3);
             
-            var drawingArea = new SKDrawingArea();
+            drawingArea = new SKDrawingArea();
             drawingArea.SetSizeRequest(100,100);
             drawingArea.PaintSurface += (sender, e) => {
                 var surface = e.Surface;
@@ -27,27 +29,49 @@ namespace Pla.Linux
                 var canvas = surface.Canvas;
 
                 
-                if(painter==null)
+                if(context.GetPainter()==null)
                 {
                     canvas.Clear(new SkiaSharp.SKColor(255,255,255) );
                     canvas.Flush ();
                 }else
                 {
-                    painter.Paint(canvas);
+                    context.GetPainter()?.Paint(e.Info, e.Surface);
                 }
             };
 
+            drawingArea.AddEvents (
+                (int)Gdk.EventMask.ButtonPressMask |
+                (int)Gdk.EventMask.TouchMask                
+                );
+            
+            drawingArea.ButtonPressEvent += (sender, e) =>{
+                int x, y;
+                drawingArea.TranslateCoordinates(drawingArea, (int)e.Event.X, (int)e.Event.Y, out x, out y);
+                context.GetControl()?.Click(x, y);
+            };
+            drawingArea.TouchEvent+= (sender, e) => {
+                int x, y;
+                drawingArea.TranslateCoordinates(drawingArea, (int)e.Event.X, (int)e.Event.Y, out x, out y);
+                context.GetControl()?.Click(x, y);
+            };
 
             Add(drawingArea);
 
             ShowAll();
+
+            context.Init(this);
         }
-        
-        public static void PlaMain(IPainter painter = null)
+
+        public static void PlaMain(IContext ctx)
         {
             Application.Init();
-            new App(painter);        
+            new App(ctx);
             Application.Run();
+        }
+
+        public void RequestRefresh()
+        {
+            drawingArea.QueueDraw();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Example;
 
 namespace Pla.IDE
 {
@@ -6,7 +7,7 @@ namespace Pla.IDE
     {
         static void Main(string[] args)
         {
-            Pla.Linux.App.PlaMain(new Example.Painter());
+            Pla.Linux.App.PlaMain(new Ctx());
             Console.WriteLine("Hello World!");
         }
     }

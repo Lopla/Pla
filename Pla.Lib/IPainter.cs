@@ -5,6 +5,6 @@ namespace Pla.Lib
 {
     public interface IPainter
     {
-        void Paint(SKCanvas canvas);
+        void Paint(SKImageInfo info, SKSurface surface);
     }
 }
