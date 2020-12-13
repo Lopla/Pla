@@ -6,7 +6,7 @@ namespace Pla.IDE
     {
         static void Main(string[] args)
         {
-            Pla.Linux.PlaApp.App(new Example.Painter());
+            Pla.Linux.App.PlaMain(new Example.Painter());
             Console.WriteLine("Hello World!");
         }
     }
