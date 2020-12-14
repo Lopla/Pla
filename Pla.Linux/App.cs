@@ -1,6 +1,7 @@
 using Gtk;
 using System;
 using SkiaSharp.Views.Gtk;
+using SkiaSharp;
 using Pla.Lib;
 using Pla.Shared;
 
@@ -23,15 +24,26 @@ namespace Pla.Linux
             ctx.Init(this);
 
             var sw = new SkiaWrapper(ctx);
-            _sk.PaintSurface += (sender, args) => sw.OnSkOnPaintSurface(sender, args);
-            _sk.Touch += (sender, args) => sw.OnTouch(sender, args);
-            _sk.EnableTouchEvents = true;
+            _sk.PaintSurface += (sender, e) => 
+            {
+                sw.OnSkOnPaintSurface(e.Info, e.Surface);
+            };
+            _sk.TouchEvent+= (sender,e) =>{
+                var loc = SKPoint.Empty;
+
+                var tArgs = ( loc, loc ); 
+                sw.OnTouch(sender, tArgs  );  
+                
+            };
+            _sk.AddEvents( (int)Gdk.EventMask.TouchMask   );
             
-            Add(drawingArea);
+            //_sk.  .Touch += (sender, args) => sw.OnTouch(sender, args);
+            //_sk.EnableTouchEvents = true;
+            
+            Add(_sk);
 
             ShowAll();
 
-            context.Init(new Pla.Shared.Engine());
         }
 
         public static void PlaMain(IContext ctx)
@@ -42,7 +54,7 @@ namespace Pla.Linux
         }
 
         public void RequestRefresh(){
-            this._sk.InvalidateSurface();
+            
         }
     }
 }

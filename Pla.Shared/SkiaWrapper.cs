@@ -1,4 +1,5 @@
-﻿using Pla.Lib;
+﻿using System;
+using Pla.Lib;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 
@@ -13,29 +14,24 @@ namespace Pla.Shared
             _context = context;
         }
 
-        public void OnSkOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        public void OnSkOnPaintSurface(SKImageInfo info, SKSurface surface)
         {
-            var surface = e.Surface;
-            var surfaceWidth = e.Info.Width;
-            var surfaceHeight = e.Info.Height;
-
-            var canvas = surface.Canvas;
-
-
             if (_context.GetPainter() == null)
             {
+                var canvas = surface.Canvas;
                 canvas.Clear(new SKColor(255, 255, 255));
                 canvas.Flush();
             }
             else
             {
-                _context.GetPainter()?.Paint(e.Info, e.Surface);
+                _context.GetPainter()?.Paint(info, surface);
             }
         }
 
-        public void OnTouch(object sender, SKTouchEventArgs args)
+        public void OnTouch(object sender, (SKPoint location, SKPoint loc2) data)
         { 
-            _context.GetControl()?.Click(args.Location);
+            _context.GetControl()?.Click(data.location);
         }
+
     }
 }

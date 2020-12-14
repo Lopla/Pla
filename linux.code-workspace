@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"Pla.Mobile/**": true,
+			"Pla.Mobile.sln": true,
+			"Pla.Mobile.sln.DotSettings.user": true
+		}
+	}
+}
