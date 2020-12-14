@@ -65,12 +65,11 @@ namespace Example
             canvas.Flush();
         }
 
-        public void Click(int x, int y)
+        public void Click(SKPoint argsLocation)
         {
-            text = $"Święta: 🎄 " + x.ToString()+" "+y.ToString();
+            text = $"Święta: 🎄 " + argsLocation.ToString();
 
             engine.RequestRefresh();
         }
-
     }
 }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pla.Lib\Pla.Lib.csproj" />
+    <ProjectReference Include="..\Pla.Shared\Pla.Shared.csproj" />
   </ItemGroup>
 
 </Project>

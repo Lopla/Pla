@@ -1,10 +1,9 @@
-﻿using System;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace Pla.Lib
 {
     public interface IControl
     {
-        void Click(int x, int y);
+        void Click(SKPoint argsLocation);
     }
 }
