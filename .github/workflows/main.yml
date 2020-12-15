@@ -52,7 +52,7 @@ jobs:
         #$ANDROID_HOME/build-tools/30.0.3/zipalign -f -v 4 pla_signed.apk pla
         #/Users/runner/Library/Android/sdk/build-tools/30.0.1/zipalign -f -v 4 pla_signed.apk pla
         
-        ~/Library/Android/sdk/build-tools/30.0.1/zipalign -f -v 4 ~/pla_signed.apk pla
+        ~/Library/Android/sdk/build-tools/30.0.1/zipalign -f -v 4 ~/pla_signed.apk ~/pla.apk
         
     - name: Release
       uses: docker://antonyurchenko/git-release:latest
@@ -64,7 +64,7 @@ jobs:
         ALLOW_TAG_PREFIX: "true"
       with:
         args: |
-            Pla/Pla.Mobile/*.apk
+            ~/pla.apk
         
   #iOS:
   #  runs-on: macos-latest
