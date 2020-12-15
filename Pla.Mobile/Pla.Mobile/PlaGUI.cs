@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Pla.Lib;
 using Pla.Shared;
+using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 
@@ -18,8 +19,16 @@ namespace Pla.Mobile
             ctx.Init(this);
 
             var sw = new SkiaWrapper(ctx);
-            _sk.PaintSurface += (sender, args) => sw.OnSkOnPaintSurface(sender, args);
-            _sk.Touch += (sender, args) => sw.OnTouch(sender, args);
+            _sk.PaintSurface += (sender, args) =>
+            {
+                sw.OnSkOnPaintSurface(args.Info, args.Surface);
+            };
+            _sk.Touch += (sender, args) =>
+            {
+                var location = new SKPoint();
+                var t = (location, location);
+                sw.OnTouch(sender, t);
+            };
             _sk.EnableTouchEvents = true;
 
             Content = _sk;
