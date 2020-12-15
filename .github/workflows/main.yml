@@ -20,6 +20,10 @@ jobs:
       run: |
         cd ..
         ls
+    - name: SDK location
+      run: |
+        echo $ANDROID_HOME
+        $ANDROID_HOME/build-tools/26.1.1/zipalign -v
         
   Android:
     runs-on: macos-latest
