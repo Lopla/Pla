@@ -39,6 +39,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: iOS
       run: |
+        nuget restore Pla.Mobile.sln
         cd Pla.Mobile
-        nuget restore
         msbuild Pla.Mobile.iOS/Blank.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
