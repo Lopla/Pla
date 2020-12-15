@@ -33,12 +33,12 @@ jobs:
         ls
         msbuild Pla.Mobile.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
         
-  iOS:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: iOS
-      run: |
-        nuget restore Pla.Mobile.sln
-        cd Pla.Mobile
-        msbuild Pla.Mobile.iOS/Blank.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
+  #iOS:
+  #  runs-on: macos-latest
+  #  steps:
+  #  - uses: actions/checkout@v1
+  #  - name: iOS
+  #    run: |
+  #      nuget restore Pla.Mobile.sln
+  #      cd Pla.Mobile
+  #      msbuild Pla.Mobile.iOS/Blank.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
