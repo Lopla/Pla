@@ -34,9 +34,12 @@ jobs:
         # debug
         # msbuild Pla.Mobile.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
         msbuild /p:Configuration=Release /t:PackageForAndroid  Pla.Mobile.Android.csproj
-        #jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore yourKeyStoreFile -storepass yourKeystorePassword -signedjar yourSigned.apk yourApkFromMsBuild.apk yourKeystoreAlias
-        #zipalign -f -v 4 yourSigned.apk yourFinaleApk
-
+        
+        # jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore yourKeyStoreFile -storepass yourKeystorePassword -signedjar yourSigned.apk yourApkFromMsBuild.apk yourKeystoreAlias
+        # zipalign -f -v 4 yourSigned.apk yourFinaleApk
+        # here we artefact Pla/Pla/Pla.Mobile/Pla.Mobile.Android/bin/Release/com.companyname.pla.mobile.apk
+        
+        
   #iOS:
   #  runs-on: macos-latest
   #  steps:
