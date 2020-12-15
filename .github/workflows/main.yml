@@ -24,7 +24,8 @@ jobs:
       run: |
         echo $ANDROID_HOME
         # ls $ANDROID_HOME/build-tools/
-        ls $ANDROID_HOME/tools/bin
+        # ls $ANDROID_HOME/tools/bin
+        find ~/Library/Android/sdk/build-tools -name "zipalign"
                 
   Android:
     runs-on: macos-latest
