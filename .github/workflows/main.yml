@@ -28,8 +28,8 @@ jobs:
     - name: Android
       run: |
         cd Pla.Mobile
-        nuget restore
         cd Pla.Mobile.Android
+        nuget restore
         ls
         msbuild Pla.Mobile.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
         
