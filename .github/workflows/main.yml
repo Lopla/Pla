@@ -53,20 +53,23 @@ jobs:
         #/Users/runner/Library/Android/sdk/build-tools/30.0.1/zipalign -f -v 4 pla_signed.apk pla
         
         ~/Library/Android/sdk/build-tools/30.0.1/zipalign -f -v 4 ~/pla_signed.apk ~/pla.apk
-        
-    - name: Release
-      uses: docker://antonyurchenko/git-release:latest
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRAFT_RELEASE: "false"
-        PRE_RELEASE: "false"
-        ALLOW_EMPTY_CHANGELOG: "true"
-        ALLOW_TAG_PREFIX: "false"        
-        CHANGELOG_FILE: "Ple/CHANGELOG.md"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        #body: |
+        #  Changes in this Release
+        #  - First Change
+        #  - Second Change
+        draft: false
+        prerelease: false
         args: |
             ~/pla.apk
-        
+    
   #iOS:
   #  runs-on: macos-latest
   #  steps:
