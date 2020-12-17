@@ -84,6 +84,9 @@ jobs:
         asset_path:  ~/pla.apk
         asset_name: pla.apk
         asset_content_type: application/zip
+        run: |
+          ls
+          pwd
         
   #iOS:
   #  runs-on: macos-latest
