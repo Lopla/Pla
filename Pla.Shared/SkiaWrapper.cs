@@ -32,6 +32,5 @@ namespace Pla.Shared
         { 
             _context.GetControl()?.Click(data.location);
         }
-
     }
 }

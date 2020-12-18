@@ -35,13 +35,18 @@ namespace Pla.Gtk
                 sw.OnTouch(sender, tArgs  );  
                 
             };
-            _sk.AddEvents( (int)Gdk.EventMask.TouchMask   );
-            _sk.TouchEvent += (sender, args) => {
+
+            _sk.AddEvents (
+                (int)Gdk.EventMask.ButtonPressMask |
+                (int)Gdk.EventMask.TouchMask                
+                );
+
+            _sk.ButtonPressEvent += (sender, e) =>{
+                int x, y;
+                _sk.TranslateCoordinates(_sk, (int)e.Event.X, (int)e.Event.Y, out x, out y);
                 sw.OnTouch(sender, (SKPoint.Empty, SKPoint.Empty));
             };
-            //_sk.  .Touch += (sender, args) => sw.OnTouch(sender, args);
-            //_sk.EnableTouchEvents = true;
-            
+
             Add(_sk);
 
             ShowAll();
@@ -55,7 +60,7 @@ namespace Pla.Gtk
         }
 
         public void RequestRefresh(){
-            
+            _sk.QueueDraw();
         }
     }
 }
