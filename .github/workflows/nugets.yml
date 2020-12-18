@@ -24,8 +24,21 @@ jobs:
     - name: Publish Gtk
       run: dotnet publish Pla.Gtk
  
-    - name: Publish to NuGet
+    - name: Lib to NuGet
       uses: brandedoutcast/publish-nuget@v2
+      continue-on-error: true
       with:
         PROJECT_FILE_PATH: Pla.Lib/Pla.Lib.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Shared to NuGet
+      uses: brandedoutcast/publish-nuget@v2
+      continue-on-error: true
+      with:
+        PROJECT_FILE_PATH: Pla.Shared/Pla.Shared.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: Gtk to NuGet
+      uses: brandedoutcast/publish-nuget@v2
+      continue-on-error: true
+      with:
+        PROJECT_FILE_PATH: Pla.Gtk/Pla.Gtk.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
