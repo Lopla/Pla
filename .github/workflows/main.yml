@@ -5,6 +5,8 @@ on: [push, pull_request]
 jobs:
   Practice:
     runs-on: macos-latest
+    env:
+      PROJECT_NAME : "Pla.csproj"
     steps:
     - uses: actions/checkout@v1
     - name: Run a one-line script
@@ -23,8 +25,6 @@ jobs:
     - name: SDK location
       run: |
         echo $ANDROID_HOME
-        # ls $ANDROID_HOME/build-tools/
-        # ls $ANDROID_HOME/tools/bin
         find ~/Library/Android/sdk/build-tools -name "zipalign"
                 
   Android:
@@ -39,59 +39,21 @@ jobs:
         nuget restore Pla.Mobile.sln
         cd Pla.Mobile
         cd Pla.Mobile.Android
-        ls
-        # debug
+
         msbuild /p:Configuration=Release /t:PackageForAndroid  Pla.Mobile.Android.csproj
 
-        # here we have artefact Pla/Pla/Pla.Mobile/Pla.Mobile.Android/bin/Release/com.companyname.pla.mobile.apk
-        #let's sign the app
         echo $KEYSTORE | base64 --decode > keystore
         
         jarsigner -verbose -sigalg MD5withRSA -digestalg SHA1 -keystore keystore -storepass $KEYSTORE_PASSWORD -signedjar ~/pla_signed.apk bin/Release/com.companyname.pla.mobile.apk Pla
         ~/Library/Android/sdk/build-tools/30.0.1/zipalign -f -v 4 ~/pla_signed.apk ~/pla.apk
         
         ls ~/
-    - name: Get Time
-      id: time
-      uses: nanzm/get-time-action@v1.1
-      with:
-        timeZone: 8
-        format: 'YYYY-MM-DD-HH-mm-ss'
-        run: |
-          echo $TIME
+   
     - name: Save artefact
       uses: actions/upload-artifact@v2
       with:       
        path: ~/pla.apk
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        TIME: "${{ steps.time.outputs.time }}"
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-        tag_name: ${{ github.ref }}_${{ env.TIME }}
-        release_name: Release ${{ github.ref }}_${{ env.TIME }}
-        #body: |
-        #  Changes in this Release
-        #  - First Change
-        #  - Second Change
-        draft: false
-        prerelease: false
-    - name: Check artefact
-      run: |
-        ls ~/
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path:  pla.apk
-        asset_name: pla.apk
-        asset_content_type: application/zip
-       
+    
   #iOS:
   #  runs-on: macos-latest
   #  steps:

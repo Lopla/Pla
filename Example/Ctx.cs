@@ -32,16 +32,26 @@ namespace Example
             var canvas = surface.Canvas;
 
             canvas.Clear(new SKColor(184, 3, 255));
-            
-            canvas.DrawRect(10,40,100,100,new SKPaint(){
-                Color = new SKColor(1,1,1)
-            });
-            
-            canvas.DrawText(text, 10,10 , new SKPaint(){
-                Color = new SKColor(255,255,255),
+
+            canvas.DrawText(text, 10, 10, new SKPaint()
+            {
+                Color = new SKColor(255, 255, 255),
                 Typeface = SKTypeface.FromFamilyName("DejaVu")
             });
 
+            canvas.Flush();
+        }
+
+        private static void DrawBlackRect(SKCanvas canvas)
+        {
+            canvas.DrawRect(10, 40, 100, 100, new SKPaint()
+            {
+                Color = new SKColor(1, 1, 1)
+            });
+        }
+
+        private static void DrawColorfullRect(SKImageInfo info, SKCanvas canvas)
+        {
             using (SKPaint paint = new SKPaint())
             {
                 // Create 300-pixel square centered rectangle
@@ -59,10 +69,7 @@ namespace Example
 
                 // Draw the gradient on the rectangle
                 canvas.DrawRect(rect, paint);
-                
             }
-
-            canvas.Flush();
         }
 
         public void Click(SKPoint argsLocation)

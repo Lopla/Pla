@@ -36,15 +36,15 @@ namespace Pla.Gtk
                 
             };
             _sk.AddEvents( (int)Gdk.EventMask.TouchMask   );
-            _sk.EnableTouchEvents = true;
-
+            _sk.TouchEvent += (sender, args) => {
+                sw.OnTouch(sender, (SKPoint.Empty, SKPoint.Empty));
+            };
             //_sk.  .Touch += (sender, args) => sw.OnTouch(sender, args);
             //_sk.EnableTouchEvents = true;
             
             Add(_sk);
 
             ShowAll();
-
         }
 
         public static void PlaMain(IContext ctx)
