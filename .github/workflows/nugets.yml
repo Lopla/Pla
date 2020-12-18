@@ -27,5 +27,5 @@ jobs:
     - name: Publish to NuGet
       uses: brandedoutcast/publish-nuget@v2
       with:
-        PROJECT_FILE_PATH: NetLicensingClient/NetLicensingClient.csproj
+        PROJECT_FILE_PATH: Pla.Lib/Pla.Lib.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
