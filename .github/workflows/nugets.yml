@@ -23,3 +23,9 @@ jobs:
       run: dotnet publish Pla.Shared
     - name: Publish Gtk
       run: dotnet publish Pla.Gtk
+ 
+    - name: Publish to NuGet
+      uses: brandedoutcast/publish-nuget@v2
+      with:
+        PROJECT_FILE_PATH: NetLicensingClient/NetLicensingClient.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
