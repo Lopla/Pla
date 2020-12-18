@@ -59,6 +59,10 @@ jobs:
         format: 'YYYY-MM-DD-HH-mm-ss'
         run: |
           echo $TIME
+    - name: Save artefact
+      uses: actions/upload-artifact@v2
+      with:       
+       path: ~/pla.apk
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -87,7 +91,7 @@ jobs:
         asset_path:  pla.apk
         asset_name: pla.apk
         asset_content_type: application/zip
-        
+       
   #iOS:
   #  runs-on: macos-latest
   #  steps:
