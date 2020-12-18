@@ -7,7 +7,7 @@ namespace Pla.IDE
     {
         static void Main(string[] args)
         {
-            Pla.Linux.App.PlaMain(new Ctx());
+            Pla.Gtk.App.PlaMain(new Ctx());
             Console.WriteLine("Hello World!");
         }
     }

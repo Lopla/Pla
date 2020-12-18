@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Example\Example.csproj" />
-    <ProjectReference Include="..\Pla.Linux\Pla.Linux.csproj" />
+    <ProjectReference Include="..\Pla.Gtk\Pla.Gtk.csproj" />
     <ProjectReference Include="..\Pla.Lib\Pla.Lib.csproj" />
   </ItemGroup>
 

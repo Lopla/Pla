@@ -5,7 +5,7 @@ using SkiaSharp;
 using Pla.Lib;
 using Pla.Shared;
 
-namespace Pla.Linux
+namespace Pla.Gtk
 {
     public class App : Window, IEngine {
 
@@ -13,7 +13,7 @@ namespace Pla.Linux
 
         public App(IContext ctx) : base("Center")
         {
-            SetDefaultSize(250, 200);
+            SetDefaultSize(320, 240);
             SetPosition(WindowPosition.Center);
             
             DeleteEvent += delegate { Application.Quit(); };
@@ -36,7 +36,8 @@ namespace Pla.Linux
                 
             };
             _sk.AddEvents( (int)Gdk.EventMask.TouchMask   );
-            
+            _sk.EnableTouchEvents = true;
+
             //_sk.  .Touch += (sender, args) => sw.OnTouch(sender, args);
             //_sk.EnableTouchEvents = true;
             
