@@ -1,4 +1,5 @@
 ﻿using System;
+using Example.GUI;
 using Pla.Lib;
 using SkiaSharp;
 
@@ -8,6 +9,7 @@ namespace Example
     {
         #region Instrumentation
         private IEngine engine;
+        private Manager manager;
 
         public IControl GetControl()
         {
@@ -22,61 +24,52 @@ namespace Example
         public void Init(IEngine engine)
         {
             this.engine = engine;
+            this.manager = new Manager(engine);
+
+            this.manager.Add(new Button(){
+                Bounds=new SKRect(10,10,100, 30),
+                Label = "hi"
+            });
         }
         #endregion
 
-        string text = "Hi";
+        string text = "Hello world (click to change)";
 
         public void Paint(SKImageInfo info, SKSurface surface)
         {
+            //// find center point of the screen
+            float centerX = info.Width / 2;
+            float centerY = info.Height / 2;
+            
             var canvas = surface.Canvas;
-
+            //// clear the screen
             canvas.Clear(new SKColor(184, 3, 255));
 
-            canvas.DrawText(text, 10, 10, new SKPaint()
+            //// draw text (from text variable)
+            canvas.DrawText(text, centerX, centerY, new SKPaint()
             {
                 Color = new SKColor(255, 255, 255),
                 Typeface = SKTypeface.FromFamilyName("DejaVu")
             });
+            
+            this.manager.Draw(canvas);
 
+            //// flush draw actions to canvas
             canvas.Flush();
-        }
-
-        private static void DrawBlackRect(SKCanvas canvas)
-        {
-            canvas.DrawRect(10, 40, 100, 100, new SKPaint()
-            {
-                Color = new SKColor(1, 1, 1)
-            });
-        }
-
-        private static void DrawColorfullRect(SKImageInfo info, SKCanvas canvas)
-        {
-            using (SKPaint paint = new SKPaint())
-            {
-                // Create 300-pixel square centered rectangle
-                float x = (info.Width - 300) / 2;
-                float y = (info.Height - 300) / 2;
-                SKRect rect = new SKRect(x, y, x + 300, y + 300);
-
-                // Create linear gradient from upper-left to lower-right
-                paint.Shader = SKShader.CreateLinearGradient(
-                                    new SKPoint(rect.Left, rect.Top),
-                                    new SKPoint(rect.Right, rect.Bottom),
-                                    new SKColor[] { SKColors.Red, SKColors.Blue },
-                                    new float[] { 0, 1 },
-                                    SKShaderTileMode.Repeat);
-
-                // Draw the gradient on the rectangle
-                canvas.DrawRect(rect, paint);
-            }
         }
 
         public void Click(SKPoint argsLocation)
         {
-            text = $"Święta: 🎄 " + argsLocation.ToString();
+            //// change text used to display text on screen
+            text = $"You are here: {argsLocation.X} {argsLocation.Y}";
 
+            //// ask GUI to refresh the screen
             engine.RequestRefresh();
+        }
+
+        public void KeyDown(uint key)
+        {
+            Console.WriteLine((char)key);
         }
     }
 }

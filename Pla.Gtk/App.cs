@@ -11,7 +11,7 @@ namespace Pla.Gtk
 
         private SKDrawingArea _sk = new SKDrawingArea();
 
-        public App(IContext ctx) : base("Center")
+        public App(IContext ctx) : base("Pla")
         {
             SetDefaultSize(320, 240);
             SetPosition(WindowPosition.Center);
@@ -36,15 +36,22 @@ namespace Pla.Gtk
                 
             };
 
-            _sk.AddEvents (
+            _sk.AddEvents(
                 (int)Gdk.EventMask.ButtonPressMask |
-                (int)Gdk.EventMask.TouchMask                
+                (int)Gdk.EventMask.KeyPressMask
                 );
 
             _sk.ButtonPressEvent += (sender, e) =>{
                 int x, y;
                 _sk.TranslateCoordinates(_sk, (int)e.Event.X, (int)e.Event.Y, out x, out y);
-                sw.OnTouch(sender, (SKPoint.Empty, SKPoint.Empty));
+                sw.OnTouch(sender, (new SKPoint(x, y), SKPoint.Empty));
+            };
+
+            //// needed to be on for keyboard
+            _sk.CanFocus = true;
+            _sk.KeyPressEvent+=(sender, e) => {
+                var key = e.Event.KeyValue;
+                sw.OnKey(key);
             };
 
             Add(_sk);

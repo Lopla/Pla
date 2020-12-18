@@ -32,5 +32,10 @@ namespace Pla.Shared
         { 
             _context.GetControl()?.Click(data.location);
         }
+
+        public void OnKey(uint key)
+        {
+            _context.GetControl()?.KeyDown(key);
+        }
     }
 }
