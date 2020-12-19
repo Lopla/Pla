@@ -1,19 +1,32 @@
 # Jak zacząć
+## Aplikacja na komputer (linux i windows)
 - Zainstaluj vs code
-- Command line
+- Z linii komend, w katalogu gdzie chcesz tworzyć swoje rozwiązanie utwórz projeky .net
 ```
 dotnet new classlib --name Example
 dotnet new console --name Example.Console
+```
+- dodatkowo dodaj referencje z projektu Console do biblioteki
+
+```
 cd Example.Console
 dotnet add reference ..\Example
+```
+ -  w projekcie konsolowym dodaj nuget ``Pla.Gtk``
+```
 dotnet add package Pla.Gtk
+```
+ - w biblitece, gdzie będzie się znajdował nasz kod dodaj referencje ``Pla.Lib``
+```
 cd ..
 cd Example
 dotnet add package Pla.Lib
 cd ..
+```
+ - uruchom visual studio code, aby móc pracować nad naszą aplikacją
+```
 code .
 ```
-- Dodaj wszystkie sugerowane dodatki dla C# i .net
 - Podmień zawartość pliku ``Example\Class1.cs`` jak niżej
 ```cs
 using System;
