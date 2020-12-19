@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pla.IDE
+namespace Example.Console
 {
     class Program
     {
