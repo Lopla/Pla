@@ -49,11 +49,17 @@ jobs:
         
         ls ~/
    
-    - name: Save artefact
+    - name: Save artefact in action
       uses: actions/upload-artifact@v2
       with:       
        path: ~/pla.apk
-    
+
+    - name: Publish
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ~/pla.apk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   #iOS:
   #  runs-on: macos-latest
   #  steps:
