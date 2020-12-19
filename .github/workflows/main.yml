@@ -66,7 +66,7 @@ jobs:
       with:
         files: ~/pla.apk
       env:
-        TAG: ${{ github.ref }}_${{ env.TIME }}
+        tag_name: ${{ github.ref }}_${{ env.TIME }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   #iOS:
   #  runs-on: macos-latest
