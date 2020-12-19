@@ -65,8 +65,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: ~/pla.apk
-      env:
         tag_name: ${{ github.ref }}_${{ env.TIME }}
+      env:        
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   #iOS:
   #  runs-on: macos-latest
