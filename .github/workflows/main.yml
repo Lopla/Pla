@@ -53,6 +53,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:       
        path: ~/pla.apk
+
     - name: Get Time
       id: time
       uses: nanzm/get-time-action@v1.1
@@ -61,13 +62,17 @@ jobs:
         format: 'YYYY-MM-DD-HH-mm-ss'
         run: |
           echo $TIME
+
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
-        files: ~/pla.apk
+        files: |
+           pla.apk
         tag_name: ${{ github.ref }}_${{ env.TIME }}
       env:        
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TIME: "${{ steps.time.outputs.time }}"
+        
   #iOS:
   #  runs-on: macos-latest
   #  steps:
