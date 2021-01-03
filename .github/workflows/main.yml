@@ -36,8 +36,8 @@ jobs:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         KEYSTORE: ${{ secrets.KEYSTORE }}
       run: |
-        nuget restore Pla.Mobile.sln
         cd Pla.Mobile
+        nuget restore Pla.Mobile.sln
         cd Pla.Mobile.Android
 
         msbuild /p:Configuration=Release /t:PackageForAndroid  Pla.Mobile.Android.csproj
