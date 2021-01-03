@@ -30,6 +30,8 @@ namespace Pla.App
 
         public void Paint(SKImageInfo info, SKSurface surface)
         {
+            surface.Canvas.Clear(SKColor.Parse("000000"));
+
              using(var painter = new SKPaint(){
                 Color = new SKColor(255,255,255)
             })
