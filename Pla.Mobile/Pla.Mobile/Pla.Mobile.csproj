@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Example\Example.csproj" />
     <ProjectReference Include="..\..\Pla.Lib\Pla.Lib.csproj" />
     <ProjectReference Include="..\..\Pla.Shared\Pla.Shared.csproj" />
   </ItemGroup>

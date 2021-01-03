@@ -1,5 +1,4 @@
 ﻿using System;
-using Example;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +10,7 @@ namespace Pla.Mobile
         {
             InitializeComponent();
 
-            MainPage = new PlaGUI(new Ctx());
+            MainPage = new PlaGUI(new Pla.App.MainContext());
         }
 
         protected override void OnStart()
