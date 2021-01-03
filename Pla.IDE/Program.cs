@@ -6,7 +6,7 @@ namespace Pla.IDE
     {
         static void Main(string[] args)
         {
-            Pla.Gtk.App.PlaMain(new Example.Class1());
+            Pla.Gtk.App.PlaMain(new Pla.App.PlaMainContext());
         }
     }
 }

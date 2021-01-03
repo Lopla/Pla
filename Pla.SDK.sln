@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.Gtk", "Pla.Gtk\Pla.Gtk.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.App", "Pla.App\Pla.App.csproj", "{A391012F-C479-4027-AC01-413C881F6775}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nugets", "Nugets", "{27C47F3B-F52C-4242-93AB-0A7250E1A590}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D73B847-6B97-4138-9480-B67EED1D7473} = {27C47F3B-F52C-4242-93AB-0A7250E1A590}
+		{B485CA60-8FD2-4F66-B5E6-BE1E0E18DEFB} = {27C47F3B-F52C-4242-93AB-0A7250E1A590}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C5EECB5-5281-4921-BA4C-C676FA961B03}

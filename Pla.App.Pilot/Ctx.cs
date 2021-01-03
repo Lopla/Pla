@@ -3,9 +3,9 @@ using Example.GUI;
 using Pla.Lib;
 using SkiaSharp;
 
-namespace Example
+namespace Pla.App
 {
-    public class Ctx : IPainter, IControl, IContext
+    public class PlaMainContext : IPainter, IControl, IContext
     {
         #region Instrumentation
         private IEngine engine;
