@@ -1,4 +1,4 @@
-name: .NET
+name: Build & publish nugets to server
 
 on:
   push:
