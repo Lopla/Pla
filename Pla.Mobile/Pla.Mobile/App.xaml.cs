@@ -10,7 +10,7 @@ namespace Pla.Mobile
         {
             InitializeComponent();
 
-            MainPage = new PlaGUI(new Pla.App.MainContext());
+            MainPage = new PlaGUI(new Pla.App.PlaMainContext());
         }
 
         protected override void OnStart()
