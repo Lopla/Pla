@@ -66,6 +66,22 @@ namespace Pla.Gtk
             Application.Run();
         }
 
+        public DeviceInfo GetDeviceInfo()
+        {
+            var heightmm = this.Screen.HeightMm;
+            var height  = this.Screen.Height;
+
+            //// 1 mm = 0.03937 in
+            var heightInch = heightmm / 25.4;
+
+            var dpi = height / heightInch;
+
+            
+            return new DeviceInfo(){
+                DPI = dpi
+            };
+        }
+
         public void RequestRefresh(){
             _sk.QueueDraw();
         }

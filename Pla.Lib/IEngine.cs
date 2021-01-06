@@ -6,5 +6,7 @@ namespace Pla.Lib
     public interface IEngine
     {
         void RequestRefresh();
+
+        DeviceInfo GetDeviceInfo();
     }
 }

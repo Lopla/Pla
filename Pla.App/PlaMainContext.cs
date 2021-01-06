@@ -36,7 +36,7 @@ namespace Pla.App
                 Color = new SKColor(255,255,255)
             })
             {
-                surface.Canvas.DrawText("Hello PLA", 10,10, painter);
+                surface.Canvas.DrawText("Hello PLA", info.Width / 2, info.Height / 2, painter);
             }
         }
     }

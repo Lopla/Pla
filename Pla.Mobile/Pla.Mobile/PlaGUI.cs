@@ -7,6 +7,7 @@ using Pla.Shared;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace Pla.Mobile
 {
@@ -37,6 +38,11 @@ namespace Pla.Mobile
         public void RequestRefresh()
         {
             _sk.InvalidateSurface();
+        }
+
+        public void GetDeviceInfo()
+        {
+            var dpi = 160 * DeviceDisplay.MainDisplayInfo.Density;
         }
     }
 }
