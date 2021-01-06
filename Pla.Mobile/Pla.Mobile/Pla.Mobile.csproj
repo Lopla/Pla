@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Pla.Lib" Version="1.0.1" />
-    <PackageReference Include="Pla.Shared" Version="1.0.0" />
+    <PackageReference Include="Pla.Shared" Version="1.0.1" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.1141" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
