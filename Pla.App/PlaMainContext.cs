@@ -40,8 +40,18 @@ namespace Pla.App
             })
             {
                 surface.Canvas.DrawText("Hello PLA", info.Width / 2, info.Height / 2, painter);
-                surface.Canvas.DrawText($"DPI: {_engine.DeviceInfo().DPI}", info.Width / 2, info.Height / 2 + 20, painter);
+                surface.Canvas.DrawText($"DPI: {_engine.GetDeviceInfo().DPI}", info.Width / 2, info.Height / 2 + 20, painter);
             }
+
+
+            //// let's draw a square of one inch length
+            var dpi = _engine.GetDeviceInfo().DPI;
+
+            surface.Canvas.DrawRect(100, 100, dpi, dpi, new SKPaint()
+            {
+                Color = SKColor.Parse("0d0")
+            });
+
         }
     }
 }

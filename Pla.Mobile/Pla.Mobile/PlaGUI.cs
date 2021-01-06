@@ -35,14 +35,26 @@ namespace Pla.Mobile
             Content = _sk;
         }
 
+        public Lib.DeviceInfo GetDeviceInfo()
+        {
+            var dpi = 160 * DeviceDisplay.MainDisplayInfo.Density;
+
+            var cw = this._sk.CanvasSize.Width;
+            var xw = this._sk.Width;
+
+            var deviceRatio = xw / cw;
+
+
+            return new Lib.DeviceInfo()
+            {
+                DPI = (int)(dpi * deviceRatio)
+            };
+        }
+
         public void RequestRefresh()
         {
             _sk.InvalidateSurface();
         }
 
-        public void GetDeviceInfo()
-        {
-            var dpi = 160 * DeviceDisplay.MainDisplayInfo.Density;
-        }
     }
 }
