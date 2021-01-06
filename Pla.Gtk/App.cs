@@ -74,7 +74,7 @@ namespace Pla.Gtk
             //// 1 mm = 0.03937 in
             var heightInch = heightmm / 25.4;
 
-            var dpi = height / heightInch;
+            int dpi =(int) (height / heightInch);
 
             
             return new DeviceInfo(){

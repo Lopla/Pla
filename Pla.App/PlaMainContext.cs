@@ -6,6 +6,8 @@ namespace Pla.App
 {
     public class PlaMainContext : IPainter, IControl, IContext
     {
+        IEngine _engine;
+
         public IControl GetControl()
         {
             return this;
@@ -18,6 +20,7 @@ namespace Pla.App
 
         public void Init(IEngine engine)
         {
+            this._engine = engine;
         }
 
         public void KeyDown(uint key)
@@ -37,6 +40,7 @@ namespace Pla.App
             })
             {
                 surface.Canvas.DrawText("Hello PLA", info.Width / 2, info.Height / 2, painter);
+                surface.Canvas.DrawText($"DPI: {_engine.DeviceInfo().DPI}", info.Width / 2, info.Height / 2 + 20, painter);
             }
         }
     }

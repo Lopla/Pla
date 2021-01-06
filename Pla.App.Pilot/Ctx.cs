@@ -52,6 +52,13 @@ namespace Pla.App
                 Typeface = SKTypeface.FromFamilyName("DejaVu")
             });
             
+            //// let's draw a square of one inch length
+            var dpi = engine.GetDeviceInfo().DPI;
+
+            canvas.DrawRect(100,100, dpi, dpi, new SKPaint(){
+                Color = SKColor.Parse("0d0")
+            });
+
             this.manager.Draw(canvas);
 
             //// flush draw actions to canvas
@@ -61,7 +68,7 @@ namespace Pla.App
         public void Click(SKPoint argsLocation)
         {
             //// change text used to display text on screen
-            text = $"You are here: {argsLocation.X} {argsLocation.Y}";
+            text = $"You are here: {argsLocation.X} {argsLocation.Y} {engine.GetDeviceInfo().DPI}";
 
             //// ask GUI to refresh the screen
             engine.RequestRefresh();
