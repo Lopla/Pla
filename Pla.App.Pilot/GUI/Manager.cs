@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
 using Pla.Lib;
 using SkiaSharp;
 
 namespace Example.GUI
 {
-    class Manager
+    class Manager : IControl
     {
         public Manager(IEngine painter){
-            this.painter = painter;            
+            this.painter = painter;  
+              
         }
 
         List<Widget> Widgets = new List<Widget>();
@@ -25,57 +25,21 @@ namespace Example.GUI
         {
             this.Widgets.ForEach(w=>w.Draw(canvas));
         }
-    }
 
-    public class Widget 
-    {
-        public SKRect Bounds = SKRect.Empty;
-        public virtual void Draw(SKCanvas canvas){
-            using( var painter = new SKPaint(){
-                    Color = new SKColor(255,255,255)
-                })
+        public void Click(SKPoint argsLocation)
+        {
+            foreach(var w in this.Widgets)
             {
-                canvas.DrawRect(Bounds, painter);
+                if(w.Bounds.Contains(argsLocation))
+                {
+                    w.OnClick(argsLocation);
+                }
             }
         }
-    }
 
-    public class Edit:Widget{
-        public string Text = "";
-
-        public override void Draw(SKCanvas canvas)
+        public void KeyDown(uint key)
         {
-            using( var paintera = new SKPaint(){
-                Color = new SKColor(255,255,255)
-                })
-            using(var painterb = new SKPaint(){
-                Color = new SKColor(0,0,0)
-                })
-            {
-                canvas.DrawRect(Bounds, paintera);
-                canvas.DrawText(Text, Bounds.Left, Bounds.MidY, painterb);
-            }
-        }
-    }
-
-    public class Button : Widget
-    {
-        public string Label = "";
-
-        public override void Draw(SKCanvas canvas)
-        {
-            base.Draw(canvas);
-
-            using( var paintera = new SKPaint(){
-                Color = new SKColor(255,255,255)
-                })
-            using(var painterb = new SKPaint(){
-                Color = new SKColor(0,0,0)
-                })
-            {
-                canvas.DrawRect(Bounds, paintera);
-                canvas.DrawText(Label, Bounds.Left, Bounds.MidY, painterb);
-            }
+            
         }
     }
 }

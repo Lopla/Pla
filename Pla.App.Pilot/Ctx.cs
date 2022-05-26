@@ -5,7 +5,7 @@ using SkiaSharp;
 
 namespace Pla.App
 {
-    public class PlaMainContext : IPainter, IControl, IContext
+    public class PilotContext : IPainter, IControl, IContext
     {
         #region Instrumentation
         private IEngine engine;
@@ -26,10 +26,11 @@ namespace Pla.App
             this.engine = engine;
             this.manager = new Manager(engine);
 
-            this.manager.Add(new Button(){
+            var b = new Button(){
                 Bounds=new SKRect(10,10,100, 30),
-                Label = "hi"
-            });
+                Label = "hi",                                                
+            };
+            this.manager.Add(b);
         }
         #endregion
 
@@ -37,32 +38,7 @@ namespace Pla.App
 
         public void Paint(SKImageInfo info, SKSurface surface)
         {
-            //// find center point of the screen
-            float centerX = info.Width / 2;
-            float centerY = info.Height / 2;
-            
-            var canvas = surface.Canvas;
-            //// clear the screen
-            canvas.Clear(new SKColor(184, 3, 255));
-
-            //// draw text (from text variable)
-            canvas.DrawText(text, centerX, centerY, new SKPaint()
-            {
-                Color = new SKColor(255, 255, 255),
-                Typeface = SKTypeface.FromFamilyName("DejaVu")
-            });
-            
-            //// let's draw a square of one inch length
-            var dpi = engine.GetDeviceInfo().DPI;
-
-            canvas.DrawRect(100,100, dpi, dpi, new SKPaint(){
-                Color = SKColor.Parse("0d0")
-            });
-
-            this.manager.Draw(canvas);
-
-            //// flush draw actions to canvas
-            canvas.Flush();
+            manager.Draw(surface.Canvas);
         }
 
         public void Click(SKPoint argsLocation)
