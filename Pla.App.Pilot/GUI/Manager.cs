@@ -4,11 +4,11 @@ using SkiaSharp;
 
 namespace Example.GUI
 {
-    class Manager : IControl
+    class Manager : IControl, IPainter
     {
-        public Manager(IEngine painter){
-            this.painter = painter;  
-              
+        public Manager(IEngine painter)
+        {
+            this.painter = painter;
         }
 
         List<Widget> Widgets = new List<Widget>();
@@ -23,14 +23,14 @@ namespace Example.GUI
 
         internal void Draw(SKCanvas canvas)
         {
-            this.Widgets.ForEach(w=>w.Draw(canvas));
+            this.Widgets.ForEach(w => w.Draw(canvas));
         }
 
         public void Click(SKPoint argsLocation)
         {
-            foreach(var w in this.Widgets)
+            foreach (var w in this.Widgets)
             {
-                if(w.Bounds.Contains(argsLocation))
+                if (w.Bounds.Contains(argsLocation))
                 {
                     w.OnClick(argsLocation);
                 }
@@ -39,7 +39,12 @@ namespace Example.GUI
 
         public void KeyDown(uint key)
         {
-            
+
+        }
+
+        public void Paint(SKImageInfo info, SKSurface surface)
+        {
+            this.Draw(surface.Canvas);
         }
     }
 }
