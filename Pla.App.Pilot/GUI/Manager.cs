@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
 using Pla.Lib;
 using SkiaSharp;
 
 namespace Example.GUI
 {
-    class Manager
+    class Manager : IControl, IPainter
     {
-        public Manager(IEngine painter){
-            this.painter = painter;            
+        public Manager(IEngine painter)
+        {
+            this.painter = painter;
         }
 
         List<Widget> Widgets = new List<Widget>();
@@ -23,59 +23,28 @@ namespace Example.GUI
 
         internal void Draw(SKCanvas canvas)
         {
-            this.Widgets.ForEach(w=>w.Draw(canvas));
+            this.Widgets.ForEach(w => w.Draw(canvas));
         }
-    }
 
-    public class Widget 
-    {
-        public SKRect Bounds = SKRect.Empty;
-        public virtual void Draw(SKCanvas canvas){
-            using( var painter = new SKPaint(){
-                    Color = new SKColor(255,255,255)
-                })
-            {
-                canvas.DrawRect(Bounds, painter);
-            }
-        }
-    }
-
-    public class Edit:Widget{
-        public string Text = "";
-
-        public override void Draw(SKCanvas canvas)
+        public void Click(SKPoint argsLocation)
         {
-            using( var paintera = new SKPaint(){
-                Color = new SKColor(255,255,255)
-                })
-            using(var painterb = new SKPaint(){
-                Color = new SKColor(0,0,0)
-                })
+            foreach (var w in this.Widgets)
             {
-                canvas.DrawRect(Bounds, paintera);
-                canvas.DrawText(Text, Bounds.Left, Bounds.MidY, painterb);
+                if (w.Bounds.Contains(argsLocation))
+                {
+                    w.OnClick(argsLocation);
+                }
             }
         }
-    }
 
-    public class Button : Widget
-    {
-        public string Label = "";
-
-        public override void Draw(SKCanvas canvas)
+        public void KeyDown(uint key)
         {
-            base.Draw(canvas);
 
-            using( var paintera = new SKPaint(){
-                Color = new SKColor(255,255,255)
-                })
-            using(var painterb = new SKPaint(){
-                Color = new SKColor(0,0,0)
-                })
-            {
-                canvas.DrawRect(Bounds, paintera);
-                canvas.DrawText(Label, Bounds.Left, Bounds.MidY, painterb);
-            }
+        }
+
+        public void Paint(SKImageInfo info, SKSurface surface)
+        {
+            this.Draw(surface.Canvas);
         }
     }
 }
