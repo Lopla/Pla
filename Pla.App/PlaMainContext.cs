@@ -51,7 +51,6 @@ namespace Pla.App
             {
                 Color = SKColor.Parse("0d0")
             });
-
         }
     }
 }
