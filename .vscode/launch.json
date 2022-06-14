@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Pla.IDE/bin/Debug/net5.0/Pla.IDE.dll",
+            "program": "${workspaceFolder}/Pla.IDE/bin/Debug/net6.0/Pla.IDE.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Pla.IDE",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console

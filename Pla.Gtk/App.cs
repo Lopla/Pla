@@ -13,7 +13,7 @@ namespace Pla.Gtk
         {
             this.Title = "Pla";
             this.Decorated = true;
-
+            ((Widget)this).Opacity = 0.05d;
             SetDefaultSize(320, 240);
             SetPosition(WindowPosition.Center);
                         
@@ -57,7 +57,7 @@ namespace Pla.Gtk
 
             Add(_sk);
 
-            ShowAll();
+            Show();
         }
 
         public static void PlaMain(IContext ctx)
