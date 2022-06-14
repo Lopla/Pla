@@ -13,8 +13,7 @@ namespace Pla.Windows.App
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            //Application.Run(new Form1());
-            //Application.Run(new PlaWindow());
+
             Pla.Win.App.PlaMain(new PilotContext());
         }
     }

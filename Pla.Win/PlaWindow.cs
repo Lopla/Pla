@@ -22,13 +22,13 @@ namespace Pla.Win
         public void Init(IContext ctx)
         {
             this.plaControl1.Init(ctx);
+        }
 
-            if (false)
-            {
-                this.BackColor = Color.LimeGreen;
-                this.TransparencyKey = Color.LimeGreen;
-                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            }
+        public void SetTransparent()
+        {
+            this.BackColor = Color.LimeGreen;
+            this.TransparencyKey = Color.LimeGreen;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
         }
     }
 }

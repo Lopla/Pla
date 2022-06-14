@@ -82,6 +82,11 @@ namespace Pla.Gtk
             };
         }
 
+        public bool RequestTransparentWindow()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void RequestRefresh(){
             _sk.QueueDraw();
         }
