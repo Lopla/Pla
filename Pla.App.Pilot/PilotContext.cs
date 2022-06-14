@@ -26,7 +26,7 @@ namespace Pla.App
 
             var b = new Button()
             {
-                Bounds = new SKRect(10, 10, 100, 30),
+                Bounds = new SKRect(10, 10, this.engine.GetDeviceInfo().DPI, 30),
                 Label = "Click me",
 
             };

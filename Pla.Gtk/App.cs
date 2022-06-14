@@ -12,8 +12,6 @@ namespace Pla.Gtk
         public App(IContext ctx) : base("")
         {
             this.Title = "Pla";
-            this.Opacity = 0.0d;
-            this._sk.Opacity = 0.05d;            
             this.Decorated = true;
 
             SetDefaultSize(320, 240);
