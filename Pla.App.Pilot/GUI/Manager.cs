@@ -22,8 +22,13 @@ namespace Example.GUI
         }
 
         internal void Draw(SKCanvas canvas)
-        {
+        {         
+            //var painter  = new SKColor(255,0,0,32);
+            //canvas.Clear(painter);
+                        
             this.Widgets.ForEach(w => w.Draw(canvas));
+
+            canvas.Flush();
         }
 
         public void Click(SKPoint argsLocation)

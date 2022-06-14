@@ -43,7 +43,6 @@ namespace Pla.App
                 surface.Canvas.DrawText($"DPI: {_engine.GetDeviceInfo().DPI}", info.Width / 2, info.Height / 2 + 20, painter);
             }
 
-
             //// let's draw a square of one inch length
             var dpi = _engine.GetDeviceInfo().DPI;
 
