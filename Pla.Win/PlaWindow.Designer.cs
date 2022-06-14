@@ -1,14 +1,14 @@
-﻿namespace Pla.Windows.App
+﻿namespace Pla.Win
 {
-    partial class Form1
+    partial class PlaWindow
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -23,8 +23,8 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -38,23 +38,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.plaControl1.Location = new System.Drawing.Point(12, 12);
             this.plaControl1.Name = "plaControl1";
-            this.plaControl1.Size = new System.Drawing.Size(765, 426);
+            this.plaControl1.Size = new System.Drawing.Size(776, 426);
             this.plaControl1.TabIndex = 0;
             // 
-            // Form1
+            // PlaWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.plaControl1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "PlaWindow";
+            this.Text = "PlaWindow";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Win.PlaControl plaControl1;
+        private PlaControl plaControl1;
     }
 }

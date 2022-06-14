@@ -2,7 +2,7 @@
 using Pla.Lib;
 using SkiaSharp;
 
-namespace Pla.App
+namespace Pla.App.Pilot
 {
     public class PilotContext : IContext
     {

@@ -7,4 +7,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="2.88.0" />
+    <PackageReference Include="SkiaSharp.Views.WindowsForms" Version="2.88.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pla.Lib\Pla.Lib.csproj" />
+    <ProjectReference Include="..\Pla.Shared\Pla.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
