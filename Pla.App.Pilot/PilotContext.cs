@@ -37,7 +37,7 @@ namespace Pla.App.Pilot
 
             this.manager.Add(b);
 
-            this.engine.RequestTransparentWindow();
+            //this.engine.RequestTransparentWindow();
         }
     }
 }

@@ -31,7 +31,7 @@ public partial class PlaControl : UserControl, IEngine
     {
         return new DeviceInfo
         {
-            DPI = 300
+            DPI = skControl.DeviceDpi
         };
     }
 
@@ -49,7 +49,7 @@ public partial class PlaControl : UserControl, IEngine
                 loc.X = ((MouseEventArgs) args).X;
                 loc.Y = ((MouseEventArgs) args).Y;
             }
-
+            
             var tArgs = (loc, loc);
             sw.OnTouch(sender, tArgs);
         };
