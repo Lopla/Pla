@@ -5,8 +5,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Version>1.0.1</Version>
+    <Authors>Paweł Gałęzowski</Authors>
+    <Company>lagcorp</Company>
+    <Description>Windows forms wrapper for pla.</Description>
   </PropertyGroup>
-
+   
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="2.88.0" />
     <PackageReference Include="SkiaSharp.Views.WindowsForms" Version="2.88.0" />
