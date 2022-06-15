@@ -1,4 +1,5 @@
 ﻿using System;
+using Pla.App.Pilot;
 
 namespace Pla.IDE
 {
@@ -6,7 +7,7 @@ namespace Pla.IDE
     {
         static void Main(string[] args)
         {
-            Pla.Gtk.App.PlaMain(new Pla.App.PilotContext());
+            Pla.Gtk.App.PlaMain(new PilotContext());
         }
     }
 }

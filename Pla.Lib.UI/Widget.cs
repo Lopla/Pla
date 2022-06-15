@@ -1,6 +1,6 @@
 using SkiaSharp;
 
-namespace Example.GUI
+namespace Pla.Lib.UI
 {
     public delegate void Clicked(SKPoint point);
 
@@ -12,11 +12,12 @@ namespace Example.GUI
         {
             using (var BackPainter = new SKPaint()
             {
-                Style= SKPaintStyle.Fill,
+                Style = SKPaintStyle.Fill,
                 Color = new SKColor(128, 128, 128),
             })
-            using (var front = new SKPaint(){
-                Style= SKPaintStyle.Stroke,
+            using (var front = new SKPaint()
+            {
+                Style = SKPaintStyle.Stroke,
                 Color = new SKColor(0, 0, 0),
             })
             {
@@ -27,7 +28,7 @@ namespace Example.GUI
 
         public void OnClick(SKPoint argsLocation)
         {
-            this.ClickedHandler?.Invoke(argsLocation);
+            ClickedHandler?.Invoke(argsLocation);
         }
 
         public event Clicked ClickedHandler;

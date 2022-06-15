@@ -1,5 +1,4 @@
 using Gtk;
-using System;
 using SkiaSharp.Views.Gtk;
 using SkiaSharp;
 using Pla.Lib;
@@ -8,22 +7,25 @@ using Pla.Shared;
 namespace Pla.Gtk
 {
     public class App : Window, IEngine {
-
         private SKDrawingArea _sk = new SKDrawingArea();
 
-        public App(IContext ctx) : base("Pla")
+        public App(IContext ctx) : base("")
         {
+            this.Title = "Pla";
+            this.Decorated = true;
+            ((Widget)this).Opacity = 0.05d;
             SetDefaultSize(320, 240);
             SetPosition(WindowPosition.Center);
-            
+                        
             DeleteEvent += delegate { Application.Quit(); };
                 
-            VBox vbox = new VBox(false, 5);
-            HBox hbox = new HBox(true, 3);
+            // VBox vbox = new VBox(false, 5);
+            // HBox hbox = new HBox(true, 3);
             
             ctx.Init(this);
 
             var sw = new SkiaWrapper(ctx);
+
             _sk.PaintSurface += (sender, e) => 
             {
                 sw.OnSkOnPaintSurface(e.Info, e.Surface);
@@ -33,7 +35,6 @@ namespace Pla.Gtk
 
                 var tArgs = ( loc, loc ); 
                 sw.OnTouch(sender, tArgs  );  
-                
             };
 
             _sk.AddEvents(
@@ -56,7 +57,7 @@ namespace Pla.Gtk
 
             Add(_sk);
 
-            ShowAll();
+            Show();
         }
 
         public static void PlaMain(IContext ctx)
@@ -75,11 +76,15 @@ namespace Pla.Gtk
             var heightInch = heightmm / 25.4;
 
             int dpi =(int) (height / heightInch);
-
             
             return new DeviceInfo(){
                 DPI = dpi
             };
+        }
+
+        public bool RequestTransparentWindow()
+        {
+            throw new System.NotImplementedException();
         }
 
         public void RequestRefresh(){

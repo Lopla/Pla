@@ -17,12 +17,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
+
     - name: Publish LIB
       run: dotnet publish Pla.Lib
     - name: Publish Shared
       run: dotnet publish Pla.Shared
     - name: Publish Gtk
       run: dotnet publish Pla.Gtk
+    - name: Publish Win
+      run: dotnet publish Pla.Win
  
     - name: Lib to NuGet
       uses: brandedoutcast/publish-nuget@v2
@@ -41,4 +44,10 @@ jobs:
       continue-on-error: true
       with:
         PROJECT_FILE_PATH: Pla.Gtk/Pla.Gtk.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+   - name: Win to NuGet
+      uses: brandedoutcast/publish-nuget@v2
+      continue-on-error: true
+      with:
+        PROJECT_FILE_PATH: Pla.Win/Pla.Win.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}

@@ -1,7 +1,5 @@
-﻿using System;
-using Pla.Lib;
+﻿using Pla.Lib;
 using SkiaSharp;
-using SkiaSharp.Views.Forms;
 
 namespace Pla.Shared
 {
@@ -19,7 +17,7 @@ namespace Pla.Shared
             if (_context.GetPainter() == null)
             {
                 var canvas = surface.Canvas;
-                canvas.Clear(new SKColor(255, 255, 255));
+                canvas.Clear(new SKColor(255, 255, 255, 0));
                 canvas.Flush();
             }
             else

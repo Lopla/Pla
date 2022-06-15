@@ -1,8 +1,8 @@
-﻿using Example.GUI;
-using Pla.Lib;
+﻿using Pla.Lib;
+using Pla.Lib.UI;
 using SkiaSharp;
 
-namespace Pla.App
+namespace Pla.App.Pilot
 {
     public class PilotContext : IContext
     {
@@ -26,16 +26,18 @@ namespace Pla.App
 
             var b = new Button()
             {
-                Bounds = new SKRect(10, 10, 100, 30),
+                Bounds = new SKRect(10, 100, 100, 130),
                 Label = "Click me",
-
             };
             b.ClickedHandler += (loc) =>
             {
                 System.Console.WriteLine("a");
+                this.engine.RequestRefresh();
             };
 
             this.manager.Add(b);
+
+            //this.engine.RequestTransparentWindow();
         }
     }
 }
