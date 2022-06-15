@@ -1,6 +1,6 @@
 using SkiaSharp;
 
-namespace Example.GUI
+namespace Pla.Lib.UI
 {
     public class Button : Widget
     {
@@ -10,10 +10,11 @@ namespace Example.GUI
         {
             base.Draw(canvas);
 
-            using(var painterb = new SKPaint(){
-                Color = new SKColor(0,0,0),
+            using (var painterb = new SKPaint()
+            {
+                Color = new SKColor(0, 0, 0),
                 TextAlign = SKTextAlign.Center,
-                })
+            })
             {
                 canvas.DrawText(Label, Bounds.MidX, Bounds.MidY, painterb);
             }

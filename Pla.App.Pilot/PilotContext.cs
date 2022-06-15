@@ -1,5 +1,5 @@
-﻿using Example.GUI;
-using Pla.Lib;
+﻿using Pla.Lib;
+using Pla.Lib.UI;
 using SkiaSharp;
 
 namespace Pla.App.Pilot
@@ -26,13 +26,13 @@ namespace Pla.App.Pilot
 
             var b = new Button()
             {
-                Bounds = new SKRect(10, 100, this.engine.GetDeviceInfo().DPI, 30),
+                Bounds = new SKRect(10, 100, 100, 130),
                 Label = "Click me",
-
             };
             b.ClickedHandler += (loc) =>
             {
                 System.Console.WriteLine("a");
+                this.engine.RequestRefresh();
             };
 
             this.manager.Add(b);

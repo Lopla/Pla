@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using Pla.Lib;
 using SkiaSharp;
 
-namespace Example.GUI
+namespace Pla.Lib.UI
 {
-    class Manager : IControl, IPainter
+    public class Manager : IControl, IPainter
     {
         public Manager(IEngine painter)
         {
@@ -17,23 +17,23 @@ namespace Example.GUI
 
         public void Add(Widget widget)
         {
-            this.Widgets.Add(widget);
-            this.painter.RequestRefresh();
+            Widgets.Add(widget);
+            painter.RequestRefresh();
         }
 
         internal void Draw(SKCanvas canvas)
-        {         
+        {
             //var painter  = new SKColor(255,0,0,32);
             //canvas.Clear(painter);
-                        
-            this.Widgets.ForEach(w => w.Draw(canvas));
+
+            Widgets.ForEach(w => w.Draw(canvas));
 
             canvas.Flush();
         }
 
         public void Click(SKPoint argsLocation)
         {
-            foreach (var w in this.Widgets)
+            foreach (var w in Widgets)
             {
                 if (w.Bounds.Contains(argsLocation))
                 {
