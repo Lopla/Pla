@@ -1,4 +1,4 @@
-name: Build & publish nugets to server
+name: Build and publish nugets to server
 
 on:
   push:
