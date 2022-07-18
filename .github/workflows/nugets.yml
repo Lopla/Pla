@@ -27,7 +27,9 @@ jobs:
       run: dotnet publish Pla.Gtk
     - name: Publish Win
       run: dotnet publish Pla.Win
- 
+    - name: PublishLIB UI
+      run: dotnet publish Pla.Lib.UI
+      
     - name: Lib to NuGet
       uses: brandedoutcast/publish-nuget@v2
       continue-on-error: true
@@ -51,4 +53,10 @@ jobs:
       continue-on-error: true
       with:
         PROJECT_FILE_PATH: Pla.Win/Pla.Win.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    - name: UI to NuGet
+      uses: brandedoutcast/publish-nuget@v2
+      continue-on-error: true
+      with:
+        PROJECT_FILE_PATH: Pla.Lib.UI/Pla.Lib.UI.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
