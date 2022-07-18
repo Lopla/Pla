@@ -5,6 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     
+    <PackageId>Pla.Lib.UI</PackageId>
+    <Version>1.0.2</Version>
+    <Authors>Paweł Gałęzowski</Authors>
+    <Company>lagcorp</Company>
+    <Description>Som ui components.</Description>
+ 
   </PropertyGroup>
 
   <ItemGroup>
