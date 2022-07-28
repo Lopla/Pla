@@ -26,7 +26,9 @@ namespace Pla.Lib.UI
             //var painter  = new SKColor(255,0,0,32);
             //canvas.Clear(painter);
 
-            Widgets.ForEach(w => w.Draw(canvas));
+            Widgets.ForEach(w => {
+                w.Draw(canvas);
+            });
 
             canvas.Flush();
         }
