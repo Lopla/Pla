@@ -16,5 +16,7 @@ namespace Pla.Lib.UI
                 canvas.DrawText(Text, Bounds.Left, Bounds.MidY, painterb);
             }
         }
+
+        
     }
 }
