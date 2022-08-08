@@ -5,7 +5,7 @@
 	<TargetFramework>netstandard2.0</TargetFramework>
     
     <PackageId>Pla.Lib.UI</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>Paweł Gałęzowski</Authors>
     <Company>lagcorp</Company>
     <Description>UI based on Pla  lib</Description>
