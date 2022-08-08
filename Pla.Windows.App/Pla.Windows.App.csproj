@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pla.App.Pilot\Pla.App.Pilot.csproj" />
+    <ProjectReference Include="..\Pla.Lib.UI\Pla.Lib.UI.csproj" />
     <ProjectReference Include="..\Pla.Win\Pla.Win.csproj" />
   </ItemGroup>
 
