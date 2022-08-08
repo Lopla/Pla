@@ -6,7 +6,7 @@ namespace Pla.Lib.UI
 
     public class Widget
     {
-        public SKRect Bounds = SKRect.Empty;
+        internal SKRect Bounds = SKRect.Empty;
 
         public virtual void Draw(SKCanvas canvas)
         {
@@ -32,5 +32,10 @@ namespace Pla.Lib.UI
         }
 
         public event Clicked ClickedHandler;
+
+        public virtual SKRect RequestedSize
+        {
+            get;
+        } = default;
     }
 }

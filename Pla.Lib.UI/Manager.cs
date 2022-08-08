@@ -1,57 +1,42 @@
-using System.Collections.Generic;
-using Pla.Lib;
 using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
     public class Manager : IControl, IPainter
     {
-        public Manager(IEngine painter)
+        public Manager(IEngine painter) : base()
         {
             this.painter = painter;
         }
 
-        List<Widget> Widgets = new List<Widget>();
-
-        private readonly IEngine painter;
+        Frame rootFrame = new Frame();
 
         public void Add(Widget widget)
         {
-            Widgets.Add(widget);
-            painter.RequestRefresh();
+            rootFrame.Add(widget);
         }
 
-        internal void Draw(SKCanvas canvas)
-        {
-            //var painter  = new SKColor(255,0,0,32);
-            //canvas.Clear(painter);
-
-            Widgets.ForEach(w => {
-                w.Draw(canvas);
-            });
-
-            canvas.Flush();
-        }
-
-        public void Click(SKPoint argsLocation)
-        {
-            foreach (var w in Widgets)
-            {
-                if (w.Bounds.Contains(argsLocation))
-                {
-                    w.OnClick(argsLocation);
-                }
-            }
-        }
+        private readonly IEngine painter;
 
         public void KeyDown(uint key)
         {
 
         }
 
+        public void Click(SKPoint argsLocation)
+        {
+            rootFrame.Click(argsLocation);
+        }
+
         public void Paint(SKImageInfo info, SKSurface surface)
         {
-            this.Draw(surface.Canvas);
+            // var c = surface.Canvas;
+            // var painter  = new SKColor(255,0,0,32);
+            // c.Clear(painter);
+
+            rootFrame.Draw(surface.Canvas);
+
+            surface.Canvas.Flush();
         }
     }
 }

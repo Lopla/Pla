@@ -26,7 +26,6 @@ namespace Pla.App.Pilot
 
             var b = new Button()
             {
-                Bounds = new SKRect(10, 100, 100, 130),
                 Label = "Click me",
             };
             b.ClickedHandler += (loc) =>
@@ -35,7 +34,16 @@ namespace Pla.App.Pilot
                 this.engine.RequestRefresh();
             };
 
-            this.manager.Add(b);
+            var f = this.manager.AddWidget(new Frame());
+            f.AddWidget(new Button(){
+                Label = "Legendary"
+            });
+            
+            f.AddWidget(new Button(){
+                Label = "Close"
+            }); 
+
+            f.Add(b);
 
             //this.engine.RequestTransparentWindow();
         }

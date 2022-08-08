@@ -19,5 +19,8 @@ namespace Pla.Lib.UI
                 canvas.DrawText(Label, Bounds.MidX, Bounds.MidY, painterb);
             }
         }
+
+        SKRect size = new SKRect(0,0,0,50);
+        public override SKRect RequestedSize => size;
     }
 }
