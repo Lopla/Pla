@@ -32,5 +32,8 @@ namespace Pla.Lib.UI
         {
             get;
         } = default;
+
+        public Frame Parent { get; set; } = null;
+
     }
 }

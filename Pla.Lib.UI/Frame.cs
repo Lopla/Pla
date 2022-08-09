@@ -9,20 +9,25 @@ namespace Pla.Lib.UI
     /// </summary>
     public class Frame : Widget
     {
+        SKRect canvasSize = default;
+        private readonly DrawingStyle drawingStyle;
+
         public Frame()
         {
         }
 
-        public Frame Parent{ get; set; } = null;
+        public Frame(DrawingStyle drawingStyle)
+        {
+            this.drawingStyle = drawingStyle;
+        }
 
         List<Widget> Widgets = new List<Widget>();
 
         public void Add(Widget widget)
         {
+            widget.Parent = this;
             Widgets.Add(widget);
         }
-
-        SKRect canvasSize = default;
 
         public override void Draw(SKCanvas canvas, DrawingStyle style)
         {
@@ -35,7 +40,7 @@ namespace Pla.Lib.UI
                 this.RecalculateControls();
             }
 
-            base.Draw(canvas, style);
+            base.Draw(canvas, drawingStyle ?? style);
 
             Widgets.ForEach(w => {
                 w.Draw(canvas, style);
@@ -47,11 +52,13 @@ namespace Pla.Lib.UI
             if (this.Parent != null)
             {
                 // i have a parent no resize for me
+                // i will be resized by my parent
                 return;
             }
             else
             {
                 // resize me
+                // i'm the root frame of all
                 this.Bounds = this.canvasSize;
                 RecalculateChildSizes();
             }            
@@ -60,7 +67,7 @@ namespace Pla.Lib.UI
         private void RecalculateChildSizes()
         {
             int padding = 5;
-            float offsetY = this.Bounds.Top;
+            float offsetY = 0;
 
             // resize my kids
             foreach (var w in this.Widgets)
