@@ -45,8 +45,7 @@ namespace Pla.Windows.App
             foreach (var p in points)
             {
                 surface.Canvas.DrawPoint(p, SKColor.Parse("000"));
-            }
-            
+            }            
         }
 
         public void Click(SKPoint argsLocation)

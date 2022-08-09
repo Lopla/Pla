@@ -22,51 +22,65 @@ namespace Pla.Lib.UI
             Widgets.Add(widget);
         }
 
-        SKRect size = default;
+        SKRect canvasSize = default;
 
-        public override void Draw(SKCanvas canvas)
+        public override void Draw(SKCanvas canvas, DrawingStyle style)
         {
-            SKRect currentSize = default;
-            canvas.GetLocalClipBounds(out currentSize);
+            SKRect currentCanvasSize = default;
+            canvas.GetLocalClipBounds(out currentCanvasSize);
 
-            if(currentSize != size)
+            if(currentCanvasSize != canvasSize)
             {
-                this.size = currentSize;
+                this.canvasSize = currentCanvasSize;
                 this.RecalculateControls();
             }
 
-            base.Draw(canvas);
+            base.Draw(canvas, style);
 
             Widgets.ForEach(w => {
-                w.Draw(canvas);
+                w.Draw(canvas, style);
             });
         }
 
         private void RecalculateControls()
         {
-            if(this.Parent!=null)
+            if (this.Parent != null)
             {
                 // i have a parent no resize for me
+                return;
             }
-            else{
-                // resize me
-                this.Bounds = this.size;
-            }
-
-            int padding = 5;
-            float offsetY = 0;
-            // resize my kids
-            foreach(var w in this.Widgets)
+            else
             {
-                    
+                // resize me
+                this.Bounds = this.canvasSize;
+                RecalculateChildSizes();
+            }            
+        }
+
+        private void RecalculateChildSizes()
+        {
+            int padding = 5;
+            float offsetY = this.Bounds.Top;
+
+            // resize my kids
+            foreach (var w in this.Widgets)
+            {
+                var dY = padding + padding + w.RequestedSize.Height;
+
                 var rect = new SKRect(
-                    this.size.Left + padding, this.size.Top + offsetY + padding,
-                    this.size.Right - padding, this.size.Top + offsetY + padding + w.RequestedSize.Height
+                    this.Bounds.Left    + padding, 
+                    this.Bounds.Top     + offsetY + padding,
+                    this.Bounds.Right   - padding, 
+                    this.Bounds.Top     + offsetY + dY
                 );
 
-                offsetY+=padding+padding+ w.RequestedSize.Height;
+                offsetY += dY;
 
                 w.Bounds = rect;
+                if (w is Frame f)
+                {
+                    f.RecalculateChildSizes();
+                }
             }
         }
 
@@ -78,6 +92,23 @@ namespace Pla.Lib.UI
                 {
                     w.OnClick(argsLocation);
                 }
+            }
+        }
+
+        public override SKRect RequestedSize
+        {
+            get
+            {
+                int padding = 5;
+                float offsetY = 0;
+
+                // resize my kids
+                foreach (var w in this.Widgets)
+                {
+                    offsetY += padding + padding + w.RequestedSize.Height;
+                }
+
+                return new SKRect(0,0,0,offsetY);
             }
         }
     }

@@ -6,9 +6,9 @@ namespace Pla.Lib.UI
     {
         public string Label = "";
 
-        public override void Draw(SKCanvas canvas)
+        public override void Draw(SKCanvas canvas, DrawingStyle style)
         {
-            base.Draw(canvas);
+            base.Draw(canvas, style);
 
             using (var painterb = new SKPaint()
             {

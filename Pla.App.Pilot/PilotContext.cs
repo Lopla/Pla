@@ -24,26 +24,16 @@ namespace Pla.App.Pilot
             this.engine = engine;
             this.manager = new Manager(engine);
 
-            var b = new Button()
-            {
-                Label = "Click me",
-            };
-            b.ClickedHandler += (loc) =>
-            {
-                System.Console.WriteLine("a");
-                this.engine.RequestRefresh();
-            };
+            this.manager.AddWidget(new Button() { Label = "No Frame" });
 
             var f = this.manager.AddWidget(new Frame());
-            f.AddWidget(new Button(){
-                Label = "Legendary"
-            });
-            
-            f.AddWidget(new Button(){
-                Label = "Close"
-            }); 
+            f.AddWidget(new Button() { Label = "Frame1/1" });
+            f.AddWidget(new Button() { Label = "Frame1/1" });
 
-            f.Add(b);
+            //var f2 = this.manager.AddWidget(new Frame());
+            //f2.AddWidget(new Button() { Label = "Frame2/1" });
+            //f2.AddWidget(new Button() { Label = "Frame2/2" });
+            //f2.AddWidget(new Button() { Label = "Frame2/3" });
 
             //this.engine.RequestTransparentWindow();
         }

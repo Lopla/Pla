@@ -6,7 +6,7 @@ namespace Pla.Lib.UI
     {
         public string Text = "";
 
-        public override void Draw(SKCanvas canvas)
+        public override void Draw(SKCanvas canvas, DrawingStyle style)
         {
             using (var painterb = new SKPaint()
             {

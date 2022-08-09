@@ -34,8 +34,15 @@ namespace Pla.Lib.UI
             // var painter  = new SKColor(255,0,0,32);
             // c.Clear(painter);
 
-            rootFrame.Draw(surface.Canvas);
-
+            var style = new DrawingStyle();
+            using (style.Front = new SKPaint()
+            {
+                Style = SKPaintStyle.Stroke,
+                Color = new SKColor(0, 0, 0),
+            })
+            {
+                rootFrame.Draw(surface.Canvas, style);
+            }
             surface.Canvas.Flush();
         }
     }
