@@ -28,7 +28,7 @@ namespace Pla.Lib.UI
 
         public event Clicked ClickedHandler;
 
-        public virtual SKRect RequestedSize
+        public virtual SKPoint RequestedSize
         {
             get;
         } = default;

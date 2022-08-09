@@ -4,20 +4,23 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
+    public enum FrameStyle { Vertical, Horizontal }
+
     /// <summary>
     /// Container for other controls, handles resizing of objects contained in it. 
     /// </summary>
     public class Frame : Widget
     {
         SKRect canvasSize = default;
+        private readonly FrameStyle style;
         private readonly DrawingStyle drawingStyle;
 
-        public Frame()
-        {
-        }
 
-        public Frame(DrawingStyle drawingStyle)
+        public Frame(
+            FrameStyle style = FrameStyle.Vertical,
+            DrawingStyle drawingStyle = null)
         {
+            this.style = style;
             this.drawingStyle = drawingStyle;
         }
 
@@ -60,6 +63,17 @@ namespace Pla.Lib.UI
                 // resize me
                 // i'm the root frame of all
                 this.Bounds = this.canvasSize;
+
+                if (this.Bounds.Height > this.RequestedSize.Y)
+                {
+                    this.Bounds.Bottom = this.RequestedSize.Y;
+                }
+
+                if (this.Bounds.Width> this.RequestedSize.X)
+                {
+                    this.Bounds.Right = this.RequestedSize.X;
+                }
+
                 RecalculateChildSizes();
             }            
         }
@@ -67,21 +81,28 @@ namespace Pla.Lib.UI
         private void RecalculateChildSizes()
         {
             int padding = 5;
-            float offsetY = 0;
+
+            SKPoint offset = new SKPoint();
+
+            SKPoint offestDelta = new SKPoint(
+                style == FrameStyle.Horizontal ? 1 : 0,
+                style == FrameStyle.Vertical ? 1 : 0
+            );
 
             // resize my kids
             foreach (var w in this.Widgets)
             {
-                var dY = padding + padding + w.RequestedSize.Height;
+                var dY = (padding + padding + w.RequestedSize.Y) ;
+                var dX = (padding + padding + w.RequestedSize.X) ;
 
                 var rect = new SKRect(
-                    this.Bounds.Left    + padding, 
-                    this.Bounds.Top     + offsetY + padding,
-                    this.Bounds.Right   - padding, 
-                    this.Bounds.Top     + offsetY + dY
+                    this.Bounds.Left    + offset.X + padding, 
+                    this.Bounds.Top     + offset.Y + padding,
+                    this.Bounds.Left    + offset.X + dX - padding, 
+                    this.Bounds.Top     + offset.Y + dY - padding
                 );
 
-                offsetY += dY;
+                offset.Offset(dX * offestDelta.X , dY * offestDelta.Y);
 
                 w.Bounds = rect;
                 if (w is Frame f)
@@ -102,20 +123,31 @@ namespace Pla.Lib.UI
             }
         }
 
-        public override SKRect RequestedSize
+        public override SKPoint RequestedSize
         {
             get
             {
                 int padding = 5;
-                float offsetY = 0;
 
-                // resize my kids
+                float maxX = 0;
+                float maxY = 0;
+                float dy = 0;
+                float dx = 0;
                 foreach (var w in this.Widgets)
                 {
-                    offsetY += padding + padding + w.RequestedSize.Height;
+                    var ex = (2 * padding + w.RequestedSize.X);
+                    var ey = (2 * padding + w.RequestedSize.Y);
+
+                    dy += ey;
+                    dx += ex;
+
+                    maxX = Math.Max(maxX, ex);
+                    maxY = Math.Max(maxY, ey);
                 }
 
-                return new SKRect(0,0,0,offsetY);
+                return 
+                    style == FrameStyle.Horizontal ? 
+                        new SKPoint(dx, maxY) : new SKPoint(maxX, dy);
             }
         }
     }

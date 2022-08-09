@@ -24,19 +24,47 @@ namespace Pla.App.Pilot
             this.engine = engine;
             this.manager = new Manager(engine);
 
+            
+            this.manager.AddWidget(new Button() { Label = "No Frame" });
+            this.manager.AddWidget(new Button() { Label = "No Frame" });
+            //var f = this.manager.AddWidget(new Frame(
+            //   FrameStyle.Horizontal,
+            //   drawingStyle: new DrawingStyle()
+            //   {
+            //       Front = new SKPaint()
+            //       {
+            //           Color = new SKColor(230, 200, 200)
+            //       }
+            //   }));
+            //f.AddWidget(new Button() { Label = "Frame1/1" });
+            //f.AddWidget(new Button() { Label = "Frame1/1" });
+            
+            LotsOfFrames();
+
+            //this.engine.RequestTransparentWindow();
+        }
+
+        private void LotsOfFrames()
+        {
             this.manager.AddWidget(new Button() { Label = "No Frame" });
 
-            var f = this.manager.AddWidget(new Frame(new DrawingStyle()
-            {
-                Front = new SKPaint()
+            var horizontalFrame = this.manager.AddWidget(new Frame(
+                FrameStyle.Horizontal,
+                drawingStyle: new DrawingStyle()
                 {
-                    Color = new SKColor(230, 200, 200)
-                }
-            }));
-            f.AddWidget(new Button() { Label = "Frame1/1" });
-            f.AddWidget(new Button() { Label = "Frame1/1" });
+                    Front = new SKPaint()
+                    {
+                        Color = new SKColor(230, 200, 200)
+                    }
+                }));
+            horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
+            var inhorizontal = horizontalFrame.AddWidget(new Frame());
+            inhorizontal.AddWidget(new Button() { Label = "Frame1/2/1" });
+            inhorizontal.AddWidget(new Button() { Label = "Frame1/2/2" });
 
-            var f2 = this.manager.AddWidget(new Frame(new DrawingStyle()
+            horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
+
+            var f2 = this.manager.AddWidget(new Frame(drawingStyle: new DrawingStyle()
             {
                 Front = new SKPaint()
                 {
@@ -47,7 +75,7 @@ namespace Pla.App.Pilot
             f2.AddWidget(new Button() { Label = "Frame2/2" });
             f2.AddWidget(new Button() { Label = "Frame2/3" });
 
-            //this.engine.RequestTransparentWindow();
+            this.manager.AddWidget(new Button() { Label = "No Frame" });
         }
     }
 }

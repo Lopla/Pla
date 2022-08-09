@@ -20,7 +20,7 @@ namespace Pla.Lib.UI
             }
         }
 
-        SKRect size = new SKRect(0,0,0,50);
-        public override SKRect RequestedSize => size;
+        SKPoint size = new SKPoint(50,50);
+        public override SKPoint RequestedSize => size;
     }
 }
