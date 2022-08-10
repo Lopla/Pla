@@ -9,7 +9,7 @@ namespace Pla.Lib.UI
     /// <summary>
     /// Container for other controls, handles resizing of objects contained in it. 
     /// </summary>
-    public class Frame : Widget
+    public class Frame : Widget, IWidgetContainer
     {
         SKRect canvasSize = default;
         private readonly FrameStyle style;
@@ -25,10 +25,11 @@ namespace Pla.Lib.UI
 
         List<Widget> Widgets = new List<Widget>();
 
-        public void Add(Widget widget)
+        public Widget Add(Widget widget)
         {
             widget.Parent = this;
             Widgets.Add(widget);
+            return widget;
         }
 
         public override void Draw(SKCanvas canvas, DrawingStyle style)

@@ -2,7 +2,7 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
-    public class Manager : IControl, IPainter
+    public class Manager : IControl, IPainter, IWidgetContainer
     {
         public Manager(IEngine painter) : base()
         {
@@ -11,9 +11,10 @@ namespace Pla.Lib.UI
 
         Frame rootFrame = new Frame();
 
-        public void Add(Widget widget)
+        public Widget Add(Widget widget)
         {
             rootFrame.Add(widget);
+            return widget;
         }
 
         private readonly IEngine painter;
