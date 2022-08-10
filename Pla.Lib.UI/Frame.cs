@@ -14,8 +14,7 @@ namespace Pla.Lib.UI
         SKRect canvasSize = default;
         private readonly FrameStyle style;
         private readonly DrawingStyle drawingStyle;
-
-
+        
         public Frame(
             FrameStyle style = FrameStyle.Vertical,
             DrawingStyle drawingStyle = null)

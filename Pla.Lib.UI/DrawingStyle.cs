@@ -35,7 +35,6 @@ namespace Pla.Lib.UI
             };
         }
 
-
         public List<SKColor> amigaWB = new List<SKColor>()
         {
             new SKColor(149, 149, 149),
