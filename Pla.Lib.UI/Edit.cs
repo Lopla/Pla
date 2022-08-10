@@ -10,13 +10,11 @@ namespace Pla.Lib.UI
         {
             using (var painterb = new SKPaint()
             {
-                Color = new SKColor(0, 0, 0)
+                Color = style.Front.Color
             })
             {
                 canvas.DrawText(Text, Bounds.Left, Bounds.MidY, painterb);
             }
-        }
-
-        
+        }        
     }
 }

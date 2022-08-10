@@ -9,7 +9,7 @@
     <Authors>Paweł Gałęzowski</Authors>
     <Company>lagcorp</Company>
     <Description>UI based on Pla lib</Description>
- 
+    
   </PropertyGroup>
 
   <ItemGroup>

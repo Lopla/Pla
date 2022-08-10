@@ -12,7 +12,7 @@ namespace Pla.Lib.UI
 
             using (var painterb = new SKPaint()
             {
-                Color = new SKColor(0, 0, 0),
+                Color = style.Front.Color,
                 TextAlign = SKTextAlign.Center,
             })
             {
@@ -20,7 +20,7 @@ namespace Pla.Lib.UI
             }
         }
 
-        SKPoint size = new SKPoint(50,50);
+        SKPoint size = new SKPoint(100,32);
         public override SKPoint RequestedSize => size;
     }
 }
