@@ -20,7 +20,7 @@ namespace Pla.Lib.UI
 
         public override void OnKeyDow(uint key)
         {
-            this.Text = this.Text + key;
+            this.Text = this.Text + (char)key;
 
             this.Parent.Invalidate();
         }
