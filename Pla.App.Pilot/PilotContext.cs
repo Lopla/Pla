@@ -25,8 +25,8 @@ namespace Pla.App.Pilot
             this.manager = new Manager(engine);
 
             ShowSelectedWidget();
-            //LotsOfFrames();
             Editor();
+            LotsOfFrames();
             //this.engine.RequestTransparentWindow();
         }
 
@@ -68,7 +68,9 @@ namespace Pla.App.Pilot
             horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
             var inhorizontal = horizontalFrame.AddWidget(new Frame());
             inhorizontal.AddWidget(new Button() { Label = "Frame1/2/1" });
+            inhorizontal.AddWidget(new Edit() { Text = "Editor/2/2" });
             inhorizontal.AddWidget(new Button() { Label = "Frame1/2/2" });
+
 
             horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
 

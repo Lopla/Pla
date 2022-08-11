@@ -4,5 +4,6 @@
     {
         Widget Add(Widget widget);
         void Invalidate();
+        void RequestResize();
     }
 }

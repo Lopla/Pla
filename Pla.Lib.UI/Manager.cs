@@ -65,6 +65,11 @@ namespace Pla.Lib.UI
             this.painter.RequestRefresh();
         }
 
+        public void RequestResize()
+        {
+            
+        }
+
         public Widget Selected { get; set; }
 
         public event WidgetSelected OnWidgetSelected;

@@ -147,6 +147,16 @@ namespace Pla.Lib.UI
             return null;
         }
 
+        public void RequestResize()
+        {
+            if(this.Parent is Manager)
+            {
+                this.RecalculateControls();
+                this.Invalidate();
+            }else
+                Parent.RequestResize();
+        }
+
         public override SKPoint RequestedSize
         {
             get
