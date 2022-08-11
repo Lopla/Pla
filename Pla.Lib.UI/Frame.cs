@@ -23,6 +23,30 @@ namespace Pla.Lib.UI
             this.drawingStyle = drawingStyle;
         }
 
+        public Widget FindWidget(SKPoint argsLocation)
+        {
+            if (Bounds.Contains(argsLocation))
+            {
+                foreach (var w in Widgets)
+                {
+                    if (w.Bounds.Contains(argsLocation))
+                    {
+                        if (w is Frame f)
+                        {
+                            return f.FindWidget(argsLocation);
+                        }
+                        return w;
+                    }
+                }
+
+                return this;
+            }
+
+
+            return null;
+            
+        }
+
         List<Widget> Widgets = new List<Widget>();
 
         public Widget Add(Widget widget)
@@ -112,15 +136,18 @@ namespace Pla.Lib.UI
             }
         }
 
-        public void Click(SKPoint argsLocation)
+        public Widget Click(SKPoint argsLocation)
         {
             foreach (var w in Widgets)
             {
                 if (w.Bounds.Contains(argsLocation))
                 {
                     w.OnClick(argsLocation);
+                    return w;
                 }
             }
+
+            return null;
         }
 
         public override SKPoint RequestedSize

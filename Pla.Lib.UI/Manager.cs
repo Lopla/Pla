@@ -2,6 +2,8 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
+    public delegate void WidgetSelected(Widget selctedWidget);
+
     public class Manager : IControl, IPainter, IWidgetContainer
     {
         public Manager(IEngine painter) : base()
@@ -26,7 +28,12 @@ namespace Pla.Lib.UI
 
         public void Click(SKPoint argsLocation)
         {
-            rootFrame.Click(argsLocation);
+            var w = rootFrame.FindWidget(argsLocation);
+            
+            this.Selected = w;
+            this.OnWidgetSelected?.Invoke(w);
+            w?.OnClick(argsLocation);
+                        
         }
 
         public void Paint(SKImageInfo info, SKSurface surface)
@@ -46,5 +53,9 @@ namespace Pla.Lib.UI
             }
             surface.Canvas.Flush();
         }
+
+        public Widget Selected { get; set; }
+
+        public event WidgetSelected OnWidgetSelected;
     }
 }

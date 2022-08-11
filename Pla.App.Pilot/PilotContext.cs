@@ -24,28 +24,28 @@ namespace Pla.App.Pilot
             this.engine = engine;
             this.manager = new Manager(engine);
 
-            
-            this.manager.AddWidget(new Button() { Label = "No Frame" });
-            this.manager.AddWidget(new Button() { Label = "No Frame" });
-            //var f = this.manager.AddWidget(new Frame(
-            //   FrameStyle.Horizontal,
-            //   drawingStyle: new DrawingStyle()
-            //   {
-            //       Front = new SKPaint()
-            //       {
-            //           Color = new SKColor(230, 200, 200)
-            //       }
-            //   }));
-            //f.AddWidget(new Button() { Label = "Frame1/1" });
-            //f.AddWidget(new Button() { Label = "Frame1/1" });
-            
+            ShowSelectedWidget();
             LotsOfFrames();
 
             //this.engine.RequestTransparentWindow();
         }
 
+        private void ShowSelectedWidget()
+        {
+            var labale = this.manager.AddWidget(new Label() { Text = "Label" });
+            this.manager.OnWidgetSelected += (widget) =>
+            {
+                labale.Text = widget?.ToString() ?? "none";
+                
+                this.engine.RequestRefresh();
+            };
+        }
+
         private void LotsOfFrames()
         {
+
+            this.manager.AddWidget(new Button() { Label = "No Frame" });
+            this.manager.AddWidget(new Button() { Label = "No Frame" });
             this.manager.AddWidget(new Button() { Label = "No Frame" });
 
             var horizontalFrame = this.manager.AddWidget(new Frame(
