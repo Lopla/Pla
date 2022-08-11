@@ -29,5 +29,15 @@ namespace Pla.Lib.UI
         }
 
         public IWidgetContainer Parent { get; set; } = null;
+
+        public virtual void LostFocus()
+        {
+            
+        }
+
+        public virtual void GotFocus()
+        {
+            
+        }
     }
 }

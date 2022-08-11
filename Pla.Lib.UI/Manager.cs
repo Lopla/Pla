@@ -33,11 +33,13 @@ namespace Pla.Lib.UI
         public void Click(SKPoint argsLocation)
         {
             var w = rootFrame.FindWidget(argsLocation);
-            
+
+            this.Selected?.LostFocus();
             this.Selected = w;
             this.OnWidgetSelected?.Invoke(w);
+            w?.GotFocus();
             w?.OnClick(argsLocation);
-                        
+                      
         }
 
         public void Paint(SKImageInfo info, SKSurface surface)
