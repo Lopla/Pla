@@ -25,9 +25,17 @@ namespace Pla.App.Pilot
             this.manager = new Manager(engine);
 
             ShowSelectedWidget();
-            LotsOfFrames();
-
+            //LotsOfFrames();
+            Editor();
             //this.engine.RequestTransparentWindow();
+        }
+
+        private void Editor()
+        {
+            this.manager.Add(new Edit()
+            {
+                Text ="a"
+            });
         }
 
         private void ShowSelectedWidget()

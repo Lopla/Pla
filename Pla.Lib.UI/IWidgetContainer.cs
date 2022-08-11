@@ -3,5 +3,6 @@
     public interface IWidgetContainer
     {
         Widget Add(Widget widget);
+        void Invalidate();
     }
 }

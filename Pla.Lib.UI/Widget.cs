@@ -28,6 +28,6 @@ namespace Pla.Lib.UI
             
         }
 
-        public Frame Parent { get; set; } = null;
+        public IWidgetContainer Parent { get; set; } = null;
     }
 }

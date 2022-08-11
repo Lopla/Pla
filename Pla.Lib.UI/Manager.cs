@@ -9,6 +9,7 @@ namespace Pla.Lib.UI
         public Manager(IEngine painter) : base()
         {
             this.painter = painter;
+            this.rootFrame.Parent=this;
         }
 
         Frame rootFrame = new Frame();
@@ -55,6 +56,11 @@ namespace Pla.Lib.UI
                 rootFrame.Draw(surface.Canvas, style);
             }
             surface.Canvas.Flush();
+        }
+
+        public void Invalidate()
+        {
+            this.painter.RequestRefresh();
         }
 
         public Widget Selected { get; set; }

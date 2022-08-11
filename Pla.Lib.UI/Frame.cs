@@ -23,6 +23,11 @@ namespace Pla.Lib.UI
             this.drawingStyle = drawingStyle;
         }
 
+        public void Invalidate()
+        {
+            this.Parent.Invalidate();
+        }
+
         public Widget FindWidget(SKPoint argsLocation)
         {
             if (Bounds.Contains(argsLocation))
@@ -74,13 +79,7 @@ namespace Pla.Lib.UI
 
         private void RecalculateControls()
         {
-            if (this.Parent != null)
-            {
-                // i have a parent no resize for me
-                // i will be resized by my parent
-                return;
-            }
-            else
+            if (Parent is Manager)
             {
                 // resize me
                 // i'm the root frame of all

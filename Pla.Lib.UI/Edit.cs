@@ -8,6 +8,7 @@ namespace Pla.Lib.UI
 
         public override void Draw(SKCanvas canvas, DrawingStyle style)
         {
+            base.Draw(canvas, style);
             using (var painterb = new SKPaint()
             {
                 Color = style.Front.Color
@@ -15,8 +16,15 @@ namespace Pla.Lib.UI
             {
                 canvas.DrawText(Text, Bounds.Left, Bounds.MidY, painterb);
             }
+        }
 
-            
-        }        
+        public override void OnKeyDow(uint key)
+        {
+            this.Text = this.Text + key;
+
+            this.Parent.Invalidate();
+        }
+
+        public override SKPoint RequestedSize => new SKPoint(100,30);
     }
 }
