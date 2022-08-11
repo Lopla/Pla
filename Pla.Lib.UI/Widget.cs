@@ -2,7 +2,6 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
-    public delegate void Clicked(SKPoint point);
 
     public class Widget
     {
@@ -14,19 +13,21 @@ namespace Pla.Lib.UI
             canvas.DrawRect(Bounds, style.Front);
         }
 
-        public void OnClick(SKPoint argsLocation)
+        public virtual void OnClick(SKPoint argsLocation)
         {
-            ClickedHandler?.Invoke(argsLocation);
-        }
 
-        public event Clicked ClickedHandler;
+        }
 
         public virtual SKPoint RequestedSize
         {
             get;
         } = default;
 
-        public Frame Parent { get; set; } = null;
+        public virtual void OnKeyDow(uint key)
+        {
+            
+        }
 
+        public Frame Parent { get; set; } = null;
     }
 }

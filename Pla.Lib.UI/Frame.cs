@@ -42,9 +42,7 @@ namespace Pla.Lib.UI
                 return this;
             }
 
-
-            return null;
-            
+            return null;            
         }
 
         List<Widget> Widgets = new List<Widget>();

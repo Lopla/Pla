@@ -2,6 +2,9 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
+
+    public delegate void Clicked(SKPoint point);
+
     public class Button : Widget
     {
         public string Label = "";
@@ -22,5 +25,14 @@ namespace Pla.Lib.UI
 
         SKPoint size = new SKPoint(100,32);
         public override SKPoint RequestedSize => size;
+
+        public override void OnClick(SKPoint argsLocation)
+        {
+            ClickedHandler?.Invoke(argsLocation);
+        }
+
+
+        public event Clicked ClickedHandler;
+
     }
 }
