@@ -3,69 +3,22 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets
 {
-    public class Edit : Widget
+    public class Edit : BaseTextWidget
     {
         private int _cursorLocation = 0;
         private bool _hasFocus;
-        private string _text;
 
-        private SKPoint _size = SKPoint.Empty;
 
-        public string Text
+        protected override void OnDraw(PaintContext paintContext, LCars style)
         {
-            get => _text;
-            set
-            {
-                if (_text != value)
-                {
-                    _text = value;
-                    var tmpSize = CaulculateRequestedSize();
-                    if (tmpSize != _size)
-                    {
-                        _size = tmpSize;
-                        Parent?.RequestResize();
-                    }
-                }
-            }
+            paintContext.Focused = _hasFocus;
+            style.ModifyAble(paintContext);
         }
 
-        public override SKPoint RequestedSize
+        protected override void OnDrawTextLine(PaintContext paintContext, LCars style, string lineOfText)
         {
-            get
-            {
-                if (_size == SKPoint.Empty) _size = CaulculateRequestedSize();
-
-                return _size;
-            }
-        }
-
-        private SKPoint CaulculateRequestedSize()
-        {
-            var newSize = SKPoint.Empty;
-            foreach (var t in TextLines())
-            {
-                var textSize = new LCars().CalculateTextSize(t);
-                newSize.Offset(0, textSize.Y);
-                if (newSize.X < textSize.X) newSize.X = textSize.X;
-            }
-
-            return newSize;
-        }
-
-        public override void Draw(SKCanvas canvas, LCars style)
-        {
-            style.ModifyAble(new PaintContext(this, canvas, _hasFocus));
-
-            float yOffset = 0;
-            foreach (var t in TextLines())
-            {
-                var currentBounds = Bounds;
-                currentBounds.Offset(0, yOffset);
-                var textSize = new LCars().CalculateTextSize(t);
-                currentBounds.Bottom = currentBounds.Top + textSize.Y;
-                style.ModifyAbleText(new PaintContext(currentBounds, canvas, _hasFocus), t, SKTextAlign.Left);
-                yOffset += textSize.Y;
-            }
+            paintContext.Focused = _hasFocus;
+            style.ModifyAbleText(paintContext, lineOfText, SKTextAlign.Left);
         }
 
         public override void OnKeyDow(uint key)
@@ -82,11 +35,6 @@ namespace Pla.Lib.UI.Widgets
             }
 
             Parent.Invalidate();
-        }
-
-        public string[] TextLines()
-        {
-            return Text?.Split('\r', '\n');
         }
 
         public override void GotFocus()

@@ -41,7 +41,7 @@ namespace Pla.App.Pilot
         {
             var b = container.AddWidget(new Button()
             {
-                Label = "Close",
+                Text = "Close",
             });
 
             b.ClickedHandler += point => { throw new Exception("How to close it?"); };
@@ -69,27 +69,27 @@ namespace Pla.App.Pilot
         private void LotsOfFrames(IWidgetContainer container)
         {
 
-            container.AddWidget(new Button() { Label = "No Frame" });
-            container.AddWidget(new Button() { Label = "No Frame" });
-            container.AddWidget(new Button() { Label = "No Frame" });
+            container.AddWidget(new Button() { Text = "No Frame" });
+            container.AddWidget(new Button() { Text = "No Frame" });
+            container.AddWidget(new Button() { Text = "No Frame" });
 
             var horizontalFrame = container.AddWidget(new Frame(
                 FrameStyle.Horizontal));
-            horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
+            horizontalFrame.AddWidget(new Button() { Text = "Frame1/1" });
             var inhorizontal = horizontalFrame.AddWidget(new Frame());
-            inhorizontal.AddWidget(new Button() { Label = "Frame1/2/1" });
+            inhorizontal.AddWidget(new Button() { Text = "Frame1/2/1" });
             inhorizontal.AddWidget(new Edit() { Text = "Editor/2/2" });
-            inhorizontal.AddWidget(new Button() { Label = "Frame1/2/2" });
+            inhorizontal.AddWidget(new Button() { Text = "Frame1/2/2" });
 
 
-            horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
+            horizontalFrame.AddWidget(new Button() { Text = "Frame1/1" });
 
             var f2 = container.AddWidget(new Frame());
-            f2.AddWidget(new Button() { Label = "Frame2/1" });
-            f2.AddWidget(new Button() { Label = "Frame2/2" });
-            f2.AddWidget(new Button() { Label = "Frame2/3" });
+            f2.AddWidget(new Button() { Text = "Frame2/1" });
+            f2.AddWidget(new Button() { Text = "Frame2/2" });
+            f2.AddWidget(new Button() { Text = "Frame2/3" });
 
-            container.AddWidget(new Button() { Label = "No Frame" });
+            container.AddWidget(new Button() { Text = "No Frame" });
         }
     }
 }

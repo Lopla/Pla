@@ -5,19 +5,16 @@ namespace Pla.Lib.UI.Widgets
 {
     public delegate void Clicked(SKPoint point);
 
-    public class Button : Widget
+    public class Button : BaseTextWidget
     {
-        public string Label = "";
-
-        public override SKPoint RequestedSize { get; } = new SKPoint(100, 32);
-
-        public override void Draw(SKCanvas canvas, LCars style)
+        protected override void OnDraw(PaintContext paintContext, LCars style)
         {
-            base.Draw(canvas, style);
+            style.PointAble(paintContext);
+        }
 
-            var p = new PaintContext(this, canvas);
-
-            style.PointAble(p, Label);
+        protected override void OnDrawTextLine(PaintContext paintContext, LCars style, string lineOfText)
+        {
+            style.PointAbleText(paintContext, lineOfText, SKTextAlign.Center);
         }
 
         public override void OnClick(SKPoint argsLocation)

@@ -52,11 +52,11 @@ namespace Pla.Lib.UI.DrawingStyles
         {
             _colors = _colorMap.Select(SKColor.Parse).ToArray();
             _font = new SKFont(
-                //SKTypeface.Default,
-                SKTypeface.FromFamilyName("Arial Narrow",
-                    SKFontStyleWeight.Bold,
-                    SKFontStyleWidth.ExtraCondensed,
-                    SKFontStyleSlant.Upright),
+                SKTypeface.Default,
+                //SKTypeface.FromFamilyName("Arial Narrow",
+                //    SKFontStyleWeight.Bold,
+                //    SKFontStyleWidth.ExtraCondensed,
+                //    SKFontStyleSlant.Upright),
                 16
                 );
             _fontDrawingPainter = new SKPaint(_font);
@@ -165,6 +165,16 @@ namespace Pla.Lib.UI.DrawingStyles
         public void ModifyAbleText(PaintContext ctx, string text, SKTextAlign align)
         {
             Text(ctx, text, align, true);
+        }
+
+        public void VisibleText(PaintContext paintContext, string text, SKTextAlign align)
+        {
+            Text(paintContext, text, align, false);
+        }
+
+        public void PointAbleText(PaintContext paintContext, string text, SKTextAlign align)
+        {
+            Text(paintContext, text, align, true);
         }
     }
 }
