@@ -52,11 +52,11 @@ namespace Pla.Lib.UI.DrawingStyles
         {
             _colors = _colorMap.Select(SKColor.Parse).ToArray();
             _font = new SKFont(
-                SKTypeface.Default,
-                //SKTypeface.FromFamilyName("Arial Narrow",
-                //    SKFontStyleWeight.Bold,
-                //    SKFontStyleWidth.ExtraCondensed,
-                //    SKFontStyleSlant.Upright),
+                //SKTypeface.Default,
+                SKTypeface.FromFamilyName("Arial Narrow",
+                    SKFontStyleWeight.Bold,
+                    SKFontStyleWidth.ExtraCondensed,
+                    SKFontStyleSlant.Upright),
                 16
                 );
             _fontDrawingPainter = new SKPaint(_font);
@@ -86,8 +86,22 @@ namespace Pla.Lib.UI.DrawingStyles
                        Color = _colors[(int)Styling.Border1],
                        Style = SKPaintStyle.Fill
                    })
+            using (var background = new SKPaint
+                   {
+                       Color = _colors[(int)Styling.Background],
+                       Style = SKPaintStyle.Fill
+                   })
             {
                 context.Canvas.DrawRoundRect(context.Bounds, BorderMargin, BorderMargin, painterBorder);
+                var b = context.Bounds;
+                b.Left += BorderMargin /2 ;
+                b.Top += 2;
+                b.Bottom -= 2;
+                context.Canvas.DrawRoundRect(b, BorderMargin, BorderMargin, background);
+                var c = b;
+                c.Left = context.Bounds.Right - BorderMargin;
+
+                context.Canvas.DrawRect(c, background);
                 ModifyAbleText(context, label, align);
             }
         }
@@ -164,7 +178,7 @@ namespace Pla.Lib.UI.DrawingStyles
 
         public void ModifyAbleText(PaintContext ctx, string text, SKTextAlign align)
         {
-            Text(ctx, text, align, true);
+            Text(ctx, text, align, false);
         }
 
         public void VisibleText(PaintContext paintContext, string text, SKTextAlign align)

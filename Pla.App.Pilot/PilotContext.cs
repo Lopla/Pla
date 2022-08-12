@@ -32,7 +32,7 @@ namespace Pla.App.Pilot
             ShowLabelAndSelectedWidgetEvent(container);
             Editor(container);
             AddButton(container);
-            //LotsOfFrames(container);
+            LotsOfFrames(container);
 
             this._engine.RequestTransparentWindow();
         }
