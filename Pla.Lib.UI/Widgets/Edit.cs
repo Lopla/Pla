@@ -1,4 +1,3 @@
-using System;
 using Pla.Lib.UI.DrawingStyles;
 using SkiaSharp;
 
@@ -6,80 +5,100 @@ namespace Pla.Lib.UI.Widgets
 {
     public class Edit : Widget
     {
-        public string Text = null;
-
+        private int _cursorLocation = 0;
         private bool _hasFocus;
-        private float _textMaximumH = 20;
-        private float _textMaximumW = 100;
+        private string _text;
+
+        private SKPoint _size = SKPoint.Empty;
+
+        public string Text
+        {
+            get => _text;
+            set
+            {
+                if (_text != value)
+                {
+                    _text = value;
+                    var tmpSize = CaulculateRequestedSize();
+                    if (tmpSize != _size)
+                    {
+                        _size = tmpSize;
+                        Parent?.RequestResize();
+                    }
+                }
+            }
+        }
+
+        public override SKPoint RequestedSize
+        {
+            get
+            {
+                if (_size == SKPoint.Empty) _size = CaulculateRequestedSize();
+
+                return _size;
+            }
+        }
+
+        private SKPoint CaulculateRequestedSize()
+        {
+            var newSize = SKPoint.Empty;
+            foreach (var t in TextLines())
+            {
+                var textSize = new LCars().CalculateTextSize(t);
+                newSize.Offset(0, textSize.Y);
+                if (newSize.X < textSize.X) newSize.X = textSize.X;
+            }
+
+            return newSize;
+        }
 
         public override void Draw(SKCanvas canvas, LCars style)
         {
-            if(!_hasFocus)
-                base.Draw(canvas, style);
+            style.ModifyAble(new PaintContext(this, canvas, _hasFocus));
 
-            using (var painterb = new SKPaint())
+            float yOffset = 0;
+            foreach (var t in TextLines())
             {
-                float spacing = 9;
-                float fontSize =
-                    style.SizeWithText("a").Y;
-
-                float textMaximumH = spacing;
-                float textMaximumW = _textMaximumW;
-                foreach (var t in this.TextLines())
-                {
-                    textMaximumW = Math.Max(textMaximumW, style.SizeWithText(t).X);
-                    
-                    textMaximumH += fontSize ;
-
-                    style.ModifyAble(new PaintContext(this, canvas, this._hasFocus), Text, SKTextAlign.Left);
-                    
-                    textMaximumH += spacing;
-                }
-
-                if(textMaximumW > _textMaximumW ||  textMaximumH> _textMaximumH)
-                {
-                    _textMaximumH = textMaximumH;
-                    _textMaximumW = textMaximumW;
-
-                    this.Parent.RequestResize();
-                }
-            } 
+                var currentBounds = Bounds;
+                currentBounds.Offset(0, yOffset);
+                var textSize = new LCars().CalculateTextSize(t);
+                currentBounds.Bottom = currentBounds.Top + textSize.Y;
+                style.ModifyAbleText(new PaintContext(currentBounds, canvas, _hasFocus), t, SKTextAlign.Left);
+                yOffset += textSize.Y;
+            }
         }
 
         public override void OnKeyDow(uint key)
         {
-            switch(key)
+            switch (key)
             {
-                case 8://backspace
-                    if(this.Text.Length > 0)
-                        this.Text = this.Text.Remove(cursorLocation, 1);
+                case 8: //backspace
+                    if (Text.Length > 0)
+                        Text = Text.Remove(_cursorLocation, 1);
                     break;
-                default: 
-                    this.Text = (this.Text ?? "") + (char)key;
+                default:
+                    Text = (Text ?? "") + (char)key;
                     break;
             }
-            this.Parent.Invalidate();
-        }
 
-        int cursorLocation = 0;
+            Parent.Invalidate();
+        }
 
         public string[] TextLines()
         {
-            return Text?.Split(new char[] { '\r', '\n' });
+            return Text?.Split('\r', '\n');
         }
-
-        public override SKPoint RequestedSize => new SKPoint(_textMaximumW,_textMaximumH);
 
         public override void GotFocus()
         {
-            this._hasFocus = true;
-            this.Parent.Invalidate();
+            _hasFocus = true;
+            Parent.Invalidate();
         }
 
         public override void LostFocus()
         {
-            this._hasFocus = false;
-            this.Parent.Invalidate();
+            _hasFocus = false;
+            Parent.Invalidate();
         }
     }
 }

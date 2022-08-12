@@ -2,31 +2,30 @@
 using Pla.Lib.UI;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
-using SkiaSharp;
 
 namespace Pla.App.Pilot
 {
     public class PilotContext : IContext
     {
-        private IEngine engine;
-        private Manager manager;
+        private IEngine _engine;
+        private Manager _manager;
 
         public IControl GetControl()
         {
-            return this.manager;
+            return this._manager;
         }
 
         public IPainter GetPainter()
         {
-            return this.manager;
+            return this._manager;
         }
 
         public void Init(IEngine engine)
         {
-            this.engine = engine;
-            this.manager = new Manager(engine);
+            this._engine = engine;
+            this._manager = new Manager(engine);
 
-            var container = this.manager
+            var container = this._manager
                     .AddWidget(new Frame())
                 ;
 
@@ -35,33 +34,35 @@ namespace Pla.App.Pilot
             AddButton(container);
             //LotsOfFrames(container);
 
-            this.engine.RequestTransparentWindow();
+            this._engine.RequestTransparentWindow();
         }
 
         private void AddButton(IWidgetContainer container)
         {
-            container.Add(new Button()
+            var b = container.AddWidget(new Button()
             {
-                Label = "Action action!"
+                Label = "Close",
             });
+
+            b.ClickedHandler += point => { throw new Exception("How to close it?"); };
         }
 
         private void Editor(IWidgetContainer container)
         {
             container.Add(new Edit()
             {
-                Text ="a"
+                Text ="Zażółć gęślą jaźń."
             });
         }
 
         private void ShowLabelAndSelectedWidgetEvent(IWidgetContainer container)
         {
             var labal = container.AddWidget(new Label() { Text = "Label" });
-            this.manager.OnWidgetSelected += (widget) =>
+            this._manager.OnWidgetSelected += (widget) =>
             {
                 labal.Text = widget?.ToString() ?? "none";
                 
-                this.engine.RequestRefresh();
+                this._engine.RequestRefresh();
             };
         }
 

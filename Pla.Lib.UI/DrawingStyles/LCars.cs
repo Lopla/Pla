@@ -24,9 +24,12 @@ namespace Pla.Lib.UI.DrawingStyles
     /// </summary>
     public class LCars
     {
-        private readonly SKColor[] _colours;
+        private readonly SKColor[] _colors;
 
-        private readonly string[] colourMap =
+        private readonly SKFont _font;
+        private readonly SKPaint _fontDrawingPainter;
+
+        private readonly string[] _colorMap =
         {
             "#000000", // background and text
             "#ff7700", // orange - normal border
@@ -45,24 +48,31 @@ namespace Pla.Lib.UI.DrawingStyles
             "#7788ff"
         };
 
-        private readonly SKFont _font;
-        private readonly SKPaint _fontDrawingPainter;
-
         public LCars()
         {
-            _colours = colourMap.Select(SKColor.Parse).ToArray();
-            this._font = new SKFont(SKTypeface.FromFamilyName("Arial Narrow", 
-                SKFontStyleWeight.Bold, 
-                SKFontStyleWidth.ExtraCondensed, 
-                SKFontStyleSlant.Upright));
-            this._fontDrawingPainter = new SKPaint(this._font);
+            _colors = _colorMap.Select(SKColor.Parse).ToArray();
+            _font = new SKFont(
+                //SKTypeface.Default,
+                SKTypeface.FromFamilyName("Arial Narrow",
+                    SKFontStyleWeight.Bold,
+                    SKFontStyleWidth.ExtraCondensed,
+                    SKFontStyleSlant.Upright),
+                16
+                );
+            _fontDrawingPainter = new SKPaint(_font);
+
+            TextLineHeight = -(int)_font.Metrics.Top ;
         }
 
-        public SKPoint SizeWithText(string text)
+        public int TextLineHeight = 0;
+        public int BorderMargin = 10;
+
+        public SKPoint CalculateTextSize(string text)
         {
             SKRect bounds = default;
             _fontDrawingPainter.MeasureText(text, ref bounds);
-            return new SKPoint(bounds.Width, bounds.Height);
+
+            return new SKPoint(bounds.Width, TextLineHeight);
         }
 
         /// <summary>
@@ -73,12 +83,12 @@ namespace Pla.Lib.UI.DrawingStyles
         {
             using (var painterBorder = new SKPaint
                    {
-                       Color = _colours[(int)Styling.Border1],
+                       Color = _colors[(int)Styling.Border1],
                        Style = SKPaintStyle.Fill
                    })
             {
-                context.Canvas.DrawRoundRect(context.Widget.Bounds, 10, 10, painterBorder);
-                Text(context, label, align, true);
+                context.Canvas.DrawRoundRect(context.Bounds, BorderMargin, BorderMargin, painterBorder);
+                ModifyAbleText(context, label, align);
             }
         }
 
@@ -90,11 +100,11 @@ namespace Pla.Lib.UI.DrawingStyles
         {
             using (var painterBorder = new SKPaint
                    {
-                       Color = _colours[(int)Styling.Border1],
+                       Color = _colors[(int)Styling.Border1],
                        Style = SKPaintStyle.Fill
                    })
             {
-                context.Canvas.DrawRoundRect(context.Widget.Bounds, 10, 10, painterBorder);
+                context.Canvas.DrawRoundRect(context.Bounds, BorderMargin, BorderMargin, painterBorder);
                 Text(context, label, align, true);
             }
         }
@@ -107,17 +117,17 @@ namespace Pla.Lib.UI.DrawingStyles
         {
             using (var painterBorder = new SKPaint
                    {
-                       Color = _colours[(int)Styling.Border1],
+                       Color = _colors[(int)Styling.Border1],
                        Style = SKPaintStyle.Stroke
                    })
             using (var painterBack = new SKPaint
                    {
-                       Color = _colours[(int)Styling.Background],
+                       Color = _colors[(int)Styling.Background],
                        Style = SKPaintStyle.Fill
                    })
             {
-                context.Canvas.DrawRoundRect(context.Widget.Bounds, 10, 10, painterBack);
-                context.Canvas.DrawRoundRect(context.Widget.Bounds, 10, 10, painterBorder);
+                context.Canvas.DrawRoundRect(context.Bounds, BorderMargin, BorderMargin, painterBack);
+                context.Canvas.DrawRoundRect(context.Bounds, BorderMargin, BorderMargin, painterBorder);
                 Text(context, label, align, false);
             }
         }
@@ -127,24 +137,34 @@ namespace Pla.Lib.UI.DrawingStyles
             using (var painterBack = new SKPaint
                    {
                        TextAlign = align,
-                       Color = dark ? _colours[(int)Styling.Background] : _colours[(int)Styling.Border1],
-                       Typeface = this._font.Typeface,
+                       Color = dark ? _colors[(int)Styling.Background] : _colors[(int)Styling.Border1],
+                       Typeface = _font.Typeface
                    })
             {
-                var textSize = SizeWithText(text);
+                var point = new SKPoint(context.Bounds.Left, context.Bounds.MidY);
 
-                var point = new SKPoint(context.Widget.Bounds.Left, context.Widget.Bounds.MidY);
                 if (align == SKTextAlign.Center)
-                    point.X = context.Widget.Bounds.MidX;
-                else if (align == SKTextAlign.Right) point.X = context.Widget.Bounds.Right;
+                {
+                    point.X = context.Bounds.MidX;
+                }
+                else if (align == SKTextAlign.Right)
+                {
+                    point.X = context.Bounds.Right - BorderMargin;
+                }else if (align == SKTextAlign.Left)
+                {
+                    point.X = context.Bounds.Left + BorderMargin;
+                }
 
-                point.Offset(0, textSize.Y / 2);
+                point.Offset(0, this._font.Size / 2);
 
-                if(text!=null)
+                if (text != null)
                     context.Canvas.DrawText(text, point, painterBack);
             }
         }
 
-       
+        public void ModifyAbleText(PaintContext ctx, string text, SKTextAlign align)
+        {
+            Text(ctx, text, align, true);
+        }
     }
 }
