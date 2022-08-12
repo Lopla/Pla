@@ -11,7 +11,7 @@ namespace Pla.Lib.UI
         private float TextMaximumH = 20;
         private float TextMaximumW = 100;
 
-        public override void Draw(SKCanvas canvas, IDrawingStyle style)
+        public override void Draw(SKCanvas canvas, LCars style)
         {
             if(!hasFocus)
                 base.Draw(canvas, style);
@@ -28,6 +28,13 @@ namespace Pla.Lib.UI
                     textMaximumW = Math.Max(textMaximumW, painterb.MeasureText(t));
                     
                     textMaximumH += fontSize ;
+
+                    style.Text(new PaintContext()
+                    {
+                        canvas = canvas,
+                        Focused = this.hasFocus,
+                        widgetSize = this.Bounds
+                    }, Text, SKTextAlign.Left, false);
 
                     canvas.DrawText(t, Bounds.Left, Bounds.Top + textMaximumH, painterb);
 

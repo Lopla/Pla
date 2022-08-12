@@ -9,7 +9,7 @@ namespace Pla.Lib.UI
     {
         public string Label = "";
 
-        public override void Draw(SKCanvas canvas, IDrawingStyle style)
+        public override void Draw(SKCanvas canvas, LCars style)
         {
             base.Draw(canvas, style);
 
@@ -20,10 +20,11 @@ namespace Pla.Lib.UI
             };
 
             style.PointAble(p);
-            style.Text(p, Label, SKTextAlign.Center);
+            style.Text(p, Label, SKTextAlign.Center, true);
         }
 
         SKPoint size = new SKPoint(100,32);
+
         public override SKPoint RequestedSize => size;
 
         public override void OnClick(SKPoint argsLocation)

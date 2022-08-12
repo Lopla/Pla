@@ -24,11 +24,20 @@ namespace Pla.App.Pilot
             this.engine = engine;
             this.manager = new Manager(engine);
 
-            ShowLabelAndSelectedWidgetEvent(); 
+            ShowLabelAndSelectedWidgetEvent();
             Editor();
+            AddButton();
             //LotsOfFrames();
 
             //this.engine.RequestTransparentWindow();
+        }
+
+        private void AddButton()
+        {
+            this.manager.Add(new Button()
+            {
+                Label = "Action action!"
+            });
         }
 
         private void Editor()
@@ -41,10 +50,10 @@ namespace Pla.App.Pilot
 
         private void ShowLabelAndSelectedWidgetEvent()
         {
-            var labale = this.manager.AddWidget(new Label() { Text = "Label" });
+            var labal = this.manager.AddWidget(new Label() { Text = "Label" });
             this.manager.OnWidgetSelected += (widget) =>
             {
-                labale.Text = widget?.ToString() ?? "none";
+                labal.Text = widget?.ToString() ?? "none";
                 
                 this.engine.RequestRefresh();
             };

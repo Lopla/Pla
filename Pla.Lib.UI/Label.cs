@@ -8,13 +8,13 @@ namespace Pla.Lib.UI
 
         public override SKPoint RequestedSize => new SKPoint(100, 20);
 
-        public override void Draw(SKCanvas canvas, IDrawingStyle style)
+        public override void Draw(SKCanvas canvas, LCars style)
         {
             style.Text(new PaintContext
             {
                 canvas = canvas,
                 widgetSize = Bounds
-            }, Text, SKTextAlign.Center);
+            }, Text, SKTextAlign.Center, true);
         }
     }
 }
