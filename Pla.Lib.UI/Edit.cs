@@ -48,10 +48,20 @@ namespace Pla.Lib.UI
 
         public override void OnKeyDow(uint key)
         {
-            this.Text = (this.Text ?? "") + (char)key;
-
+            switch(key)
+            {
+                case 8://backspace
+                    if(this.Text.Length > 0)
+                        this.Text = this.Text.Remove(cursorLocation, 1);
+                    break;
+                default: 
+                    this.Text = (this.Text ?? "") + (char)key;
+                    break;
+            }
             this.Parent.Invalidate();
         }
+
+        int cursorLocation = 0;
 
         public string[] TextLines()
         {

@@ -56,6 +56,7 @@ namespace Pla.Lib.UI
         {
             widget.Parent = this;
             Widgets.Add(widget);
+            this.Parent.RequestResize();
             return widget;
         }
 

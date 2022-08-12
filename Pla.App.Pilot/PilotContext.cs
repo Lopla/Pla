@@ -27,7 +27,7 @@ namespace Pla.App.Pilot
             ShowSelectedWidget();
             Editor();
             LotsOfFrames();
-            //this.engine.RequestTransparentWindow();
+            this.engine.RequestTransparentWindow();
         }
 
         private void Editor()

@@ -39,7 +39,7 @@
             this.plaControl1.Location = new System.Drawing.Point(0, 0);
             this.plaControl1.Margin = new System.Windows.Forms.Padding(0);
             this.plaControl1.Name = "plaControl1";
-            this.plaControl1.Size = new System.Drawing.Size(804, 454);
+            this.plaControl1.Size = new System.Drawing.Size(800, 450);
             this.plaControl1.TabIndex = 0;
             // 
             // PlaWindow
