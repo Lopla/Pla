@@ -1,4 +1,6 @@
 using Pla.Lib.UI.DrawingStyles;
+using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets;
 using SkiaSharp;
 
 namespace Pla.Lib.UI

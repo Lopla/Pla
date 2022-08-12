@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Pla.Lib.UI.DrawingStyles;
+using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
-namespace Pla.Lib.UI
+namespace Pla.Lib.UI.Widgets
 {
     public enum FrameStyle
     {

@@ -1,6 +1,7 @@
+using Pla.Lib.UI.DrawingStyles;
 using SkiaSharp;
 
-namespace Pla.Lib.UI
+namespace Pla.Lib.UI.Widgets
 {
 
     public delegate void Clicked(SKPoint point);

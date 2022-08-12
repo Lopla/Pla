@@ -1,4 +1,4 @@
-﻿namespace Pla.Lib.UI
+﻿namespace Pla.Lib.UI.Interfaces
 {
     public interface IWidgetContainer
     {

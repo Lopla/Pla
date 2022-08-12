@@ -1,8 +1,8 @@
-using SkiaSharp;
 using System;
-using System.Collections.Generic;
+using Pla.Lib.UI.DrawingStyles;
+using SkiaSharp;
 
-namespace Pla.Lib.UI
+namespace Pla.Lib.UI.Widgets
 {
     public class Edit : Widget
     {
@@ -20,13 +20,14 @@ namespace Pla.Lib.UI
             using (var painterb = new SKPaint())
             {
                 float spacing = 9;
-                float fontSize = 
-                    painterb.FontMetrics.XHeight;
+                float fontSize =
+                    style.SizeWithText("a").Y;
+
                 float textMaximumH = spacing;
                 float textMaximumW = _textMaximumW;
                 foreach (var t in this.TextLines())
                 {
-                    textMaximumW = Math.Max(textMaximumW, painterb.MeasureText(t));
+                    textMaximumW = Math.Max(textMaximumW, style.SizeWithText(t).X);
                     
                     textMaximumH += fontSize ;
 

@@ -1,5 +1,7 @@
 ﻿using Pla.Lib;
 using Pla.Lib.UI;
+using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets;
 using SkiaSharp;
 
 namespace Pla.App.Pilot
@@ -31,7 +33,7 @@ namespace Pla.App.Pilot
             ShowLabelAndSelectedWidgetEvent(container);
             Editor(container);
             AddButton(container);
-            LotsOfFrames(container);
+            //LotsOfFrames(container);
 
             this.engine.RequestTransparentWindow();
         }

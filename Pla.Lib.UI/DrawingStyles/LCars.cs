@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using SkiaSharp;
 
-namespace Pla.Lib.UI
+namespace Pla.Lib.UI.DrawingStyles
 {
     internal enum Styling
     {
@@ -46,6 +46,7 @@ namespace Pla.Lib.UI
         };
 
         private readonly SKFont _font;
+        private readonly SKPaint _fontDrawingPainter;
 
         public LCars()
         {
@@ -54,6 +55,14 @@ namespace Pla.Lib.UI
                 SKFontStyleWeight.Bold, 
                 SKFontStyleWidth.ExtraCondensed, 
                 SKFontStyleSlant.Upright));
+            this._fontDrawingPainter = new SKPaint(this._font);
+        }
+
+        public SKPoint SizeWithText(string text)
+        {
+            SKRect bounds = default;
+            _fontDrawingPainter.MeasureText(text, ref bounds);
+            return new SKPoint(bounds.Width, bounds.Height);
         }
 
         /// <summary>
@@ -122,10 +131,14 @@ namespace Pla.Lib.UI
                        Typeface = this._font.Typeface,
                    })
             {
+                var textSize = SizeWithText(text);
+
                 var point = new SKPoint(context.Widget.Bounds.Left, context.Widget.Bounds.MidY);
                 if (align == SKTextAlign.Center)
                     point.X = context.Widget.Bounds.MidX;
                 else if (align == SKTextAlign.Right) point.X = context.Widget.Bounds.Right;
+
+                point.Offset(0, textSize.Y / 2);
 
                 if(text!=null)
                     context.Canvas.DrawText(text, point, painterBack);
