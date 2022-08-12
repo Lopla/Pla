@@ -1,4 +1,5 @@
 using Pla.Lib.UI.DrawingStyles;
+using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets
@@ -9,13 +10,13 @@ namespace Pla.Lib.UI.Widgets
         private bool _hasFocus;
 
 
-        protected override void OnDraw(PaintContext paintContext, LCars style)
+        protected override void OnDraw(PaintContext paintContext, IDesign style)
         {
             paintContext.Focused = _hasFocus;
             style.ModifyAble(paintContext);
         }
 
-        protected override void OnDrawTextLine(PaintContext paintContext, LCars style, string lineOfText)
+        protected override void OnDrawTextLine(PaintContext paintContext, IDesign style, string lineOfText)
         {
             paintContext.Focused = _hasFocus;
             style.ModifyAbleText(paintContext, lineOfText, SKTextAlign.Left);

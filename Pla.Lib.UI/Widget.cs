@@ -9,7 +9,7 @@ namespace Pla.Lib.UI
     {
         internal SKRect Bounds = SKRect.Empty;
 
-        public virtual void Draw(SKCanvas canvas, LCars style)
+        public virtual void Draw(SKCanvas canvas, IDesign style)
         {
             style.Visible(new PaintContext(this, canvas));
         }

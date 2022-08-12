@@ -97,7 +97,7 @@ namespace Pla.Lib.UI.Widgets
             return null;
         }
 
-        public override void Draw(SKCanvas canvas, LCars style)
+        public override void Draw(SKCanvas canvas, IDesign style)
         {
             SKRect currentCanvasSize = default;
             canvas.GetLocalClipBounds(out currentCanvasSize);
