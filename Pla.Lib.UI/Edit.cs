@@ -11,18 +11,16 @@ namespace Pla.Lib.UI
         private float TextMaximumH = 20;
         private float TextMaximumW = 100;
 
-        public override void Draw(SKCanvas canvas, DrawingStyle style)
+        public override void Draw(SKCanvas canvas, IDrawingStyle style)
         {
             if(!hasFocus)
                 base.Draw(canvas, style);
 
-            using (var painterb = new SKPaint()
-            {
-                Color = style.Front.Color
-            })
+            using (var painterb = new SKPaint())
             {
                 float spacing = 9;
-                float fontSize = painterb.FontMetrics.XHeight;
+                float fontSize = 
+                    painterb.FontMetrics.XHeight;
                 float textMaximumH = spacing;
                 float textMaximumW = TextMaximumW;
                 foreach (var t in this.TextLines())

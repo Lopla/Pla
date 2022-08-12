@@ -48,7 +48,7 @@ namespace Pla.Lib.UI
             // var painter  = new SKColor(255,0,0,32);
             // c.Clear(painter);
 
-            var style = new DrawingStyle();
+            var style = new IDrawingStyle();
             using (style.Front = new SKPaint()
             {
                 Style = SKPaintStyle.Stroke,

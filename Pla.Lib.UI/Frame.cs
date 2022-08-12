@@ -13,11 +13,11 @@ namespace Pla.Lib.UI
     {
         SKRect canvasSize = default;
         private readonly FrameStyle style;
-        private readonly DrawingStyle drawingStyle;
+        private readonly IDrawingStyle drawingStyle;
         
         public Frame(
             FrameStyle style = FrameStyle.Vertical,
-            DrawingStyle drawingStyle = null)
+            IDrawingStyle drawingStyle = null)
         {
             this.style = style;
             this.drawingStyle = drawingStyle;
@@ -60,7 +60,7 @@ namespace Pla.Lib.UI
             return widget;
         }
 
-        public override void Draw(SKCanvas canvas, DrawingStyle style)
+        public override void Draw(SKCanvas canvas, IDrawingStyle style)
         {
             SKRect currentCanvasSize = default;
             canvas.GetLocalClipBounds(out currentCanvasSize);

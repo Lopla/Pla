@@ -7,10 +7,9 @@ namespace Pla.Lib.UI
     {
         internal SKRect Bounds = SKRect.Empty;
 
-        public virtual void Draw(SKCanvas canvas, DrawingStyle style)
-        {            
-            canvas.DrawRect(Bounds, style.Back);
-            canvas.DrawRect(Bounds, style.Front);
+        public virtual void Draw(SKCanvas canvas, IDrawingStyle style)
+        {
+            style.Pointable(Bounds, false);
         }
 
         public virtual void OnClick(SKPoint argsLocation)

@@ -8,7 +8,7 @@ namespace Pla.Lib.UI
         {
         }
 
-        public override void Draw(SKCanvas canvas, DrawingStyle style)
+        public override void Draw(SKCanvas canvas, IDrawingStyle style)
         {
             base.Draw(canvas, style);
 

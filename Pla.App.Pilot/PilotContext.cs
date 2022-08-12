@@ -58,7 +58,7 @@ namespace Pla.App.Pilot
 
             var horizontalFrame = this.manager.AddWidget(new Frame(
                 FrameStyle.Horizontal,
-                drawingStyle: new DrawingStyle()
+                drawingStyle: new IDrawingStyle()
                 {
                     Front = new SKPaint()
                     {
@@ -74,7 +74,7 @@ namespace Pla.App.Pilot
 
             horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
 
-            var f2 = this.manager.AddWidget(new Frame(drawingStyle: new DrawingStyle()
+            var f2 = this.manager.AddWidget(new Frame(drawingStyle: new IDrawingStyle()
             {
                 Front = new SKPaint()
                 {
