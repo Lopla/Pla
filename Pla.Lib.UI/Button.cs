@@ -13,14 +13,9 @@ namespace Pla.Lib.UI
         {
             base.Draw(canvas, style);
 
-            var p = new PaintContext()
-            {
-                canvas = canvas,
-                widgetSize = this.Bounds
-            };
+            var p = new PaintContext(this, canvas);
 
-            style.PointAble(p);
-            style.Text(p, Label, SKTextAlign.Center, true);
+            style.PointAble(p, Label, SKTextAlign.Center);
         }
 
         SKPoint size = new SKPoint(100,32);

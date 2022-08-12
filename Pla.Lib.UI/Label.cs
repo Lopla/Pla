@@ -10,11 +10,7 @@ namespace Pla.Lib.UI
 
         public override void Draw(SKCanvas canvas, LCars style)
         {
-            style.Text(new PaintContext
-            {
-                canvas = canvas,
-                widgetSize = Bounds
-            }, Text, SKTextAlign.Center, true);
+            style.Visible(new PaintContext(this, canvas), Text);
         }
     }
 }

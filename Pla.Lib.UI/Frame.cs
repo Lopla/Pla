@@ -108,11 +108,7 @@ namespace Pla.Lib.UI
 
             if (!(this.Parent is Manager))
             {
-                style.Visible(new PaintContext
-                {
-                    canvas = canvas,
-                    widgetSize = Bounds
-                });
+                style.Visible(new PaintContext(this, canvas));
             }
 
             _widgets.ForEach(w => { w.Draw(canvas, style); });

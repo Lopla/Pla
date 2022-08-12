@@ -9,11 +9,7 @@ namespace Pla.Lib.UI
 
         public virtual void Draw(SKCanvas canvas, LCars style)
         {
-            style.Visible(new PaintContext()
-            {
-                widgetSize = Bounds,
-                canvas = canvas
-            });
+            style.Visible(new PaintContext(this, canvas));
         }
 
         public virtual void OnClick(SKPoint argsLocation)

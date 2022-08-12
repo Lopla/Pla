@@ -7,13 +7,14 @@ namespace Pla.Lib.UI
     public class Edit : Widget
     {
         public string Text = null;
-        private bool hasFocus;
-        private float TextMaximumH = 20;
-        private float TextMaximumW = 100;
+
+        private bool _hasFocus;
+        private float _textMaximumH = 20;
+        private float _textMaximumW = 100;
 
         public override void Draw(SKCanvas canvas, LCars style)
         {
-            if(!hasFocus)
+            if(!_hasFocus)
                 base.Draw(canvas, style);
 
             using (var painterb = new SKPaint())
@@ -22,29 +23,22 @@ namespace Pla.Lib.UI
                 float fontSize = 
                     painterb.FontMetrics.XHeight;
                 float textMaximumH = spacing;
-                float textMaximumW = TextMaximumW;
+                float textMaximumW = _textMaximumW;
                 foreach (var t in this.TextLines())
                 {
                     textMaximumW = Math.Max(textMaximumW, painterb.MeasureText(t));
                     
                     textMaximumH += fontSize ;
 
-                    style.Text(new PaintContext()
-                    {
-                        canvas = canvas,
-                        Focused = this.hasFocus,
-                        widgetSize = this.Bounds
-                    }, Text, SKTextAlign.Left, false);
-
-                    canvas.DrawText(t, Bounds.Left, Bounds.Top + textMaximumH, painterb);
-
+                    style.ModifyAble(new PaintContext(this, canvas, this._hasFocus), Text, SKTextAlign.Left);
+                    
                     textMaximumH += spacing;
                 }
 
-                if(textMaximumW > TextMaximumW ||  textMaximumH> TextMaximumH)
+                if(textMaximumW > _textMaximumW ||  textMaximumH> _textMaximumH)
                 {
-                    TextMaximumH = textMaximumH;
-                    TextMaximumW = textMaximumW;
+                    _textMaximumH = textMaximumH;
+                    _textMaximumW = textMaximumW;
 
                     this.Parent.RequestResize();
                 }
@@ -73,17 +67,17 @@ namespace Pla.Lib.UI
             return Text?.Split(new char[] { '\r', '\n' });
         }
 
-        public override SKPoint RequestedSize => new SKPoint(TextMaximumW,TextMaximumH);
+        public override SKPoint RequestedSize => new SKPoint(_textMaximumW,_textMaximumH);
 
         public override void GotFocus()
         {
-            this.hasFocus = true;
+            this._hasFocus = true;
             this.Parent.Invalidate();
         }
 
         public override void LostFocus()
         {
-            this.hasFocus = false;
+            this._hasFocus = false;
             this.Parent.Invalidate();
         }
     }

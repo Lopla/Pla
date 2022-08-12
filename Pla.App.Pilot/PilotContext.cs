@@ -24,33 +24,37 @@ namespace Pla.App.Pilot
             this.engine = engine;
             this.manager = new Manager(engine);
 
-            ShowLabelAndSelectedWidgetEvent();
-            Editor();
-            AddButton();
-            //LotsOfFrames();
+            var container = this.manager
+                    .AddWidget(new Frame())
+                ;
 
-            //this.engine.RequestTransparentWindow();
+            ShowLabelAndSelectedWidgetEvent(container);
+            Editor(container);
+            AddButton(container);
+            LotsOfFrames(container);
+
+            this.engine.RequestTransparentWindow();
         }
 
-        private void AddButton()
+        private void AddButton(IWidgetContainer container)
         {
-            this.manager.Add(new Button()
+            container.Add(new Button()
             {
                 Label = "Action action!"
             });
         }
 
-        private void Editor()
+        private void Editor(IWidgetContainer container)
         {
-            this.manager.Add(new Edit()
+            container.Add(new Edit()
             {
                 Text ="a"
             });
         }
 
-        private void ShowLabelAndSelectedWidgetEvent()
+        private void ShowLabelAndSelectedWidgetEvent(IWidgetContainer container)
         {
-            var labal = this.manager.AddWidget(new Label() { Text = "Label" });
+            var labal = container.AddWidget(new Label() { Text = "Label" });
             this.manager.OnWidgetSelected += (widget) =>
             {
                 labal.Text = widget?.ToString() ?? "none";
@@ -59,14 +63,14 @@ namespace Pla.App.Pilot
             };
         }
 
-        private void LotsOfFrames()
+        private void LotsOfFrames(IWidgetContainer container)
         {
 
-            this.manager.AddWidget(new Button() { Label = "No Frame" });
-            this.manager.AddWidget(new Button() { Label = "No Frame" });
-            this.manager.AddWidget(new Button() { Label = "No Frame" });
+            container.AddWidget(new Button() { Label = "No Frame" });
+            container.AddWidget(new Button() { Label = "No Frame" });
+            container.AddWidget(new Button() { Label = "No Frame" });
 
-            var horizontalFrame = this.manager.AddWidget(new Frame(
+            var horizontalFrame = container.AddWidget(new Frame(
                 FrameStyle.Horizontal));
             horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
             var inhorizontal = horizontalFrame.AddWidget(new Frame());
@@ -77,12 +81,12 @@ namespace Pla.App.Pilot
 
             horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
 
-            var f2 = this.manager.AddWidget(new Frame());
+            var f2 = container.AddWidget(new Frame());
             f2.AddWidget(new Button() { Label = "Frame2/1" });
             f2.AddWidget(new Button() { Label = "Frame2/2" });
             f2.AddWidget(new Button() { Label = "Frame2/3" });
 
-            this.manager.AddWidget(new Button() { Label = "No Frame" });
+            container.AddWidget(new Button() { Label = "No Frame" });
         }
     }
 }

@@ -3,7 +3,7 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
-    enum Styling
+    internal enum Styling
     {
         Background = 0,
         Border1,
@@ -22,8 +22,10 @@ namespace Pla.Lib.UI
     /// <summary>
     ///     Warp 10
     /// </summary>
-    public class LCars 
+    public class LCars
     {
+        private readonly SKColor[] _colours;
+
         private readonly string[] colourMap =
         {
             "#000000", // background and text
@@ -43,35 +45,22 @@ namespace Pla.Lib.UI
             "#7788ff"
         };
 
-        private readonly SKColor[] _colours;
+        private readonly SKFont _font;
 
         public LCars()
         {
             _colours = colourMap.Select(SKColor.Parse).ToArray();
+            this._font = new SKFont(SKTypeface.FromFamilyName("Arial Narrow", 
+                SKFontStyleWeight.Bold, 
+                SKFontStyleWidth.ExtraCondensed, 
+                SKFontStyleSlant.Upright));
         }
 
-        public void ModifyAble(PaintContext context)
-        {
-        }
-
-        public void Text(PaintContext context, string text, SKTextAlign align, bool dark)
-        {
-            using (var painterBack = new SKPaint
-                   {
-                       TextAlign = align,
-                       Color = dark ? _colours[(int)Styling.Background] : _colours[(int)Styling.Border1]
-            })
-            {
-                var point = new SKPoint(context.widgetSize.Left, context.widgetSize.MidY);
-                if (align == SKTextAlign.Center)
-                    point.X = context.widgetSize.MidX;
-                else if (align == SKTextAlign.Right) point.X = context.widgetSize.Right;
-
-                context.canvas.DrawText(text, point, painterBack);
-            }
-        }
-
-        public void PointAble(PaintContext context)
+        /// <summary>
+        ///     Edit boxes
+        /// </summary>
+        /// <param name="context"></param>
+        public void ModifyAble(PaintContext context, string label = null, SKTextAlign align = SKTextAlign.Center)
         {
             using (var painterBorder = new SKPaint
                    {
@@ -79,11 +68,33 @@ namespace Pla.Lib.UI
                        Style = SKPaintStyle.Fill
                    })
             {
-                context.canvas.DrawRoundRect(context.widgetSize, 10, 10, painterBorder);
+                context.Canvas.DrawRoundRect(context.Widget.Bounds, 10, 10, painterBorder);
+                Text(context, label, align, true);
             }
         }
 
-        public void Visible(PaintContext context)
+        /// <summary>
+        ///     Clickable touchable elements like buttons, radio etc.
+        /// </summary>
+        /// <param name="context"></param>
+        public void PointAble(PaintContext context, string label = null, SKTextAlign align = SKTextAlign.Center)
+        {
+            using (var painterBorder = new SKPaint
+                   {
+                       Color = _colours[(int)Styling.Border1],
+                       Style = SKPaintStyle.Fill
+                   })
+            {
+                context.Canvas.DrawRoundRect(context.Widget.Bounds, 10, 10, painterBorder);
+                Text(context, label, align, true);
+            }
+        }
+
+        /// <summary>
+        ///     Passive ui element like frames and labels
+        /// </summary>
+        /// <param name="context"></param>
+        public void Visible(PaintContext context, string label = null, SKTextAlign align = SKTextAlign.Center)
         {
             using (var painterBorder = new SKPaint
                    {
@@ -96,13 +107,31 @@ namespace Pla.Lib.UI
                        Style = SKPaintStyle.Fill
                    })
             {
-                context.canvas.DrawRoundRect(context.widgetSize, 10, 10, painterBorder);
-                context.canvas.DrawRoundRect(context.widgetSize, 10, 10, painterBack);
+                context.Canvas.DrawRoundRect(context.Widget.Bounds, 10, 10, painterBack);
+                context.Canvas.DrawRoundRect(context.Widget.Bounds, 10, 10, painterBorder);
+                Text(context, label, align, false);
             }
         }
 
-        public void ReadAble(PaintContext context)
+        private void Text(PaintContext context, string text, SKTextAlign align, bool dark)
         {
+            using (var painterBack = new SKPaint
+                   {
+                       TextAlign = align,
+                       Color = dark ? _colours[(int)Styling.Background] : _colours[(int)Styling.Border1],
+                       Typeface = this._font.Typeface,
+                   })
+            {
+                var point = new SKPoint(context.Widget.Bounds.Left, context.Widget.Bounds.MidY);
+                if (align == SKTextAlign.Center)
+                    point.X = context.Widget.Bounds.MidX;
+                else if (align == SKTextAlign.Right) point.X = context.Widget.Bounds.Right;
+
+                if(text!=null)
+                    context.Canvas.DrawText(text, point, painterBack);
+            }
         }
+
+       
     }
 }
