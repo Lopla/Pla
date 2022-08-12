@@ -1,3 +1,4 @@
+using Pla.Lib.UI.DrawingStyles;
 using SkiaSharp;
 
 namespace Pla.Lib.UI
@@ -44,19 +45,9 @@ namespace Pla.Lib.UI
 
         public void Paint(SKImageInfo info, SKSurface surface)
         {
-            // var c = surface.Canvas;
-            // var painter  = new SKColor(255,0,0,32);
-            // c.Clear(painter);
+            var style = new LCars();
+            rootFrame.Draw(surface.Canvas, style);
 
-            var style = new IDrawingStyle();
-            using (style.Front = new SKPaint()
-            {
-                Style = SKPaintStyle.Stroke,
-                Color = new SKColor(0, 0, 0),
-            })
-            {
-                rootFrame.Draw(surface.Canvas, style);
-            }
             surface.Canvas.Flush();
         }
 

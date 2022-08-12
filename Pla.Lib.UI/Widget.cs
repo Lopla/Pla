@@ -9,7 +9,11 @@ namespace Pla.Lib.UI
 
         public virtual void Draw(SKCanvas canvas, IDrawingStyle style)
         {
-            style.Pointable(Bounds, false);
+            style.PointAble(new PaintContext()
+            {
+                widgetSize = Bounds,
+                canvas = canvas
+            });
         }
 
         public virtual void OnClick(SKPoint argsLocation)

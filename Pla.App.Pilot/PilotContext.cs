@@ -24,10 +24,11 @@ namespace Pla.App.Pilot
             this.engine = engine;
             this.manager = new Manager(engine);
 
-            ShowSelectedWidget();
+            ShowLabelAndSelectedWidgetEvent(); 
             Editor();
-            LotsOfFrames();
-            this.engine.RequestTransparentWindow();
+            //LotsOfFrames();
+
+            //this.engine.RequestTransparentWindow();
         }
 
         private void Editor()
@@ -38,7 +39,7 @@ namespace Pla.App.Pilot
             });
         }
 
-        private void ShowSelectedWidget()
+        private void ShowLabelAndSelectedWidgetEvent()
         {
             var labale = this.manager.AddWidget(new Label() { Text = "Label" });
             this.manager.OnWidgetSelected += (widget) =>
@@ -57,14 +58,7 @@ namespace Pla.App.Pilot
             this.manager.AddWidget(new Button() { Label = "No Frame" });
 
             var horizontalFrame = this.manager.AddWidget(new Frame(
-                FrameStyle.Horizontal,
-                drawingStyle: new IDrawingStyle()
-                {
-                    Front = new SKPaint()
-                    {
-                        Color = new SKColor(230, 200, 200)
-                    }
-                }));
+                FrameStyle.Horizontal));
             horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
             var inhorizontal = horizontalFrame.AddWidget(new Frame());
             inhorizontal.AddWidget(new Button() { Label = "Frame1/2/1" });
@@ -74,13 +68,7 @@ namespace Pla.App.Pilot
 
             horizontalFrame.AddWidget(new Button() { Label = "Frame1/1" });
 
-            var f2 = this.manager.AddWidget(new Frame(drawingStyle: new IDrawingStyle()
-            {
-                Front = new SKPaint()
-                {
-                    Color = new SKColor(200, 230, 200)
-                }
-            }));
+            var f2 = this.manager.AddWidget(new Frame());
             f2.AddWidget(new Button() { Label = "Frame2/1" });
             f2.AddWidget(new Button() { Label = "Frame2/2" });
             f2.AddWidget(new Button() { Label = "Frame2/3" });

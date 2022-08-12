@@ -4,9 +4,10 @@ namespace Pla.Lib.UI
 {
     public interface IDrawingStyle
     {
-        void Pointable(PaintContext context);
-        void Readable(PaintContext context);
-        void Modifyable(PaintContext context);
+        void PointAble(PaintContext context);
+        void ReadAble(PaintContext context);
+        void ModifyAble(PaintContext context);
+        void Text(PaintContext context, string text, SKTextAlign align);
     }
 
     public class PaintContext

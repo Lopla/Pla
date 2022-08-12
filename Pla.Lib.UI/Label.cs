@@ -2,28 +2,19 @@
 
 namespace Pla.Lib.UI
 {
-    public class Label:Widget
+    public class Label : Widget
     {
-        public Label()
-        {
-        }
+        public string Text { get; set; }
+
+        public override SKPoint RequestedSize => new SKPoint(100, 20);
 
         public override void Draw(SKCanvas canvas, IDrawingStyle style)
         {
-            base.Draw(canvas, style);
-
-            using (var painterb = new SKPaint()
+            style.Text(new PaintContext
             {
-                Color = style.Front.Color,
-                TextAlign = SKTextAlign.Center,
-            })
-            {
-                canvas.DrawText(Text, Bounds.MidX, Bounds.MidY, painterb);
-            }
+                canvas = canvas,
+                widgetSize = Bounds
+            }, Text, SKTextAlign.Center);
         }
-
-        public string Text { get; set; }
-
-        public override SKPoint RequestedSize => new SKPoint(100,20);
     }
 }

@@ -13,14 +13,14 @@ namespace Pla.Lib.UI
         {
             base.Draw(canvas, style);
 
-            using (var painterb = new SKPaint()
+            var p = new PaintContext()
             {
-                Color = style.Front.Color,
-                TextAlign = SKTextAlign.Center,
-            })
-            {
-                canvas.DrawText(Label, Bounds.MidX, Bounds.MidY, painterb);
-            }
+                canvas = canvas,
+                widgetSize = this.Bounds
+            };
+
+            style.PointAble(p);
+            style.Text(p, Label, SKTextAlign.Center);
         }
 
         SKPoint size = new SKPoint(100,32);
