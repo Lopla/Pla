@@ -1,4 +1,3 @@
-using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
@@ -6,9 +5,8 @@ namespace Pla.Lib.UI.Widgets
 {
     public abstract class BaseTextWidget : Widget
     {
-        private string _text;
-
         private SKPoint _size = SKPoint.Empty;
+        private string _text;
 
         public string Text
         {
@@ -23,13 +21,7 @@ namespace Pla.Lib.UI.Widgets
             }
         }
 
-        public override SKPoint RequestedSize
-        {
-            get
-            {
-                return _size;
-            }
-        }
+        public override SKPoint RequestedSize => _size;
 
         private SKPoint CaulculateRequestedSize(IDesign style)
         {
@@ -41,29 +33,30 @@ namespace Pla.Lib.UI.Widgets
                 if (newSize.X < textSize.X) newSize.X = textSize.X;
             }
 
+            newSize.Y += style.GetTextHeight();
             return newSize;
         }
 
         /// <summary>
-        /// calls <see cref="OnDraw"/> and foreach line calls <see cref="OnDrawTextLine"/>
+        ///     calls <see cref="OnDraw" /> and foreach line calls <see cref="OnDrawTextLine" />
         /// </summary>
         /// <param name="canvas"></param>
         /// <param name="style"></param>
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            if (this._size == SKPoint.Empty)
+            if (_size == SKPoint.Empty)
             {
-                this._size = CaulculateRequestedSize(style);
-                this.Parent?.RequestResize();
+                _size = CaulculateRequestedSize(style);
+                Parent?.RequestResize();
             }
 
-            this.OnDraw(new PaintContext(this, canvas), style);
+            OnDraw(new PaintContext(this, canvas), style);
 
             OnDrawAllText(canvas, style);
         }
 
         /// <summary>
-        /// Paints all underlaying lines and calls <see cref="OnDrawTextLine"/> when need to render one text line
+        ///     Paints all underlaying lines and calls <see cref="OnDrawTextLine" /> when need to render one text line
         /// </summary>
         /// <param name="canvas"></param>
         /// <param name="style"></param>
@@ -77,7 +70,7 @@ namespace Pla.Lib.UI.Widgets
                 var textSize = style.CalculateTextSize(t);
                 currentBounds.Bottom = currentBounds.Top + textSize.Y;
 
-                this.OnDrawTextLine(new PaintContext(currentBounds, canvas), style, t);
+                OnDrawTextLine(new PaintContext(currentBounds, canvas), style, t);
 
                 yOffset += textSize.Y;
             }
@@ -92,7 +85,7 @@ namespace Pla.Lib.UI.Widgets
         {
             style.Visible(paintContext);
         }
-        
+
         public string[] TextLines()
         {
             return Text?.Split('\r', '\n');

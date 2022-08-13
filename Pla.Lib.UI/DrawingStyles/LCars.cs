@@ -32,32 +32,55 @@ namespace Pla.Lib.UI.DrawingStyles
 
         private readonly SKFont _font;
         private readonly SKPaint _fontDrawingPainter;
+        private readonly SKPaint _fontDrawingPainterWhite;
+        public int Ascender;
         public int BorderMargin = 10;
-
+        public int Descender;
         public int TextLineHeight;
 
         public LCars()
         {
             _colors = _colorMap.Select(SKColor.Parse).ToArray();
             _font = new SKFont(
-                //SKTypeface.Default,
-                SKTypeface.FromFamilyName("Arial Narrow",
-                    SKFontStyleWeight.Bold,
-                    SKFontStyleWidth.ExtraCondensed,
-                    SKFontStyleSlant.Upright),
-                16
+                SKTypeface.Default
+                //SKTypeface.FromFamilyName("Arial Narrow",
+                //    SKFontStyleWeight.Bold,
+                //    SKFontStyleWidth.ExtraCondensed,
+                //    SKFontStyleSlant.Upright)
             );
-            _fontDrawingPainter = new SKPaint(_font);
 
-            TextLineHeight = -(int)_font.Metrics.Top;
+            int TextSize = 18;
+
+            _fontDrawingPainter = new SKPaint
+            {
+                Color = _colors[(int)Styling.Background],
+                Typeface = _font.Typeface,
+                TextSize = TextSize
+            };
+            _fontDrawingPainterWhite = new SKPaint
+            {
+                Color = _colors[(int)Styling.Border1],
+                Typeface = _font.Typeface,
+                TextSize = TextSize
+            };
+
+            Ascender = -(int)_font.Metrics.Ascent;
+            Descender = (int)_font.Metrics.Descent;
+            TextLineHeight = Ascender + Descender;
         }
+
 
         public SKPoint CalculateTextSize(string text)
         {
             SKRect bounds = default;
             _fontDrawingPainter.MeasureText(text, ref bounds);
 
-            return new SKPoint(bounds.Width, TextLineHeight);
+            return new SKPoint(bounds.Width, this.GetTextHeight());
+        }
+
+        public int GetTextHeight()
+        {
+            return (int)_fontDrawingPainter.TextSize;
         }
 
         /// <summary>
@@ -148,26 +171,19 @@ namespace Pla.Lib.UI.DrawingStyles
 
         private void Text(PaintContext context, string text, SKTextAlign align, bool dark)
         {
-            using (var painterBack = new SKPaint
-                   {
-                       TextAlign = align,
-                       Color = dark ? _colors[(int)Styling.Background] : _colors[(int)Styling.Border1],
-                       Typeface = _font.Typeface
-                   })
-            {
-                var point = new SKPoint(context.Bounds.Left, context.Bounds.MidY);
+            var point = new SKPoint(context.Bounds.Left, context.Bounds.MidY);
 
-                if (align == SKTextAlign.Center)
-                    point.X = context.Bounds.MidX;
-                else if (align == SKTextAlign.Right)
-                    point.X = context.Bounds.Right - BorderMargin;
-                else if (align == SKTextAlign.Left) point.X = context.Bounds.Left + BorderMargin;
+            if (align == SKTextAlign.Center)
+                point.X = context.Bounds.MidX;
+            else if (align == SKTextAlign.Right)
+                point.X = context.Bounds.Right - BorderMargin;
+            else if (align == SKTextAlign.Left)
+                point.X = context.Bounds.Left + BorderMargin;
 
-                point.Offset(0, _font.Size / 2);
+            point.Offset(0, -_fontDrawingPainter.FontMetrics.Ascent / 2);
 
-                if (text != null)
-                    context.Canvas.DrawText(text, point, painterBack);
-            }
+            if (text != null)
+                context.Canvas.DrawText(text, point, dark ? _fontDrawingPainter : _fontDrawingPainterWhite);
         }
     }
 }
