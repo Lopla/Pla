@@ -25,14 +25,15 @@ namespace Pla.App.Pilot
             this._engine = engine;
             this._manager = new Manager(engine);
 
-            var container = this._manager
-                    .AddWidget(new Frame())
+            var container =
+                    this._manager
+                    //.AddWidget(new Frame())
                 ;
 
-            //ShowLabelAndSelectedWidgetEvent(container);
+            ShowLabelAndSelectedWidgetEvent(container);
             Editor(container);
-            //AddButton(container);
-            //LotsOfFrames(container);
+            AddButton(container);
+            LotsOfFrames(container);
 
             //this._engine.RequestTransparentWindow();
         }

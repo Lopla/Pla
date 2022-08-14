@@ -47,6 +47,8 @@ namespace Pla.Lib.UI
 
         public void Paint(SKImageInfo info, SKSurface surface)
         {
+            surface.Canvas.Clear();
+
             var style = new LCars();
             rootFrame.Draw(surface.Canvas, style);
 
