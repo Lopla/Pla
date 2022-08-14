@@ -23,19 +23,6 @@ namespace Pla.Lib.UI.Widgets
 
         public override SKPoint RequestedSize => _size;
 
-        private SKPoint CaulculateRequestedSize(IDesign style)
-        {
-            var newSize = SKPoint.Empty;
-            foreach (var t in TextLines())
-            {
-                var textSize = style.CalculateTextSize(t);
-                newSize.Offset(0, textSize.Y);
-                if (newSize.X < textSize.X) newSize.X = textSize.X;
-            }
-
-            newSize.Y += style.GetTextHeight();
-            return newSize;
-        }
 
         /// <summary>
         ///     calls <see cref="OnDraw" /> and foreach line calls <see cref="OnDrawTextLine" />
@@ -46,7 +33,7 @@ namespace Pla.Lib.UI.Widgets
         {
             if (_size == SKPoint.Empty)
             {
-                _size = CaulculateRequestedSize(style);
+                _size = style.GetTextTotalSize(this.TextLines());
                 Parent?.RequestResize();
             }
 
@@ -62,18 +49,8 @@ namespace Pla.Lib.UI.Widgets
         /// <param name="style"></param>
         protected virtual void OnDrawAllText(SKCanvas canvas, IDesign style)
         {
-            float yOffset = 0;
-            foreach (var t in TextLines())
-            {
-                var currentBounds = Bounds;
-                currentBounds.Offset(0, yOffset);
-                var textSize = style.CalculateTextSize(t);
-                currentBounds.Bottom = currentBounds.Top + textSize.Y;
-
-                OnDrawTextLine(new PaintContext(currentBounds, canvas), style, t);
-
-                yOffset += textSize.Y;
-            }
+            var currentBounds = Bounds;
+            style.DrawAllText(new PaintContext(currentBounds, canvas), this.TextLines());
         }
 
         protected virtual void OnDrawTextLine(PaintContext paintContext, IDesign style, string lineOfText)

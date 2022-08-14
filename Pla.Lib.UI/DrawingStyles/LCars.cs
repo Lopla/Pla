@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
@@ -30,18 +31,17 @@ namespace Pla.Lib.UI.DrawingStyles
 
         private readonly SKColor[] _colors;
 
-        private readonly SKFont _font;
         private readonly SKPaint _fontDrawingPainter;
         private readonly SKPaint _fontDrawingPainterWhite;
         public int Ascender;
-        public int BorderMargin = 10;
+        public int BorderMargin = 0;
         public int Descender;
         public int TextLineHeight;
 
         public LCars()
         {
             _colors = _colorMap.Select(SKColor.Parse).ToArray();
-            _font = new SKFont(
+            var font = new SKFont(
                 SKTypeface.Default
                 //SKTypeface.FromFamilyName("Arial Narrow",
                 //    SKFontStyleWeight.Bold,
@@ -49,33 +49,67 @@ namespace Pla.Lib.UI.DrawingStyles
                 //    SKFontStyleSlant.Upright)
             );
 
-            int TextSize = 18;
+            var TextSize = 18;
 
             _fontDrawingPainter = new SKPaint
             {
                 Color = _colors[(int)Styling.Background],
-                Typeface = _font.Typeface,
+                Typeface = font.Typeface,
                 TextSize = TextSize
             };
             _fontDrawingPainterWhite = new SKPaint
             {
                 Color = _colors[(int)Styling.Border1],
-                Typeface = _font.Typeface,
+                Typeface = font.Typeface,
                 TextSize = TextSize
             };
 
-            Ascender = -(int)_font.Metrics.Ascent;
-            Descender = (int)_font.Metrics.Descent;
+            Ascender = -(int)font.Metrics.Ascent;
+            Descender = (int)font.Metrics.Descent;
             TextLineHeight = Ascender + Descender;
         }
 
+        public SKPoint GetTextTotalSize(IEnumerable<string> TextLines)
+        {
+            var newSize = SKPoint.Empty;
+            foreach (var t in TextLines)
+            {
+                var textSize = CalculateTextSize(t);
+                newSize.Offset(0, textSize.Y);
+                if (newSize.X < textSize.X) newSize.X = textSize.X;
+            }
+
+            newSize.Y += GetDescender();
+            return newSize;
+        }
 
         public SKPoint CalculateTextSize(string text)
         {
             SKRect bounds = default;
             _fontDrawingPainter.MeasureText(text, ref bounds);
 
-            return new SKPoint(bounds.Width, this.GetTextHeight());
+            return new SKPoint(bounds.Width, GetTextHeight());
+        }
+
+        public int GetDescender()
+        {
+            return (int)_fontDrawingPainter.FontMetrics.Descent;
+        }
+
+        public void DrawAllText(PaintContext paintContext, string[] textLines)
+        {
+            float yOffset = 0;
+            foreach (var t in textLines)
+            {
+                var currentBounds = paintContext.Bounds;
+                currentBounds.Offset(0, yOffset);
+                var textSize = CalculateTextSize(t);
+                currentBounds.Bottom = currentBounds.Top + textSize.Y;
+
+                VisibleText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left);
+
+                yOffset += textSize.Y;
+            }
         }
 
         public int GetTextHeight()
@@ -91,25 +125,17 @@ namespace Pla.Lib.UI.DrawingStyles
         {
             using (var painterBorder = new SKPaint
                    {
-                       Color = _colors[(int)Styling.Border1],
-                       Style = SKPaintStyle.Fill
+                       Color = _colors[(int)Styling.Border7],
+                       Style = SKPaintStyle.StrokeAndFill
                    })
             using (var background = new SKPaint
                    {
-                       Color = _colors[(int)Styling.Background],
+                       Color = _colors[(int)Styling.Border6],
                        Style = SKPaintStyle.Fill
                    })
             {
-                context.Canvas.DrawRoundRect(context.Bounds, BorderMargin, BorderMargin, painterBorder);
-                var b = context.Bounds;
-                b.Left += BorderMargin / 2;
-                b.Top += 2;
-                b.Bottom -= 2;
-                context.Canvas.DrawRoundRect(b, BorderMargin, BorderMargin, background);
-                var c = b;
-                c.Left = context.Bounds.Right - BorderMargin;
+                context.Canvas.DrawRect(context.Bounds, painterBorder);
 
-                context.Canvas.DrawRect(c, background);
                 ModifyAbleText(context, label, align);
             }
         }
@@ -171,19 +197,24 @@ namespace Pla.Lib.UI.DrawingStyles
 
         private void Text(PaintContext context, string text, SKTextAlign align, bool dark)
         {
-            var point = new SKPoint(context.Bounds.Left, context.Bounds.MidY);
+            var point = new SKPoint(context.Bounds.Left, context.Bounds.Top);
 
             if (align == SKTextAlign.Center)
                 point.X = context.Bounds.MidX;
             else if (align == SKTextAlign.Right)
-                point.X = context.Bounds.Right - BorderMargin;
+                point.X = context.Bounds.Right;
             else if (align == SKTextAlign.Left)
-                point.X = context.Bounds.Left + BorderMargin;
+                point.X = context.Bounds.Left;
 
-            point.Offset(0, -_fontDrawingPainter.FontMetrics.Ascent / 2);
+
+            var tempPainter = dark ? _fontDrawingPainter : _fontDrawingPainterWhite;
+
+            point.Offset(0, tempPainter.TextSize);
+
+            tempPainter.TextAlign = align;
 
             if (text != null)
-                context.Canvas.DrawText(text, point, dark ? _fontDrawingPainter : _fontDrawingPainterWhite);
+                context.Canvas.DrawText(text, point, tempPainter);
         }
     }
 }

@@ -29,12 +29,12 @@ namespace Pla.App.Pilot
                     .AddWidget(new Frame())
                 ;
 
-            ShowLabelAndSelectedWidgetEvent(container);
+            //ShowLabelAndSelectedWidgetEvent(container);
             Editor(container);
-            AddButton(container);
-            LotsOfFrames(container);
+            //AddButton(container);
+            //LotsOfFrames(container);
 
-            this._engine.RequestTransparentWindow();
+            //this._engine.RequestTransparentWindow();
         }
 
         private void AddButton(IWidgetContainer container)
@@ -51,7 +51,7 @@ namespace Pla.App.Pilot
         {
             container.Add(new Edit()
             {
-                Text ="Zażółć gęślą jaźń."
+                Text ="Zażółć gęślą jaźń. yyygggIIWWllLLTTT"
             });
         }
 

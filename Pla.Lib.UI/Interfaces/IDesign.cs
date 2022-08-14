@@ -1,10 +1,12 @@
-﻿using SkiaSharp;
+﻿using System.Collections.Generic;
+using SkiaSharp;
 
 namespace Pla.Lib.UI.Interfaces
 {
     public interface IDesign
     {
         SKPoint CalculateTextSize(string text);
+        SKPoint GetTextTotalSize(IEnumerable<string> lines);
 
         /// <summary>
         ///     Edit boxes
@@ -28,5 +30,7 @@ namespace Pla.Lib.UI.Interfaces
         void VisibleText(PaintContext paintContext, string text, SKTextAlign align);
         void PointAbleText(PaintContext paintContext, string text, SKTextAlign align);
         int GetTextHeight();
+        int GetDescender();
+        void DrawAllText(PaintContext paintContext, string[] textLines);
     }
 }
