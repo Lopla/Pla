@@ -22,7 +22,7 @@ namespace Pla.Lib.UI.Widgets
         }
 
         public override SKPoint RequestedSize => _size;
-
+        
 
         /// <summary>
         ///     calls <see cref="OnDraw" /> and foreach line calls <see cref="OnDrawTextLine" />
@@ -50,6 +50,7 @@ namespace Pla.Lib.UI.Widgets
         protected virtual void OnDrawAllText(SKCanvas canvas, IDesign style)
         {
             var currentBounds = Bounds;
+
             style.DrawAllText(new PaintContext(currentBounds, canvas), this.TextLines());
         }
 

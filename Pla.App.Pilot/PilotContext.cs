@@ -27,7 +27,7 @@ namespace Pla.App.Pilot
 
             var container =
                     this._manager
-                    //.AddWidget(new Frame())
+                    .AddWidget(new Frame())
                 ;
 
             ShowLabelAndSelectedWidgetEvent(container);

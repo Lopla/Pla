@@ -29,8 +29,6 @@ namespace Pla.Lib.UI.Interfaces
         void ModifyAbleText(PaintContext ctx, string text, SKTextAlign align);
         void VisibleText(PaintContext paintContext, string text, SKTextAlign align);
         void PointAbleText(PaintContext paintContext, string text, SKTextAlign align);
-        int GetTextHeight();
-        int GetDescender();
         void DrawAllText(PaintContext paintContext, string[] textLines);
     }
 }

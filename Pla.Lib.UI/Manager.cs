@@ -5,44 +5,35 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
-    public delegate void WidgetSelected(Widget selctedWidget);
+    public delegate void WidgetSelected(Widget selectedWidget);
 
     public class Manager : IControl, IPainter, IWidgetContainer
     {
-        public Manager(IEngine painter) : base()
+        private readonly IEngine _painter;
+        private readonly Frame _rootFrame = new Frame();
+
+        public Manager(IEngine painter)
         {
-            this.painter = painter;
-            this.rootFrame.Parent=this;
+            _painter = painter;
+            _rootFrame.Parent = this;
         }
 
-        Frame rootFrame = new Frame();
-
-        public Widget Add(Widget widget)
-        {
-            rootFrame.Add(widget);
-            return widget;
-        }
-
-        private readonly IEngine painter;
+        public Widget Selected { get; set; }
 
         public void KeyDown(uint key)
         {
-            if(this.Selected!=null)
-            {
-                this.Selected.OnKeyDow(key);
-            }
+            if (Selected != null) Selected.OnKeyDow(key);
         }
 
         public void Click(SKPoint argsLocation)
         {
-            var w = rootFrame.FindWidget(argsLocation);
+            var w = _rootFrame.FindWidget(argsLocation);
 
-            this.Selected?.LostFocus();
-            this.Selected = w;
-            this.OnWidgetSelected?.Invoke(w);
+            Selected?.LostFocus();
+            Selected = w;
+            OnWidgetSelected?.Invoke(w);
             w?.GotFocus();
             w?.OnClick(argsLocation);
-                      
         }
 
         public void Paint(SKImageInfo info, SKSurface surface)
@@ -50,22 +41,25 @@ namespace Pla.Lib.UI
             surface.Canvas.Clear();
 
             var style = new LCars();
-            rootFrame.Draw(surface.Canvas, style);
+            _rootFrame.Draw(surface.Canvas, style);
 
             surface.Canvas.Flush();
         }
 
+        public Widget Add(Widget widget)
+        {
+            _rootFrame.Add(widget);
+            return widget;
+        }
+
         public void Invalidate()
         {
-            this.painter.RequestRefresh();
+            _painter.RequestRefresh();
         }
 
         public void RequestResize()
         {
-            
         }
-
-        public Widget Selected { get; set; }
 
         public event WidgetSelected OnWidgetSelected;
     }
