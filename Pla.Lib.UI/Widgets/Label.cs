@@ -14,14 +14,20 @@ namespace Pla.Lib.UI.Widgets
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {
+            var textSize = _painter.GetTextTotalSize(this.TextLines());
+            var ornamentedElement = _ornaments.GetSize(textSize);
+
             if (_size == SKPoint.Empty)
             {
-                _size = _painter.GetTextTotalSize(this.TextLines());
+                //// add text size
+                this._size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
                 Parent?.RequestResize();
             }
 
-            _ornaments.Draw(new PaintContext(this, canvas));
-            _painter.Draw(new PaintContext(this, canvas), TextLines(), _ornaments.palette.Colour(Styling.Alert));
+            _ornaments.Draw(new PaintContext(Bounds, canvas));
+            _painter.Draw(new PaintContext(this, canvas), 
+                TextLines(), 
+                _ornaments.Palette.Colour(Styling.Alert));
         }
 
         public string Text
