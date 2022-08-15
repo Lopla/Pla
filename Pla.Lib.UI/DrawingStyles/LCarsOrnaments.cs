@@ -10,7 +10,10 @@ namespace Pla.Lib.UI.DrawingStyles
         public LCarsOrnaments(IDesign style)
         {
             _style = style;
+            this.BorderWidth = 10;
         }
+
+        public int BorderWidth { get; set; }
 
         public void Draw(PaintContext context)
         {
@@ -23,7 +26,19 @@ namespace Pla.Lib.UI.DrawingStyles
                 context.Canvas.DrawRect(context.Bounds, painterBorder);
             }
         }
-        
+
+        public void DrawVisible(PaintContext paintContext)
+        {
+            using (var painterBorder = new SKPaint
+                   {
+                       Color = _style.Palette.Color(Styling.Background),
+                       Style = SKPaintStyle.StrokeAndFill
+                   })
+            {
+                paintContext.Canvas.DrawRect(paintContext.Bounds, painterBorder);
+            }
+        }
+
         /// <summary>
         ///     Grow ornaments around this element
         /// </summary>
@@ -31,9 +46,9 @@ namespace Pla.Lib.UI.DrawingStyles
         /// <returns></returns>
         public OrnamentBounds GetSize(SKPoint size)
         {
-            var skRect = SKRect.Inflate(new SKRect(0, 0, size.X, size.Y), 10, 10).Standardized;
+            var skRect = SKRect.Inflate(new SKRect(0, 0, size.X, size.Y), BorderWidth, BorderWidth).Standardized;
 
-            var skInternalRect = new SKRect(10, 10, size.X, size.Y);
+            var skInternalRect = new SKRect(BorderWidth, BorderWidth, size.X, size.Y);
 
             return new OrnamentBounds
             {

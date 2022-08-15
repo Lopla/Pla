@@ -14,11 +14,11 @@ namespace Pla.Lib.UI.Widgets
             _cursorLocation = 0;
         }
         
-        protected override void OnDraw(PaintContext paintContext, IDesign style)
-        {
-            paintContext.Focused = _hasFocus;
-            style.ModifyAble(paintContext);
-        }
+        //protected override void OnDraw(PaintContext paintContext, IDesign style)
+        //{
+        //    paintContext.Focused = _hasFocus;
+        //    style.ModifyAble(paintContext);
+        //}
         
         public override void OnKeyDow(uint key)
         {

@@ -4,54 +4,8 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets
 {
-    public class Label : Widget
+    public class Label : BaseTextWidget
     {
-        private readonly TextPainterActiveElement _painter = new TextPainterActiveElement();
 
-        private SKPoint _size;
-        private string _text;
-
-        public string Text
-        {
-            get => _text;
-            set
-            {
-                if (_text != value)
-                {
-                    _text = value;
-                    _size = SKPoint.Empty;
-
-                    Parent?.RequestResize();
-                }
-            }
-        }
-        
-        public override SKPoint CalculateRequestedSize(IDesign style)
-        {
-            var textSize = _painter.GetTextTotalSize(TextLines());
-            var ornamentedElement = 
-                style.Ornaments.GetSize(textSize);
-
-            //// add text size
-            var size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
-
-            return size;
-        }
-
-        public override void Draw(SKCanvas canvas, IDesign style)
-        {
-            var textSize = _painter.GetTextTotalSize(TextLines());
-            var ornamentedElement = style.Ornaments.GetSize(textSize);
-
-            style.Ornaments.Draw(new PaintContext(Bounds, canvas));
-            _painter.Draw(new PaintContext(ornamentedElement.OffsetForInternalBounds(Bounds), canvas),
-                TextLines(),
-                style.Palette.Color(Styling.Alert));
-        }
-
-        public string[] TextLines()
-        {
-            return Text?.Split('\r', '\n');
-        }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
@@ -17,39 +16,14 @@ namespace Pla.Lib.UI.Widgets
     /// </summary>
     public class Frame : Widget, IWidgetContainer
     {
-        private readonly List<Widget> _widgets = new List<Widget>();
         private readonly FrameStyle _orientation;
+        private readonly List<Widget> _widgets = new List<Widget>();
         private SKRect _canvasSize;
 
         public Frame(
             FrameStyle style = FrameStyle.Vertical)
         {
-            this._orientation = style;
-        }
-        
-        public override SKPoint CalculateRequestedSize(IDesign style)
-        {
-            var padding = 5;
-
-            float maxX = 0;
-            float maxY = 0;
-            float dy = 0;
-            float dx = 0;
-            foreach (var w in _widgets)
-            {
-                var childSize = w.CalculateRequestedSize(style);
-                var ex = 2 * padding + childSize.X;
-                var ey = 2 * padding + childSize.Y;
-
-                dy += ey;
-                dx += ex;
-
-                maxX = Math.Max(maxX, ex);
-                maxY = Math.Max(maxY, ey);
-            }
-
-            return
-                _orientation == FrameStyle.Horizontal ? new SKPoint(dx, maxY) : new SKPoint(maxX, dy);
+            _orientation = style;
         }
 
         public void Invalidate()
@@ -76,6 +50,31 @@ namespace Pla.Lib.UI.Widgets
             {
                 Parent.RequestResize();
             }
+        }
+
+        public override SKPoint CalculateRequestedSize(IDesign style)
+        {
+            var padding = 5;
+
+            float maxX = 0;
+            float maxY = 0;
+            float dy = 0;
+            float dx = 0;
+            foreach (var w in _widgets)
+            {
+                var childSize = w.CalculateRequestedSize(style);
+                var ex = 2 * padding + childSize.X;
+                var ey = 2 * padding + childSize.Y;
+
+                dy += ey;
+                dx += ex;
+
+                maxX = Math.Max(maxX, ex);
+                maxY = Math.Max(maxY, ey);
+            }
+
+            return
+                _orientation == FrameStyle.Horizontal ? new SKPoint(dx, maxY) : new SKPoint(maxX, dy);
         }
 
         public Widget FindWidget(SKPoint argsLocation)
@@ -106,9 +105,10 @@ namespace Pla.Lib.UI.Widgets
                 RecalculateControls();
             }
 
-            if (!(this.Parent is Manager))
+            if (!(Parent is Manager))
             {
-                style.Visible(new PaintContext(this, canvas));
+                style.Ornaments.Draw(new PaintContext(this, canvas));
+                style.Ornaments.DrawVisible(new PaintContext(this, canvas));
             }
 
             _widgets.ForEach(w => { w.Draw(canvas, style); });
@@ -118,13 +118,13 @@ namespace Pla.Lib.UI.Widgets
         {
             if (Parent is Manager m)
             {
-                var style  = m.GetStyle();
+                var style = m.GetStyle();
 
                 // resize me
                 // i'm the root frame of all
                 Bounds = _canvasSize;
 
-                var requestedResize = this.CalculateRequestedSize(style);
+                var requestedResize = CalculateRequestedSize(style);
 
                 if (Bounds.Height > requestedResize.Y) Bounds.Bottom = requestedResize.Y;
 
@@ -162,7 +162,7 @@ namespace Pla.Lib.UI.Widgets
                 offset.Offset(dX * offestDelta.X, dY * offestDelta.Y);
 
                 w.Bounds = rect;
-                if (w is Frame f) 
+                if (w is Frame f)
                     f.RecalculateChildSizes(design);
             }
         }

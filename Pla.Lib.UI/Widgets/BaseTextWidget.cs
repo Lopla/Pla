@@ -1,3 +1,4 @@
+using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
@@ -5,7 +6,8 @@ namespace Pla.Lib.UI.Widgets
 {
     public abstract class BaseTextWidget : Widget
     {
-        private SKPoint _size = SKPoint.Empty;
+        private readonly TextPainterActiveElement _painter = new TextPainterActiveElement();
+
         private string _text;
 
         public string Text
@@ -16,49 +18,31 @@ namespace Pla.Lib.UI.Widgets
                 if (_text != value)
                 {
                     _text = value;
-                    _size = SKPoint.Empty;
+                    Parent?.RequestResize();
                 }
             }
         }
 
         public override SKPoint CalculateRequestedSize(IDesign style)
         {
-            return SKPoint.Empty;
-            
+            var textSize = _painter.GetTextTotalSize(TextLines());
+            var ornamentedElement =
+                style.Ornaments.GetSize(textSize);
+
+            var size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
+
+            return size;
         }
-        
-        /// <summary>
-        ///     calls <see cref="OnDraw" /> and foreach line calls <see cref="OnDrawTextLine" />
-        /// </summary>
-        /// <param name="canvas"></param>
-        /// <param name="style"></param>
+
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            if (_size == SKPoint.Empty)
-            {
-                _size = style.GetTextTotalSize(this.TextLines());
-                Parent?.RequestResize();
-            }
+            var textSize = _painter.GetTextTotalSize(TextLines());
+            var ornamentedElement = style.Ornaments.GetSize(textSize);
 
-            OnDraw(new PaintContext(this, canvas), style);
-            OnDrawAllText(canvas, style);
-        }
-
-        /// <summary>
-        ///     Paints all underlaying lines and calls <see cref="OnDrawTextLine" /> when need to render one text line
-        /// </summary>
-        /// <param name="canvas"></param>
-        /// <param name="style"></param>
-        protected virtual void OnDrawAllText(SKCanvas canvas, IDesign style)
-        {
-            var currentBounds = Bounds;
-
-            style.DrawAllText(new PaintContext(currentBounds, canvas), this.TextLines());
-        }
-
-        protected virtual void OnDraw(PaintContext paintContext, IDesign style)
-        {
-            style.Visible(paintContext);
+            style.Ornaments.Draw(new PaintContext(Bounds, canvas));
+            _painter.Draw(new PaintContext(ornamentedElement.OffsetForInternalBounds(Bounds), canvas),
+                TextLines(),
+                style.Palette.Color(Styling.Alert));
         }
 
         public string[] TextLines()
