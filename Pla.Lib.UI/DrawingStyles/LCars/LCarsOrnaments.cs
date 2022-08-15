@@ -18,22 +18,19 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         public void Draw(PaintContext context, 
             Ornament ornament)
         {
-            if (ornament == Ornament.Visible)
+            using (var painterBack= new SKPaint
+                   {
+                       Color = _style.Palette.BackColor(ornament),
+                       Style = SKPaintStyle.Fill
+                   })
+            using (var painterBorder = new SKPaint
+                   {
+                       Color = _style.Palette.FrontColor(ornament),
+                       Style = SKPaintStyle.Stroke
+                   })
             {
-                using (var painterBack= new SKPaint
-                       {
-                           Color = _style.Palette.Color(Styling.Background),
-                           Style = SKPaintStyle.Fill
-                       })
-                using (var painterBorder = new SKPaint
-                       {
-                           Color = _style.Palette.Color(Styling.Border7),
-                           Style = SKPaintStyle.Stroke
-                       })
-                {
-                    context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBack);
-                    context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBorder);
-                }
+                context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBack);
+                context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBorder);
             }
         }
         

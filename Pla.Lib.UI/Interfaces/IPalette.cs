@@ -6,6 +6,7 @@ namespace Pla.Lib.UI.Interfaces
     public interface IPalette
     {
         SKColor Color(Styling styleInColor);
-        SKColor Color(Ornament styleInColor);
+        SKColor FrontColor(Ornament styleInColor);
+        SKColor BackColor(Ornament styleInColor);
     }
 }

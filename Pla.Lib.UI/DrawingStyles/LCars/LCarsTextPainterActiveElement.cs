@@ -62,7 +62,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
                 var textSize = CalculateTextSize(t);
                 currentBounds.Bottom = currentBounds.Top + textSize.Y;
 
-                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left, _palette.Color(ornamentType));
+                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left, _palette.FrontColor(ornamentType));
 
                 yOffset += textSize.Y;
             }

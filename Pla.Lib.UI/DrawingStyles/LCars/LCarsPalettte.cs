@@ -38,13 +38,25 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             return _colors[(int)styleInColor];
         }
 
-        public SKColor Color(Ornament styleInColor)
+        public SKColor FrontColor(Ornament styleInColor)
+        {
+            Dictionary<Ornament, Styling> colour = new Dictionary<Ornament, Styling>()
+            {
+                { Ornament.Visible, Styling.Background },
+                { Ornament.Active, Styling.Background },
+                { Ornament.Modifiable, Styling.Border3 },
+            };
+
+            return Color(colour[styleInColor]);
+        }
+
+        public SKColor BackColor(Ornament styleInColor)
         {
             Dictionary<Ornament, Styling> colour = new Dictionary<Ornament, Styling>()
             {
                 { Ornament.Visible, Styling.Border1 },
                 { Ornament.Active, Styling.Border2 },
-                { Ornament.Modifiable, Styling.Border3 },
+                { Ornament.Modifiable, Styling.Background },
             };
 
             return Color(colour[styleInColor]);

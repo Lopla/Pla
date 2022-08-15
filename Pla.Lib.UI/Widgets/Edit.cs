@@ -19,7 +19,12 @@ namespace Pla.Lib.UI.Widgets
         //    paintContext.Focused = _hasFocus;
         //    style.ModifyAble(paintContext);
         //}
-        
+
+        public override void Draw(SKCanvas canvas, IDesign style)
+        {
+            base.Draw(canvas, style);
+        }
+
         public override void OnKeyDow(uint key)
         {
             switch (key)
