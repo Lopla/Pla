@@ -23,7 +23,6 @@ namespace Pla.Lib.UI.Widgets
 
         public override SKPoint RequestedSize => _size;
         
-
         /// <summary>
         ///     calls <see cref="OnDraw" /> and foreach line calls <see cref="OnDrawTextLine" />
         /// </summary>

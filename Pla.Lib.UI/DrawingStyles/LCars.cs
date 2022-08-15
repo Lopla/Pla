@@ -10,6 +10,8 @@ namespace Pla.Lib.UI.DrawingStyles
     /// </summary>
     public class LCars : IDesign
     {
+
+
         private readonly string[] _colorMap =
         {
             "#000000", // background and text

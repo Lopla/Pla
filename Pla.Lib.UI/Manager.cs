@@ -22,7 +22,7 @@ namespace Pla.Lib.UI
 
         public void KeyDown(uint key)
         {
-            if (Selected != null) Selected.OnKeyDow(key);
+            Selected?.OnKeyDow(key);
         }
 
         public void Click(SKPoint argsLocation)

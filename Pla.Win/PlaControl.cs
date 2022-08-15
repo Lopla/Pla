@@ -60,7 +60,7 @@ public partial class PlaControl : UserControl, IEngine
             var key = args.KeyChar;
             sw.OnKey(key);
         };
-
+        
         ctx.Init(this);
     }
 }

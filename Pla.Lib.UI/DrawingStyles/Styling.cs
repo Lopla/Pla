@@ -1,6 +1,6 @@
 ﻿namespace Pla.Lib.UI.DrawingStyles
 {
-    internal enum Styling
+    public enum Styling
     {
         Background = 0,
         Border1,
