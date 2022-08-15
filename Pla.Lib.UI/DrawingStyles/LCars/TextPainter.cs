@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles
 {
-    public class TextPainterActiveElement : IActiveElementPainter
+    public class LCarsTextPainterActiveElement : IActiveElementPainter
     {
         private readonly SKTypeface _font = SKTypeface.Default;
 

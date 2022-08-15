@@ -6,7 +6,14 @@ namespace Pla.Lib.UI.Widgets
 {
     public abstract class BaseTextWidget : Widget
     {
-        private readonly TextPainterActiveElement _painter = new TextPainterActiveElement();
+        private readonly Ornament _ornamentType;
+
+        public BaseTextWidget(Ornament ornamentType = Ornament.Visible)
+        {
+            _ornamentType = ornamentType;
+        }
+
+        private readonly LCarsTextPainterActiveElement _painter = new LCarsTextPainterActiveElement();
 
         private string _text;
 
@@ -27,7 +34,7 @@ namespace Pla.Lib.UI.Widgets
         {
             var textSize = _painter.GetTextTotalSize(TextLines());
             var ornamentedElement =
-                style.Ornaments.GetSize(textSize);
+                style.Ornaments.GetSize(textSize, _ornamentType);
 
             var size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
 
@@ -39,10 +46,13 @@ namespace Pla.Lib.UI.Widgets
             var textSize = _painter.GetTextTotalSize(TextLines());
             var ornamentedElement = style.Ornaments.GetSize(textSize);
 
-            style.Ornaments.Draw(new PaintContext(Bounds, canvas));
+            style
+                .Ornaments
+                .Draw(new PaintContext(Bounds, canvas), _ornamentType);
+
             _painter.Draw(new PaintContext(ornamentedElement.OffsetForInternalBounds(Bounds), canvas),
                 TextLines(),
-                style.Palette.Color(Styling.Alert));
+                style.Palette.Color(Styling.Border1));
         }
 
         public string[] TextLines()

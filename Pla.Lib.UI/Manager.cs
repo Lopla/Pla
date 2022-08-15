@@ -1,4 +1,5 @@
 using Pla.Lib.UI.DrawingStyles;
+using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
 using SkiaSharp;
@@ -40,7 +41,7 @@ namespace Pla.Lib.UI
         {
             surface.Canvas.Clear();
 
-            var style = new LCars();
+            var style = new LCarsStyle();
             _rootFrame.Draw(surface.Canvas, style);
 
             surface.Canvas.Flush();
@@ -65,7 +66,7 @@ namespace Pla.Lib.UI
 
         public IDesign GetStyle()
         {
-            return new LCars();
+            return new LCarsStyle();
         }
     }
 }

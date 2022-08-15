@@ -1,8 +1,16 @@
-﻿using Pla.Lib.UI.DrawingStyles;
+﻿using System;
+using Pla.Lib.UI.DrawingStyles;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.Interfaces
 {
+    public enum Ornament
+    {
+        Visible = 1,
+        Modifiable = 2,
+        Active = 3,
+    }
+
     public interface IOrnamentsPainter
     {
         /// <summary>
@@ -10,14 +18,8 @@ namespace Pla.Lib.UI.Interfaces
         /// </summary>
         /// <param name="size"></param>
         /// <returns></returns>
-        OrnamentBounds GetSize(SKPoint size);
+        OrnamentBounds GetSize(SKPoint size, Ornament ornament = Ornament.Visible);
 
-        void Draw(PaintContext context);
-
-        /// <summary>
-        /// Draw generic visible element. Usualy a boring square with frames
-        /// </summary>
-        /// <param name="paintContext"></param>
-        void DrawVisible(PaintContext paintContext);
+        void Draw(PaintContext context, Ornament ornament = Ornament.Visible);
     }
 }

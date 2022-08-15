@@ -94,6 +94,8 @@ namespace Pla.Lib.UI.Widgets
             return null;
         }
 
+        private Ornament ornamentType = Ornament.Visible;
+
         public override void Draw(SKCanvas canvas, IDesign style)
         {
             SKRect currentCanvasSize = default;
@@ -107,8 +109,7 @@ namespace Pla.Lib.UI.Widgets
 
             if (!(Parent is Manager))
             {
-                style.Ornaments.Draw(new PaintContext(this, canvas));
-                style.Ornaments.DrawVisible(new PaintContext(this, canvas));
+                style.Ornaments.Draw(new PaintContext(this, canvas), ornamentType);
             }
 
             _widgets.ForEach(w => { w.Draw(canvas, style); });

@@ -1,6 +1,7 @@
-﻿using SkiaSharp;
+﻿using Pla.Lib.UI.DrawingStyles;
+using SkiaSharp;
 
-namespace Pla.Lib.UI.DrawingStyles
+namespace Pla.Lib.UI.Interfaces
 {
     public interface IPalette
     {

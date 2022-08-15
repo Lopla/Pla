@@ -16,7 +16,7 @@ namespace Pla.Lib.UI
 
         public virtual void Draw(SKCanvas canvas, IDesign style)
         {
-            style.Visible(new PaintContext(this, canvas));
+            style.Ornaments.Draw(new PaintContext(this, canvas));
         }
 
         public virtual void OnClick(SKPoint argsLocation)
