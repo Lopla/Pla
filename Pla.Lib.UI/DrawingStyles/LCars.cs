@@ -10,8 +10,6 @@ namespace Pla.Lib.UI.DrawingStyles
     /// </summary>
     public class LCars : IDesign
     {
-
-
         private readonly string[] _colorMap =
         {
             "#000000", // background and text
@@ -32,15 +30,18 @@ namespace Pla.Lib.UI.DrawingStyles
         };
 
         private readonly SKColor[] _colors;
+        private readonly SKTypeface _font = SKTypeface.Default;
 
         public int BorderMargin = 0;
         public int TextLineHeight = 16;
-        private readonly SKTypeface _font = SKTypeface.Default;
 
         public LCars()
         {
             _colors = _colorMap.Select(SKColor.Parse).ToArray();
+            Ornaments = new LCarsOrnaments(this);
         }
+
+        public IPalette Palette { get; } = new LCarsPalette();
 
         public SKPoint GetTextTotalSize(IEnumerable<string> textLines)
         {
@@ -51,19 +52,19 @@ namespace Pla.Lib.UI.DrawingStyles
                 newSize.Offset(0, textSize.Y);
                 if (newSize.X < textSize.X) newSize.X = textSize.X;
             }
-            
+
             return newSize;
         }
 
         public SKPoint CalculateTextSize(string text)
         {
             SKRect bounds = default;
-            var painter = this.TextPainter();
+            var painter = TextPainter();
             painter.MeasureText(text, ref bounds);
 
             return new SKPoint(bounds.Width, painter.FontSpacing);
         }
-        
+
         public void DrawAllText(PaintContext paintContext, string[] textLines)
         {
             float yOffset = 0;
@@ -153,6 +154,8 @@ namespace Pla.Lib.UI.DrawingStyles
             LineOfText(paintContext, text, align, true);
         }
 
+        public IOrnamentsPainter Ornaments { get; }
+
         private void LineOfText(PaintContext context, string text, SKTextAlign align, bool dark)
         {
             var point = new SKPoint(context.Bounds.Left, context.Bounds.Top);
@@ -172,7 +175,7 @@ namespace Pla.Lib.UI.DrawingStyles
 
             var stylingColor = dark ? Styling.Background : Styling.Border1;
 
-            SKColor color = _colors[(int)stylingColor];
+            var color = _colors[(int)stylingColor];
 
             var textPainter = TextPainter(align, color);
             {
@@ -182,11 +185,11 @@ namespace Pla.Lib.UI.DrawingStyles
             }
         }
 
-        private SKPaint TextPainter(SKTextAlign align = SKTextAlign.Center, SKColor? color=null)
+        private SKPaint TextPainter(SKTextAlign align = SKTextAlign.Center, SKColor? color = null)
         {
-            return new SKPaint()
+            return new SKPaint
             {
-                TextSize = this.TextLineHeight,
+                TextSize = TextLineHeight,
                 TextAlign = align,
                 Color = color ?? _colors[0],
                 Typeface = _font

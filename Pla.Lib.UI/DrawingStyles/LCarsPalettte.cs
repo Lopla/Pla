@@ -3,7 +3,7 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles
 {
-    public class LCarsPalette
+    public class LCarsPalette : IPalette
     {
         private readonly string[] _colorMap =
         {
@@ -31,9 +31,9 @@ namespace Pla.Lib.UI.DrawingStyles
             _colors = _colorMap.Select(SKColor.Parse).ToArray();
         }
 
-        public SKColor Colour(Styling styleinColour)
+        public SKColor Color(Styling styleInColor)
         {
-            return _colors[(int)styleinColour];
+            return _colors[(int)styleInColor];
         }
     }
 }

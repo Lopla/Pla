@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Pla.Lib.UI.DrawingStyles;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.Interfaces
@@ -30,5 +31,8 @@ namespace Pla.Lib.UI.Interfaces
         void VisibleText(PaintContext paintContext, string text, SKTextAlign align);
         void PointAbleText(PaintContext paintContext, string text, SKTextAlign align);
         void DrawAllText(PaintContext paintContext, string[] textLines);
+
+        IOrnamentsPainter Ornaments { get; }
+        IPalette Palette { get; }
     }
 }

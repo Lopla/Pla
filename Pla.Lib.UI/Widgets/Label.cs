@@ -6,29 +6,10 @@ namespace Pla.Lib.UI.Widgets
 {
     public class Label : Widget
     {
-        private string _text;
-        private SKPoint _size;
-
         private readonly TextPainterActiveElement _painter = new TextPainterActiveElement();
-        private readonly LCarsOrnaments _ornaments = new LCarsOrnaments();
 
-        public override void Draw(SKCanvas canvas, IDesign style)
-        {
-            var textSize = _painter.GetTextTotalSize(this.TextLines());
-            var ornamentedElement = _ornaments.GetSize(textSize);
-
-            if (_size == SKPoint.Empty)
-            {
-                //// add text size
-                this._size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
-                Parent?.RequestResize();
-            }
-
-            _ornaments.Draw(new PaintContext(Bounds, canvas));
-            _painter.Draw(new PaintContext(this, canvas), 
-                TextLines(), 
-                _ornaments.Palette.Colour(Styling.Alert));
-        }
+        private SKPoint _size;
+        private string _text;
 
         public string Text
         {
@@ -42,8 +23,25 @@ namespace Pla.Lib.UI.Widgets
                 }
             }
         }
-        
+
         public override SKPoint RequestedSize => _size;
+
+        public override void Draw(SKCanvas canvas, IDesign style)
+        {
+            var textSize = _painter.GetTextTotalSize(TextLines());
+            var ornamentedElement = style.Ornaments.GetSize(textSize);
+
+            if (_size == SKPoint.Empty)
+            {
+                //// add text size
+                _size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
+                Parent?.RequestResize();
+            }
+            style.Ornaments.Draw(new PaintContext(Bounds, canvas));
+            _painter.Draw(new PaintContext(ornamentedElement.OffsetForInternalBounds(Bounds), canvas),
+                TextLines(),
+                style.Palette.Color(Styling.Alert));
+        }
 
         public string[] TextLines()
         {
