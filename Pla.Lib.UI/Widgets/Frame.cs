@@ -18,40 +18,38 @@ namespace Pla.Lib.UI.Widgets
     public class Frame : Widget, IWidgetContainer
     {
         private readonly List<Widget> _widgets = new List<Widget>();
-        private readonly FrameStyle _style;
+        private readonly FrameStyle _orientation;
         private SKRect _canvasSize;
 
         public Frame(
             FrameStyle style = FrameStyle.Vertical)
         {
-            this._style = style;
+            this._orientation = style;
         }
-
-        public override SKPoint RequestedSize
+        
+        public override SKPoint CalculateRequestedSize(IDesign style)
         {
-            get
+            var padding = 5;
+
+            float maxX = 0;
+            float maxY = 0;
+            float dy = 0;
+            float dx = 0;
+            foreach (var w in _widgets)
             {
-                var padding = 5;
+                var childSize = w.CalculateRequestedSize(style);
+                var ex = 2 * padding + childSize.X;
+                var ey = 2 * padding + childSize.Y;
 
-                float maxX = 0;
-                float maxY = 0;
-                float dy = 0;
-                float dx = 0;
-                foreach (var w in _widgets)
-                {
-                    var ex = 2 * padding + w.RequestedSize.X;
-                    var ey = 2 * padding + w.RequestedSize.Y;
+                dy += ey;
+                dx += ex;
 
-                    dy += ey;
-                    dx += ex;
-
-                    maxX = Math.Max(maxX, ex);
-                    maxY = Math.Max(maxY, ey);
-                }
-
-                return
-                    _style == FrameStyle.Horizontal ? new SKPoint(dx, maxY) : new SKPoint(maxX, dy);
+                maxX = Math.Max(maxX, ex);
+                maxY = Math.Max(maxY, ey);
             }
+
+            return
+                _orientation == FrameStyle.Horizontal ? new SKPoint(dx, maxY) : new SKPoint(maxX, dy);
         }
 
         public void Invalidate()
@@ -118,36 +116,41 @@ namespace Pla.Lib.UI.Widgets
 
         private void RecalculateControls()
         {
-            if (Parent is Manager)
+            if (Parent is Manager m)
             {
+                var style  = m.GetStyle();
+
                 // resize me
                 // i'm the root frame of all
                 Bounds = _canvasSize;
 
-                if (Bounds.Height > RequestedSize.Y) Bounds.Bottom = RequestedSize.Y;
+                var requestedResize = this.CalculateRequestedSize(style);
 
-                if (Bounds.Width > RequestedSize.X) Bounds.Right = RequestedSize.X;
+                if (Bounds.Height > requestedResize.Y) Bounds.Bottom = requestedResize.Y;
 
-                RecalculateChildSizes();
+                if (Bounds.Width > requestedResize.X) Bounds.Right = requestedResize.X;
+
+                RecalculateChildSizes(style);
             }
         }
 
-        private void RecalculateChildSizes()
+        private void RecalculateChildSizes(IDesign design)
         {
             var padding = 5;
 
             var offset = new SKPoint();
 
             var offestDelta = new SKPoint(
-                _style == FrameStyle.Horizontal ? 1 : 0,
-                _style == FrameStyle.Vertical ? 1 : 0
+                _orientation == FrameStyle.Horizontal ? 1 : 0,
+                _orientation == FrameStyle.Vertical ? 1 : 0
             );
 
             // resize my kids
             foreach (var w in _widgets)
             {
-                var dY = padding + padding + w.RequestedSize.Y;
-                var dX = padding + padding + w.RequestedSize.X;
+                var childSize = w.CalculateRequestedSize(design);
+                var dY = padding + padding + childSize.Y;
+                var dX = padding + padding + childSize.X;
 
                 var rect = new SKRect(
                     Bounds.Left + offset.X + padding,
@@ -159,7 +162,8 @@ namespace Pla.Lib.UI.Widgets
                 offset.Offset(dX * offestDelta.X, dY * offestDelta.Y);
 
                 w.Bounds = rect;
-                if (w is Frame f) f.RecalculateChildSizes();
+                if (w is Frame f) 
+                    f.RecalculateChildSizes(design);
             }
         }
     }

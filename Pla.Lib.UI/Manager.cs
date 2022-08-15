@@ -62,5 +62,10 @@ namespace Pla.Lib.UI
         }
 
         public event WidgetSelected OnWidgetSelected;
+
+        public IDesign GetStyle()
+        {
+            return new LCars();
+        }
     }
 }
