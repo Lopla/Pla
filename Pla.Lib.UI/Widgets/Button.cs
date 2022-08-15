@@ -13,11 +13,6 @@ namespace Pla.Lib.UI.Widgets
             style.PointAble(paintContext);
         }
 
-        protected override void OnDrawTextLine(PaintContext paintContext, IDesign style, string lineOfText)
-        {
-            style.PointAbleText(paintContext, lineOfText, SKTextAlign.Center);
-        }
-
         public override void OnClick(SKPoint argsLocation)
         {
             ClickedHandler?.Invoke(argsLocation);

@@ -38,7 +38,6 @@ namespace Pla.Lib.UI.Widgets
             }
 
             OnDraw(new PaintContext(this, canvas), style);
-
             OnDrawAllText(canvas, style);
         }
 
@@ -52,11 +51,6 @@ namespace Pla.Lib.UI.Widgets
             var currentBounds = Bounds;
 
             style.DrawAllText(new PaintContext(currentBounds, canvas), this.TextLines());
-        }
-
-        protected virtual void OnDrawTextLine(PaintContext paintContext, IDesign style, string lineOfText)
-        {
-            style.VisibleText(paintContext, lineOfText, SKTextAlign.Left);
         }
 
         protected virtual void OnDraw(PaintContext paintContext, IDesign style)

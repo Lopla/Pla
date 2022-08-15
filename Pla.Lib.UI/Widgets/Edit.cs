@@ -15,13 +15,7 @@ namespace Pla.Lib.UI.Widgets
             paintContext.Focused = _hasFocus;
             style.ModifyAble(paintContext);
         }
-
-        protected override void OnDrawTextLine(PaintContext paintContext, IDesign style, string lineOfText)
-        {
-            paintContext.Focused = _hasFocus;
-            style.ModifyAbleText(paintContext, lineOfText, SKTextAlign.Left);
-        }
-
+        
         public override void OnKeyDow(uint key)
         {
             switch (key)
