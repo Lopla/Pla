@@ -40,7 +40,7 @@ namespace Pla.Lib.UI.DrawingStyles
             var painter = GetTextPainter();
             painter.MeasureText(text, ref bounds);
 
-            return new SKPoint(bounds.Width, painter.TextSize);
+            return new SKPoint(bounds.Width, painter.FontSpacing);
         }
 
         public void Draw(PaintContext paintContext, IEnumerable<string> textLines, SKColor color)
