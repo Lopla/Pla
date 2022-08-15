@@ -2,7 +2,7 @@
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
-namespace Pla.Lib.UI.DrawingStyles
+namespace Pla.Lib.UI.DrawingStyles.LCars
 {
     public class LCarsTextPainterActiveElement : IActiveElementPainter
     {
