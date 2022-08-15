@@ -51,8 +51,8 @@ namespace Pla.Lib.UI.Widgets
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
             style.TextPainter.Draw(new PaintContext(ornamentedElement.OffsetForInternalBounds(Bounds), canvas),
-                TextLines(),
-                style.Palette.Color(Styling.Border1));
+                TextLines(), 
+                _ornamentType);
         }
 
         public string[] TextLines()

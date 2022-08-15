@@ -6,6 +6,13 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
 {
     public class LCarsTextPainterActiveElement : IActiveElementPainter
     {
+        private readonly IPalette _palette;
+
+        public LCarsTextPainterActiveElement(IPalette palette)
+        {
+            _palette = palette;
+        }
+
         private readonly SKTypeface _font = SKTypeface.Default;
 
         public float TextLineHeight { get; set; } = 16;
@@ -43,8 +50,10 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             return new SKPoint(bounds.Width, painter.FontSpacing);
         }
 
-        public void Draw(PaintContext paintContext, IEnumerable<string> textLines, SKColor color)
+        public void Draw(PaintContext paintContext, IEnumerable<string> textLines, Ornament ornamentType)
         {
+            
+
             float yOffset = 0;
             foreach (var t in textLines)
             {
@@ -53,7 +62,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
                 var textSize = CalculateTextSize(t);
                 currentBounds.Bottom = currentBounds.Top + textSize.Y;
 
-                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left, color);
+                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left, _palette.Color(ornamentType));
 
                 yOffset += textSize.Y;
             }

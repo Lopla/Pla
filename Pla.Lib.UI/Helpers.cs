@@ -10,6 +10,5 @@ namespace Pla.Lib.UI
             frame.Add(newWidget);
             return newWidget;
         }
-        
     }
 }

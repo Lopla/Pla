@@ -6,6 +6,9 @@ namespace Pla.Lib.UI.Widgets
 {
     public class Label : BaseTextWidget
     {
+        public Label() : base(Ornament.Visible)
+        {
 
+        }
     }
 }

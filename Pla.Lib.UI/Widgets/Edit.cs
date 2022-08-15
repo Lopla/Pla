@@ -6,14 +6,14 @@ namespace Pla.Lib.UI.Widgets
 {
     public class Edit : BaseTextWidget
     {
-        private readonly int _cursorLocation;
-        private bool _hasFocus;
-
-        public Edit()
+        public Edit() : base(Ornament.Modifiable)
         {
             _cursorLocation = 0;
         }
-        
+
+        private readonly int _cursorLocation;
+        private bool _hasFocus;
+
         //protected override void OnDraw(PaintContext paintContext, IDesign style)
         //{
         //    paintContext.Focused = _hasFocus;

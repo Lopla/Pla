@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
@@ -35,6 +36,18 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         public SKColor Color(Styling styleInColor)
         {
             return _colors[(int)styleInColor];
+        }
+
+        public SKColor Color(Ornament styleInColor)
+        {
+            Dictionary<Ornament, Styling> colour = new Dictionary<Ornament, Styling>()
+            {
+                { Ornament.Visible, Styling.Border1 },
+                { Ornament.Active, Styling.Border2 },
+                { Ornament.Modifiable, Styling.Border3 },
+            };
+
+            return Color(colour[styleInColor]);
         }
     }
 }
