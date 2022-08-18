@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
@@ -16,14 +16,18 @@ namespace Pla.Lib.UI.Widgets
     /// </summary>
     public class Frame : Widget, IWidgetContainer
     {
-        private readonly FrameStyle _orientation;
+        public FrameStyle Orientation { get; }
         private readonly List<Widget> _widgets = new List<Widget>();
+
+        private readonly Ornament ornamentType = Ornament.WidgetContainer;
         private SKRect _canvasSize;
 
-        public Frame(
-            FrameStyle style = FrameStyle.Vertical)
+        private readonly LCarsFrameActiveElement _frameActiveElement;
+
+        public Frame(FrameStyle style = FrameStyle.Vertical)
         {
-            _orientation = style;
+            _frameActiveElement = new LCarsFrameActiveElement(this);
+            Orientation = style;
         }
 
         public void Invalidate()
@@ -52,68 +56,7 @@ namespace Pla.Lib.UI.Widgets
             }
         }
 
-        public override SKPoint CalculateRequestedSize(IDesign style)
-        {
-            var padding = 5;
-
-            float maxX = 0;
-            float maxY = 0;
-            float dy = 0;
-            float dx = 0;
-            foreach (var w in _widgets)
-            {
-                var childSize = w.CalculateRequestedSize(style);
-                var ex = 2 * padding + childSize.X;
-                var ey = 2 * padding + childSize.Y;
-
-                dy += ey;
-                dx += ex;
-
-                maxX = Math.Max(maxX, ex);
-                maxY = Math.Max(maxY, ey);
-            }
-
-            return
-                _orientation == FrameStyle.Horizontal ? new SKPoint(dx, maxY) : new SKPoint(maxX, dy);
-        }
-
-        public Widget FindWidget(SKPoint argsLocation)
-        {
-            if (Bounds.Contains(argsLocation))
-            {
-                foreach (var w in _widgets)
-                    if (w.Bounds.Contains(argsLocation))
-                    {
-                        if (w is Frame f) return f.FindWidget(argsLocation);
-                        return w;
-                    }
-
-                return this;
-            }
-
-            return null;
-        }
-
-        private Ornament ornamentType = Ornament.WidgetContainer;
-
-        public override void Draw(SKCanvas canvas, IDesign style)
-        {
-            SKRect currentCanvasSize = default;
-            canvas.GetLocalClipBounds(out currentCanvasSize);
-
-            if (currentCanvasSize != _canvasSize)
-            {
-                _canvasSize = currentCanvasSize;
-                RecalculateControls();
-            }
-
-            if (!(Parent is Manager))
-            {
-                style.Ornaments.Draw(new PaintContext(this, canvas), ornamentType);
-            }
-
-            _widgets.ForEach(w => { w.Draw(canvas, style); });
-        }
+        public IEnumerable<Widget> Widgets => _widgets;
 
         private void RecalculateControls()
         {
@@ -142,12 +85,12 @@ namespace Pla.Lib.UI.Widgets
             var offset = new SKPoint();
 
             var offestDelta = new SKPoint(
-                _orientation == FrameStyle.Horizontal ? 1 : 0,
-                _orientation == FrameStyle.Vertical ? 1 : 0
+                Orientation == FrameStyle.Horizontal ? 1 : 0,
+                Orientation == FrameStyle.Vertical ? 1 : 0
             );
 
             // resize my kids
-            foreach (var w in _widgets)
+            foreach (var w in Widgets)
             {
                 var childSize = w.CalculateRequestedSize(design);
                 var dY = padding + padding + childSize.Y;
@@ -166,6 +109,45 @@ namespace Pla.Lib.UI.Widgets
                 if (w is Frame f)
                     f.RecalculateChildSizes(design);
             }
+        }
+
+        public override SKPoint CalculateRequestedSize(IDesign style)
+        {
+            return _frameActiveElement.GetSize();
+        }
+
+        public Widget FindWidget(SKPoint argsLocation)
+        {
+            if (Bounds.Contains(argsLocation))
+            {
+                foreach (var w in _widgets)
+                    if (w.Bounds.Contains(argsLocation))
+                    {
+                        if (w is Frame f) return f.FindWidget(argsLocation);
+                        return w;
+                    }
+
+                return this;
+            }
+
+            return null;
+        }
+
+        public override void Draw(SKCanvas canvas, IDesign style)
+        {
+            SKRect currentCanvasSize = default;
+            canvas.GetLocalClipBounds(out currentCanvasSize);
+
+            if (currentCanvasSize != _canvasSize)
+            {
+                _canvasSize = currentCanvasSize;
+                RecalculateControls();
+            }
+
+            //if (!(Parent is Manager))
+            //    style.Ornaments.Draw(new PaintContext(this, canvas), ornamentType);
+
+            _frameActiveElement.Draw(new PaintContext(this, canvas));
         }
     }
 }

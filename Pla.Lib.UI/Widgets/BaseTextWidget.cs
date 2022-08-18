@@ -9,9 +9,12 @@ namespace Pla.Lib.UI.Widgets
     {
         private readonly Ornament _ornamentType;
 
+        public IActiveElementPainter ActiveElementPainter { get; set; }
+
         public BaseTextWidget(Ornament ornamentType = Ornament.Visible)
         {
             _ornamentType = ornamentType;
+            ActiveElementPainter = new LCarsTextPainterActiveElement(this);
         }
         
         private string _text;
@@ -31,7 +34,7 @@ namespace Pla.Lib.UI.Widgets
 
         public override SKPoint CalculateRequestedSize(IDesign style)
         {
-            var textSize = style.TextPainter.GetTextTotalSize(TextLines());
+            var textSize = this.ActiveElementPainter.GetSize();
 
             var ornamentedElement =
                 style.Ornaments.GetSizeAroundElement(textSize, _ornamentType);
@@ -43,7 +46,7 @@ namespace Pla.Lib.UI.Widgets
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            var textSize = style.TextPainter.GetTextTotalSize(TextLines());
+            var textSize = this.ActiveElementPainter.GetSize();
 
             var ornamentedElement = style.Ornaments.GetSizeAroundElement(textSize);
 
@@ -52,9 +55,7 @@ namespace Pla.Lib.UI.Widgets
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
             var newTextBounds = ornamentedElement.OffsetForInternalBounds(this.Bounds);
-            style.TextPainter.Draw(new PaintContext(newTextBounds, canvas),
-                TextLines(), 
-                _ornamentType);
+            this.ActiveElementPainter.Draw(new PaintContext(newTextBounds, canvas));
         }
 
         public string[] TextLines()

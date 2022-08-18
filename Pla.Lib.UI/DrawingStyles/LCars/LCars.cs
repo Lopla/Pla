@@ -11,11 +11,8 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         {
             Ornaments = new LCarsOrnaments(this);
             Palette = new LCarsPalette();
-            TextPainter = new LCarsTextPainterActiveElement(Palette);
         }
-
-        public IActiveElementPainter TextPainter { get; set; }
-
+        
         public IPalette Palette { get; }
 
         public IOrnamentsPainter Ornaments { get; }

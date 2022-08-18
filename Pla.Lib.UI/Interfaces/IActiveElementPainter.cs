@@ -5,8 +5,8 @@ namespace Pla.Lib.UI.Interfaces
 {
     public interface IActiveElementPainter
     {
-        SKPoint GetTextTotalSize(IEnumerable<string> textLines);
+        SKPoint GetSize();
         
-        void Draw(PaintContext paintContext, IEnumerable<string> textLines, Ornament ornamentType);
+        void Draw(PaintContext paintContext);
     }
 }

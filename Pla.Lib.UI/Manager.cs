@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
@@ -47,6 +48,13 @@ namespace Pla.Lib.UI
             surface.Canvas.Flush();
         }
 
+        public IEnumerable<Widget> Widgets
+        {
+            get => this._rootFrame.Widgets;
+        }
+
+        public IWidgetContainer Parent { get; set; }
+
         public Widget Add(Widget widget)
         {
             _rootFrame.Add(widget);
@@ -60,6 +68,14 @@ namespace Pla.Lib.UI
 
         public void RequestResize()
         {
+        }
+
+        public FrameStyle Orientation
+        {
+            get
+            {
+                return this._rootFrame.Orientation;
+            }
         }
 
         public event WidgetSelected OnWidgetSelected;

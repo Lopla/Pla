@@ -4,6 +4,5 @@
     {
         IOrnamentsPainter Ornaments { get; }
         IPalette Palette { get; }
-        IActiveElementPainter TextPainter { get; }
     }
 }

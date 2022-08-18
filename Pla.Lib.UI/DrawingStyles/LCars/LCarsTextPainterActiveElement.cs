@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars
@@ -7,20 +8,22 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
     public class LCarsTextPainterActiveElement : IActiveElementPainter
     {
         private readonly IPalette _palette;
+        private readonly BaseTextWidget _textWidget;
 
-        public LCarsTextPainterActiveElement(IPalette palette)
+        public LCarsTextPainterActiveElement(BaseTextWidget textWidget)
         {
-            _palette = palette;
+            _palette = new LCarsPalette();
+            _textWidget = textWidget;
         }
 
         private readonly SKTypeface _font = SKTypeface.Default;
 
         public float TextLineHeight { get; set; } = 16;
 
-        public SKPoint GetTextTotalSize(IEnumerable<string> textLines)
+        public SKPoint GetSize()
         {
             var newSize = SKPoint.Empty;
-            foreach (var t in textLines)
+            foreach (var t in _textWidget.TextLines())
             {
                 var textSize = CalculateTextSize(t);
                 newSize.Offset(0, textSize.Y);
@@ -50,17 +53,17 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             return new SKPoint(bounds.Width, painter.FontSpacing);
         }
 
-        public void Draw(PaintContext paintContext, IEnumerable<string> textLines, Ornament ornamentType)
+        public void Draw(PaintContext paintContext)
         {
             float yOffset = 0;
-            foreach (var t in textLines)
+            foreach (var t in _textWidget.TextLines())
             {
                 var currentBounds = paintContext.Bounds;
                 currentBounds.Offset(0, yOffset);
                 var textSize = CalculateTextSize(t);
                 currentBounds.Bottom = currentBounds.Top + textSize.Y;
 
-                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left, _palette.FrontColor(ornamentType));
+                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left, _palette.FrontColor(Ornament.Visible));
 
                 yOffset += textSize.Y;
             }
