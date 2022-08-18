@@ -34,7 +34,7 @@ namespace Pla.Lib.UI.Widgets
             var textSize = _textOrnamentPainter.GetSize();
 
             var ornamentedElement =
-                style.Ornaments.GetSizeAroundElement(textSize, _ornamentType);
+                style.Ornaments.GetSizeAroundElement(_textOrnamentPainter, _ornamentType);
 
             var size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
 
@@ -45,7 +45,7 @@ namespace Pla.Lib.UI.Widgets
         {
             var textSize = _textOrnamentPainter.GetSize();
 
-            var ornamentedElement = style.Ornaments.GetSizeAroundElement(textSize);
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_textOrnamentPainter);
 
             style
                 .Ornaments

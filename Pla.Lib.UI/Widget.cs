@@ -6,7 +6,7 @@ namespace Pla.Lib.UI
     public class Widget
     {
         internal SKRect Bounds = SKRect.Empty;
-        
+
         public IWidgetContainer Parent { get; set; } = null;
 
         public virtual SKPoint CalculateRequestedSize(IDesign style)
@@ -16,7 +16,6 @@ namespace Pla.Lib.UI
 
         public virtual void Draw(SKCanvas canvas, IDesign style)
         {
-            style.Ornaments.Draw(new PaintContext(this, canvas));
         }
 
         public virtual void OnClick(SKPoint argsLocation)

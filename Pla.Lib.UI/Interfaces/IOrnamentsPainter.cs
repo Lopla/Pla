@@ -9,9 +9,8 @@ namespace Pla.Lib.UI.Interfaces
         /// <summary>
         ///     Grow ornaments around this element
         /// </summary>
-        /// <param name="size"></param>
         /// <returns></returns>
-        OrnamentBounds GetSizeAroundElement(SKPoint size, Ornament ornament = Ornament.Visible);
+        OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement, Ornament ornament = Ornament.Visible);
 
         void Draw(PaintContext context, Ornament ornament = Ornament.Visible);
     }

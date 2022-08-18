@@ -37,10 +37,10 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         ///     Grow ornaments around this element
         /// </summary>
         /// <returns></returns>
-        public OrnamentBounds GetSizeAroundElement(SKPoint internalElementSize,
+        public OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement,
             Ornament ornamentType)
         {
-            return this.GetSizeAroundElementFrameLrtb(internalElementSize);
+            return this.GetSizeAroundElementFrameLrtb(internalElement.GetSize());
         }
 
         private OrnamentBounds GetSizeAroundElementFrameLrtb(SKPoint internalElementSize)

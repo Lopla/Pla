@@ -8,16 +8,22 @@ namespace Pla.Lib.UI.Widgets
     /// <summary>
     ///     Container for other controls, handles resizing of objects contained in it.
     /// </summary>
-    public class Frame : Widget, IWidgetContainer
+    public class Frame : OrnamentedWidget, IWidgetContainer
     {
-        private readonly FrameActiveElement _frameActiveElement;
+        private FrameActiveElement FrameActiveElement
+        {
+            get
+            {
+                return new FrameActiveElement(this);
+            }
+        }
         private readonly List<Widget> _widgets = new List<Widget>();
         
         private SKRect _canvasSize;
 
-        public Frame(FrameStyle style = FrameStyle.Vertical)
+        public Frame(FrameStyle style = FrameStyle.Vertical) 
+            : base(Ornament.WidgetContainer)
         {
-            _frameActiveElement = new FrameActiveElement(this);
             Orientation = style;
         }
 
@@ -103,12 +109,7 @@ namespace Pla.Lib.UI.Widgets
                     f.RecalculateChildSizes(design);
             }
         }
-
-        public override SKPoint CalculateRequestedSize(IDesign style)
-        {
-            return _frameActiveElement.GetSize();
-        }
-
+        
         public Widget FindWidget(SKPoint argsLocation)
         {
             if (Bounds.Contains(argsLocation))
@@ -126,10 +127,14 @@ namespace Pla.Lib.UI.Widgets
             return null;
         }
 
+        protected override IActiveElementPainter GetPainter()
+        {
+            return FrameActiveElement;
+        }
+
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            SKRect currentCanvasSize = default;
-            canvas.GetLocalClipBounds(out currentCanvasSize);
+            canvas.GetLocalClipBounds(out var currentCanvasSize);
 
             if (currentCanvasSize != _canvasSize)
             {
@@ -140,7 +145,7 @@ namespace Pla.Lib.UI.Widgets
             //if (!(Parent is Manager))
             //    style.Ornaments.Draw(new PaintContext(this, canvas), ornamentType);
 
-            _frameActiveElement.Draw(new PaintContext(this, canvas));
+            FrameActiveElement.Draw(new PaintContext(this, canvas));
         }
     }
 }
