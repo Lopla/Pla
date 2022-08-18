@@ -94,7 +94,7 @@ namespace Pla.Lib.UI.Widgets
             return null;
         }
 
-        private Ornament ornamentType = Ornament.Visible;
+        private Ornament ornamentType = Ornament.WidgetContainer;
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {

@@ -18,10 +18,10 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         public void Draw(PaintContext context,
             Ornament ornamentType)
         {
-            this.DrawFrameLRTB(context, ornamentType);
+            this.DrawFrameLrtb(context, ornamentType);
         }
 
-        private void DrawFrameLRTB(PaintContext context, Ornament ornamentType)
+        private void DrawFrameLrtb(PaintContext context, Ornament ornamentType)
         {
             using (var painterBack = new SKPaint
                    {
@@ -40,10 +40,10 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         public OrnamentBounds GetSizeAroundElement(SKPoint internalElementSize,
             Ornament ornamentType)
         {
-            return this.GetSizeAroundElemenFrameLRTB(internalElementSize);
+            return this.GetSizeAroundElementFrameLrtb(internalElementSize);
         }
 
-        private OrnamentBounds GetSizeAroundElemenFrameLRTB(SKPoint internalElementSize)
+        private OrnamentBounds GetSizeAroundElementFrameLrtb(SKPoint internalElementSize)
         {
             //// minimal frame size
             var ornamentSize = new SKRect(0, 0, 
