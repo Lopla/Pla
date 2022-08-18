@@ -1,5 +1,4 @@
-using Pla.Lib.UI.DrawingStyles;
-using Pla.Lib.UI.DrawingStyles.LCars;
+using Pla.Lib.UI.DrawingStyles.LCars.ActiveElements;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
@@ -8,16 +7,14 @@ namespace Pla.Lib.UI.Widgets
     public abstract class BaseTextWidget : Widget
     {
         private readonly Ornament _ornamentType;
-
-        public IActiveElementPainter ActiveElementPainter { get; set; }
+        private readonly IActiveElementPainter _textOrnamentPainter;
+        private string _text;
 
         public BaseTextWidget(Ornament ornamentType = Ornament.Visible)
         {
             _ornamentType = ornamentType;
-            ActiveElementPainter = new LCarsTextPainterActiveElement(this);
+            _textOrnamentPainter = new TextActiveElement(this);
         }
-        
-        private string _text;
 
         public string Text
         {
@@ -34,7 +31,7 @@ namespace Pla.Lib.UI.Widgets
 
         public override SKPoint CalculateRequestedSize(IDesign style)
         {
-            var textSize = this.ActiveElementPainter.GetSize();
+            var textSize = _textOrnamentPainter.GetSize();
 
             var ornamentedElement =
                 style.Ornaments.GetSizeAroundElement(textSize, _ornamentType);
@@ -46,7 +43,7 @@ namespace Pla.Lib.UI.Widgets
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            var textSize = this.ActiveElementPainter.GetSize();
+            var textSize = _textOrnamentPainter.GetSize();
 
             var ornamentedElement = style.Ornaments.GetSizeAroundElement(textSize);
 
@@ -54,8 +51,8 @@ namespace Pla.Lib.UI.Widgets
                 .Ornaments
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
-            var newTextBounds = ornamentedElement.OffsetForInternalBounds(this.Bounds);
-            this.ActiveElementPainter.Draw(new PaintContext(newTextBounds, canvas));
+            var newTextBounds = ornamentedElement.OffsetForInternalBounds(Bounds);
+            _textOrnamentPainter.Draw(new PaintContext(newTextBounds, canvas));
         }
 
         public string[] TextLines()

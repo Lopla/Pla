@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-using Pla.Lib.UI.Interfaces;
+﻿using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
 using SkiaSharp;
 
-namespace Pla.Lib.UI.DrawingStyles.LCars
+namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
 {
-    public class LCarsTextPainterActiveElement : IActiveElementPainter
+    public class TextActiveElement : IActiveElementPainter
     {
         private readonly IPalette _palette;
         private readonly BaseTextWidget _textWidget;
 
-        public LCarsTextPainterActiveElement(BaseTextWidget textWidget)
+        public TextActiveElement(BaseTextWidget textWidget)
         {
             _palette = new LCarsPalette();
             _textWidget = textWidget;

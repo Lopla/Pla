@@ -3,15 +3,15 @@ using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
 using SkiaSharp;
 
-namespace Pla.Lib.UI.DrawingStyles.LCars
+namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
 {
-    internal class LCarsFrameActiveElement : IActiveElementPainter
+    internal class FrameActiveElement : IActiveElementPainter
     {
         private readonly IWidgetContainer _container;
 
-        private IDesign style= new LCarsStyle();
+        private readonly IDesign _style= new LCarsStyle();
 
-        public LCarsFrameActiveElement(IWidgetContainer widgetContainer)
+        public FrameActiveElement(IWidgetContainer widgetContainer)
         {
             this._container = widgetContainer;
         }
@@ -26,7 +26,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             float dx = 0;
             foreach (var w in this._container.Widgets)
             {
-                var childSize = w.CalculateRequestedSize(style);
+                var childSize = w.CalculateRequestedSize(_style);
                 var ex = 2 * padding + childSize.X;
                 var ey = 2 * padding + childSize.Y;
 

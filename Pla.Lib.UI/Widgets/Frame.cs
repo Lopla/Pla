@@ -1,34 +1,27 @@
 using System.Collections.Generic;
-using Pla.Lib.UI.DrawingStyles.LCars;
+using Pla.Lib.UI.DrawingStyles.LCars.ActiveElements;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets
 {
-    public enum FrameStyle
-    {
-        Vertical,
-        Horizontal
-    }
-
     /// <summary>
     ///     Container for other controls, handles resizing of objects contained in it.
     /// </summary>
     public class Frame : Widget, IWidgetContainer
     {
-        public FrameStyle Orientation { get; }
+        private readonly FrameActiveElement _frameActiveElement;
         private readonly List<Widget> _widgets = new List<Widget>();
-
-        private readonly Ornament ornamentType = Ornament.WidgetContainer;
+        
         private SKRect _canvasSize;
-
-        private readonly LCarsFrameActiveElement _frameActiveElement;
 
         public Frame(FrameStyle style = FrameStyle.Vertical)
         {
-            _frameActiveElement = new LCarsFrameActiveElement(this);
+            _frameActiveElement = new FrameActiveElement(this);
             Orientation = style;
         }
+
+        public FrameStyle Orientation { get; }
 
         public void Invalidate()
         {

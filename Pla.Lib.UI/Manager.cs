@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
@@ -7,8 +6,6 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI
 {
-    public delegate void WidgetSelected(Widget selectedWidget);
-
     public class Manager : IControl, IPainter, IWidgetContainer
     {
         private readonly IEngine _painter;
@@ -48,10 +45,7 @@ namespace Pla.Lib.UI
             surface.Canvas.Flush();
         }
 
-        public IEnumerable<Widget> Widgets
-        {
-            get => this._rootFrame.Widgets;
-        }
+        public IEnumerable<Widget> Widgets => _rootFrame.Widgets;
 
         public IWidgetContainer Parent { get; set; }
 
@@ -70,13 +64,7 @@ namespace Pla.Lib.UI
         {
         }
 
-        public FrameStyle Orientation
-        {
-            get
-            {
-                return this._rootFrame.Orientation;
-            }
-        }
+        public FrameStyle Orientation => _rootFrame.Orientation;
 
         public event WidgetSelected OnWidgetSelected;
 
