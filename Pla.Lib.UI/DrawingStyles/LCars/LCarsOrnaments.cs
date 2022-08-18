@@ -10,45 +10,43 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         public LCarsOrnaments(IDesign style)
         {
             _style = style;
-            this.BorderWidth = 10;
+            BorderWidth = 20;
         }
 
         public int BorderWidth { get; set; }
 
-        public void Draw(PaintContext context, 
-            Ornament ornament)
+        public void Draw(PaintContext context,
+            Ornament ornamentType)
         {
-            using (var painterBack= new SKPaint
+            using (var painterBack = new SKPaint
                    {
-                       Color = _style.Palette.BackColor(ornament),
+                       Color = _style.Palette.BackColor(ornamentType),
                        Style = SKPaintStyle.Fill
-                   })
-            using (var painterBorder = new SKPaint
-                   {
-                       Color = _style.Palette.FrontColor(ornament),
-                       Style = SKPaintStyle.Stroke
                    })
             {
                 context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBack);
-                context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBorder);
             }
         }
-        
+
         /// <summary>
         ///     Grow ornaments around this element
         /// </summary>
-        /// <param name="size"></param>
         /// <returns></returns>
-        public OrnamentBounds GetSize(SKPoint size, 
-            Ornament ornament)
+        public OrnamentBounds GetSizeAroundElement(SKPoint internalElementSize,
+            Ornament ornamentType)
         {
-            var skRect = SKRect.Inflate(new SKRect(0, 0, size.X, size.Y), BorderWidth, BorderWidth).Standardized;
+            var yInflate =
+                internalElementSize.Y > 2 * BorderWidth ? 0 : 3 * BorderWidth - internalElementSize.Y;
 
-            var skInternalRect = new SKRect(BorderWidth, BorderWidth, size.X, size.Y);
+            var sizeWithOrnament = new SKRect(0, 0,
+                internalElementSize.X + 2*BorderWidth,
+                internalElementSize.Y + yInflate);
+
+            var skInternalRect = new SKRect(BorderWidth, BorderWidth, internalElementSize.X, internalElementSize.Y);
 
             return new OrnamentBounds
             {
-                Bounds = skRect,
+                Bounds = sizeWithOrnament,
                 InternalBounds = skInternalRect
             };
         }

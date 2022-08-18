@@ -13,7 +13,6 @@ namespace Pla.Lib.UI.Widgets
         {
             _ornamentType = ornamentType;
         }
-
         
         private string _text;
 
@@ -33,8 +32,9 @@ namespace Pla.Lib.UI.Widgets
         public override SKPoint CalculateRequestedSize(IDesign style)
         {
             var textSize = style.TextPainter.GetTextTotalSize(TextLines());
+
             var ornamentedElement =
-                style.Ornaments.GetSize(textSize, _ornamentType);
+                style.Ornaments.GetSizeAroundElement(textSize, _ornamentType);
 
             var size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
 
@@ -44,13 +44,15 @@ namespace Pla.Lib.UI.Widgets
         public override void Draw(SKCanvas canvas, IDesign style)
         {
             var textSize = style.TextPainter.GetTextTotalSize(TextLines());
-            var ornamentedElement = style.Ornaments.GetSize(textSize);
+
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(textSize);
 
             style
                 .Ornaments
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
-            style.TextPainter.Draw(new PaintContext(ornamentedElement.OffsetForInternalBounds(Bounds), canvas),
+            var newTextBounds = ornamentedElement.OffsetForInternalBounds(this.Bounds);
+            style.TextPainter.Draw(new PaintContext(newTextBounds, canvas),
                 TextLines(), 
                 _ornamentType);
         }

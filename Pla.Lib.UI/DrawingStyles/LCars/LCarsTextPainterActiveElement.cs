@@ -52,8 +52,6 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
 
         public void Draw(PaintContext paintContext, IEnumerable<string> textLines, Ornament ornamentType)
         {
-            
-
             float yOffset = 0;
             foreach (var t in textLines)
             {

@@ -18,7 +18,7 @@ namespace Pla.Lib.UI.Interfaces
         /// </summary>
         /// <param name="size"></param>
         /// <returns></returns>
-        OrnamentBounds GetSize(SKPoint size, Ornament ornament = Ornament.Visible);
+        OrnamentBounds GetSizeAroundElement(SKPoint size, Ornament ornament = Ornament.Visible);
 
         void Draw(PaintContext context, Ornament ornament = Ornament.Visible);
     }

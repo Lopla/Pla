@@ -13,18 +13,7 @@ namespace Pla.Lib.UI.Widgets
 
         private readonly int _cursorLocation;
         private bool _hasFocus;
-
-        //protected override void OnDraw(PaintContext paintContext, IDesign style)
-        //{
-        //    paintContext.Focused = _hasFocus;
-        //    style.ModifyAble(paintContext);
-        //}
-
-        public override void Draw(SKCanvas canvas, IDesign style)
-        {
-            base.Draw(canvas, style);
-        }
-
+        
         public override void OnKeyDow(uint key)
         {
             switch (key)
