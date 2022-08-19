@@ -90,5 +90,10 @@ namespace Pla.Gtk
         public void RequestRefresh(){
             _sk.QueueDraw();
         }
+
+        public void RequestQuit()
+        {
+            Application.Quit();
+        }
     }
 }

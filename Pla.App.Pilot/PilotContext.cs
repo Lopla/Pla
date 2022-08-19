@@ -7,8 +7,8 @@ namespace Pla.App.Pilot
 {
     public class PilotContext : IContext
     {
-        private IEngine _engine;
-        private Manager _manager;
+        private IEngine _engine = null;
+        private Manager _manager = null;
 
         public IControl GetControl()
         {
