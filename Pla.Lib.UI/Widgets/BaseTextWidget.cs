@@ -4,16 +4,20 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets
 {
-    public abstract class BaseTextWidget : Widget
+    public abstract class BaseTextWidget : OrnamentedWidget
     {
         private readonly Ornament _ornamentType;
-        private readonly IActiveElementPainter _textOrnamentPainter;
+
+        private IActiveElementPainter TextOrnamentPainter
+        {
+            get { return new TextActiveElement(this); }
+        }
         private string _text;
 
         public BaseTextWidget(Ornament ornamentType = Ornament.Visible)
+            :base(ornamentType)
         {
             _ornamentType = ornamentType;
-            _textOrnamentPainter = new TextActiveElement(this);
         }
 
         public string Text
@@ -29,12 +33,17 @@ namespace Pla.Lib.UI.Widgets
             }
         }
 
+        protected override IActiveElementPainter GetPainter()
+        {
+            return this.TextOrnamentPainter;
+        }
+
         public override SKPoint CalculateRequestedSize(IDesign style)
         {
-            var textSize = _textOrnamentPainter.GetSize();
+            var textSize = TextOrnamentPainter.GetSize();
 
             var ornamentedElement =
-                style.Ornaments.GetSizeAroundElement(_textOrnamentPainter, _ornamentType);
+                style.Ornaments.GetSizeAroundElement(TextOrnamentPainter, _ornamentType);
 
             var size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
 
@@ -43,16 +52,16 @@ namespace Pla.Lib.UI.Widgets
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            var textSize = _textOrnamentPainter.GetSize();
+            var textSize = TextOrnamentPainter.GetSize();
 
-            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_textOrnamentPainter);
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(TextOrnamentPainter);
 
             style
                 .Ornaments
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
             var newTextBounds = ornamentedElement.OffsetForInternalBounds(Bounds);
-            _textOrnamentPainter.Draw(new PaintContext(newTextBounds, canvas));
+            TextOrnamentPainter.Draw(new PaintContext(newTextBounds, canvas));
         }
 
         public string[] TextLines()
