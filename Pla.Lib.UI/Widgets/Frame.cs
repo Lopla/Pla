@@ -13,13 +13,13 @@ namespace Pla.Lib.UI.Widgets
     public class Frame : Widget, IWidgetContainer
     {
         private readonly OrnamentType _ornamentStyle;
-
-        private readonly List<Widget> _widgets = new List<Widget>();
-        
-        private SKRect _canvasSize;
         private readonly FrameActiveElement _painter;
 
-        public Frame(FrameStyle style = FrameStyle.Vertical, OrnamentType ornamentStyle = OrnamentType.Visible) 
+        private readonly List<Widget> _widgets = new List<Widget>();
+
+        private SKRect _canvasSize;
+
+        public Frame(FrameStyle style = FrameStyle.Vertical, OrnamentType ornamentStyle = OrnamentType.Visible)
         {
             _ornamentStyle = ornamentStyle;
             Orientation = style;
@@ -54,8 +54,6 @@ namespace Pla.Lib.UI.Widgets
             }
         }
 
-        public IEnumerable<Widget> Widgets => _widgets;
-
         private void RecalculateControls()
         {
             if (Parent is Manager m)
@@ -74,13 +72,6 @@ namespace Pla.Lib.UI.Widgets
 
                 RecalculateChildSizes(style);
             }
-        }
-
-        public override SKPoint CalculateRequestedSize(IDesign style)
-        {
-
-            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_painter, this._ornamentStyle);
-            return ornamentedElement.RequestedSize();
         }
 
         private void RecalculateChildSizes(IDesign design)
@@ -115,7 +106,7 @@ namespace Pla.Lib.UI.Widgets
                     f.RecalculateChildSizes(design);
             }
         }
-        
+
         public Widget FindWidget(SKPoint argsLocation)
         {
             if (Bounds.Contains(argsLocation))
@@ -132,7 +123,9 @@ namespace Pla.Lib.UI.Widgets
 
             return null;
         }
-        
+
+        public IEnumerable<Widget> Widgets => _widgets;
+
         public override void Draw(SKCanvas canvas, IDesign style)
         {
             canvas.GetLocalClipBounds(out var currentCanvasSize);
@@ -147,6 +140,12 @@ namespace Pla.Lib.UI.Widgets
             //    style.Ornaments.Draw(new PaintContext(this, canvas), ornamentType);
 
             _painter.Draw(new PaintContext(this, canvas));
+        }
+
+        public override SKPoint CalculateRequestedSize(IDesign style)
+        {
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_painter, _ornamentStyle);
+            return ornamentedElement.RequestedSize();
         }
     }
 }

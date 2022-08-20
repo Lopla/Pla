@@ -9,7 +9,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
     {
         public LCarsStyle()
         {
-            Ornaments = new LCarsOrnaments(this);
+            Ornaments = new LCarsOrnaments();
             Palette = new LCarsPalette();
         }
         

@@ -7,19 +7,10 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
 {
     public class LCarsOrnaments : IOrnamentsPainter
     {
-        private readonly IDesign _style;
-
-        public LCarsOrnaments(IDesign style)
-        {
-            _style = style;
-        }
-
         public void Draw(PaintContext context,
             OrnamentType ornamentType)
         {
-
             new Frame().Draw(context, ornamentType);
-
         }
 
 
