@@ -18,14 +18,14 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
         {
 
 
-            using (var painterBack = new SKPaint
-                   {
-                       Color = new SKColor(0, 0, 0),
-                       Style = SKPaintStyle.Stroke
-                   })
-            {
-                context.Canvas.DrawRect(context.Bounds, painterBack);
-            }
+            //using (var painterBack = new SKPaint
+            //       {
+            //           Color = new SKColor(0, 0, 0),
+            //           Style = SKPaintStyle.Stroke
+            //       })
+            //{
+            //    context.Canvas.DrawRect(context.Bounds, painterBack);
+            //}
             
 
             // top header

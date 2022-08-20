@@ -76,9 +76,11 @@ namespace Pla.Lib.UI.Widgets
 
         private void RecalculateChildSizes(IDesign design)
         {
-            var padding = 0;
+            var padding = 4;
 
-            var offset = new SKPoint();
+            var ornamentInternalOffset = design.Ornaments.GetSizeAroundElement(this._painter, _ornamentStyle);
+
+            var offset = ornamentInternalOffset.InternalBounds.Location;
 
             var offsetDelta = new SKPoint(
                 Orientation == FrameStyle.Horizontal ? 1 : 0,

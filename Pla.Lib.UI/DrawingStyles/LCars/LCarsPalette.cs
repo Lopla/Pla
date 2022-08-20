@@ -45,8 +45,8 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             {
                 { OrnamentType.Visible, Styling.Background },
                 { OrnamentType.Active, Styling.Background },
-                { OrnamentType.Modifiable, Styling.Border3 },
-                { OrnamentType.WidgetContainer, Styling.Border7 },
+                { OrnamentType.Modifiable, Styling.Background },
+                { OrnamentType.WidgetContainer, Styling.Border3 },
             };
 
             return Color(colour[styleInColor]);
@@ -58,7 +58,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             {
                 { OrnamentType.Visible, Styling.Border1 },
                 { OrnamentType.Active, Styling.Border2 },
-                { OrnamentType.Modifiable, Styling.Background },
+                { OrnamentType.Modifiable, Styling.Border3 },
                 { OrnamentType.WidgetContainer, Styling.Background },
             };
 
