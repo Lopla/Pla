@@ -1,5 +1,6 @@
 ﻿using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
+using Pla.Lib.UI.Widgets.Base;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
@@ -7,9 +8,9 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
     public class TextActiveElement : IActiveElementPainter
     {
         private readonly IPalette _palette;
-        private readonly BaseTextWidget _textWidget;
+        private readonly TextWidget _textWidget;
 
-        public TextActiveElement(BaseTextWidget textWidget)
+        public TextActiveElement(TextWidget textWidget)
         {
             _palette = new LCarsPalette();
             _textWidget = textWidget;

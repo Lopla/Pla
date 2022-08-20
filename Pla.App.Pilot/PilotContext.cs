@@ -2,6 +2,7 @@
 using Pla.Lib.UI;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
+using Pla.Lib.UI.Widgets.Enums;
 
 namespace Pla.App.Pilot
 {

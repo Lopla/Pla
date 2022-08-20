@@ -2,9 +2,9 @@ using Pla.Lib.UI.DrawingStyles.LCars.ActiveElements;
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
-namespace Pla.Lib.UI.Widgets
+namespace Pla.Lib.UI.Widgets.Base
 {
-    public abstract class BaseTextWidget : OrnamentedWidget
+    public abstract class TextWidget : OrnamentedWidget
     {
         private readonly Ornament _ornamentType;
 
@@ -14,7 +14,7 @@ namespace Pla.Lib.UI.Widgets
         }
         private string _text;
 
-        public BaseTextWidget(Ornament ornamentType = Ornament.Visible)
+        public TextWidget(Ornament ornamentType = Ornament.Visible)
             :base(ornamentType)
         {
             _ornamentType = ornamentType;
@@ -52,8 +52,6 @@ namespace Pla.Lib.UI.Widgets
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            var textSize = TextOrnamentPainter.GetSize();
-
             var ornamentedElement = style.Ornaments.GetSizeAroundElement(TextOrnamentPainter);
 
             style

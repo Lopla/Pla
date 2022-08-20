@@ -1,7 +1,7 @@
 using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
-namespace Pla.Lib.UI
+namespace Pla.Lib.UI.Widgets.Base
 {
     public abstract class OrnamentedWidget : Widget
     {
