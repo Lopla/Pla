@@ -1,4 +1,5 @@
 ﻿using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
@@ -7,7 +8,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
     {
         private readonly IDesign _style = new LCarsStyle();
 
-        public void Draw(PaintContext context, OrnamentStyle ornamentType)
+        public void Draw(PaintContext context, OrnamentType ornamentType)
         {
             using (var painterBack = new SKPaint
                    {

@@ -1,5 +1,6 @@
 ﻿using Pla.Lib.UI.DrawingStyles.LCars.Ornaments;
 using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars
@@ -14,7 +15,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         }
 
         public void Draw(PaintContext context,
-            OrnamentStyle ornamentType)
+            OrnamentType ornamentType)
         {
 
             new Frame().Draw(context, ornamentType);
@@ -27,7 +28,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         /// </summary>
         /// <returns></returns>
         public OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement,
-            OrnamentStyle ornamentType)
+            OrnamentType ornamentType)
         {
             return
                 new Frame().GetSizeAroundElement(internalElement.GetSize());

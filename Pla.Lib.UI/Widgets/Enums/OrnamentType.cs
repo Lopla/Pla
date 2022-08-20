@@ -1,6 +1,6 @@
-﻿namespace Pla.Lib.UI.Interfaces
+﻿namespace Pla.Lib.UI.Widgets.Enums
 {
-    public enum OrnamentStyle
+    public enum OrnamentType
     {
         Visible = 1,
         Modifiable = 2,

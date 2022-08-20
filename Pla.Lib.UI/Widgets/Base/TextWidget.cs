@@ -1,17 +1,18 @@
 using Pla.Lib.UI.DrawingStyles.LCars.ActiveElements;
 using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets.Base
 {
     public class TextWidget : Widget
     {
-        private readonly OrnamentStyle _ornamentType;
+        private readonly OrnamentType _ornamentType;
         
         private string _text;
         private readonly TextActiveElement _painter;
 
-        public TextWidget(OrnamentStyle ornamentType)
+        public TextWidget(OrnamentType ornamentType)
         {
             _ornamentType = ornamentType;
             _painter = new TextActiveElement(ornamentType, this);

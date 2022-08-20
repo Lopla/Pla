@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars
@@ -38,27 +39,27 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             return _colors[(int)styleInColor];
         }
 
-        public SKColor FrontColor(OrnamentStyle styleInColor)
+        public SKColor FrontColor(OrnamentType styleInColor)
         {
-            Dictionary<OrnamentStyle, Styling> colour = new Dictionary<OrnamentStyle, Styling>()
+            Dictionary<OrnamentType, Styling> colour = new Dictionary<OrnamentType, Styling>()
             {
-                { OrnamentStyle.Visible, Styling.Background },
-                { OrnamentStyle.Active, Styling.Background },
-                { OrnamentStyle.Modifiable, Styling.Border3 },
-                { OrnamentStyle.WidgetContainer, Styling.Border7 },
+                { OrnamentType.Visible, Styling.Background },
+                { OrnamentType.Active, Styling.Background },
+                { OrnamentType.Modifiable, Styling.Border3 },
+                { OrnamentType.WidgetContainer, Styling.Border7 },
             };
 
             return Color(colour[styleInColor]);
         }
 
-        public SKColor BackColor(OrnamentStyle styleInColor)
+        public SKColor BackColor(OrnamentType styleInColor)
         {
-            Dictionary<OrnamentStyle, Styling> colour = new Dictionary<OrnamentStyle, Styling>()
+            Dictionary<OrnamentType, Styling> colour = new Dictionary<OrnamentType, Styling>()
             {
-                { OrnamentStyle.Visible, Styling.Border1 },
-                { OrnamentStyle.Active, Styling.Border2 },
-                { OrnamentStyle.Modifiable, Styling.Background },
-                { OrnamentStyle.WidgetContainer, Styling.Background },
+                { OrnamentType.Visible, Styling.Border1 },
+                { OrnamentType.Active, Styling.Border2 },
+                { OrnamentType.Modifiable, Styling.Background },
+                { OrnamentType.WidgetContainer, Styling.Background },
             };
 
             return Color(colour[styleInColor]);

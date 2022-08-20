@@ -12,14 +12,14 @@ namespace Pla.Lib.UI.Widgets
     /// </summary>
     public class Frame : Widget, IWidgetContainer
     {
-        private readonly OrnamentStyle _ornamentStyle;
+        private readonly OrnamentType _ornamentStyle;
 
         private readonly List<Widget> _widgets = new List<Widget>();
         
         private SKRect _canvasSize;
         private readonly FrameActiveElement _painter;
 
-        public Frame(FrameStyle style = FrameStyle.Vertical, OrnamentStyle ornamentStyle = OrnamentStyle.Visible) 
+        public Frame(FrameStyle style = FrameStyle.Vertical, OrnamentType ornamentStyle = OrnamentType.Visible) 
         {
             _ornamentStyle = ornamentStyle;
             Orientation = style;
