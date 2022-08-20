@@ -10,8 +10,8 @@ namespace Pla.Lib.UI.Interfaces
         ///     Grow ornaments around this element
         /// </summary>
         /// <returns></returns>
-        OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement, Ornament ornament = Ornament.Visible);
+        OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement, OrnamentStyle ornament = OrnamentStyle.Visible);
 
-        void Draw(PaintContext context, Ornament ornament = Ornament.Visible);
+        void Draw(PaintContext context, OrnamentStyle ornament = OrnamentStyle.Visible);
     }
 }

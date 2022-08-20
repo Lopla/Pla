@@ -12,7 +12,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
         private readonly IPalette _palette;
         private readonly TextWidget _textWidget;
 
-        public TextActiveElement(Ornament style, TextWidget textWidget)
+        public TextActiveElement(OrnamentStyle style, TextWidget textWidget)
         {
             _palette = new LCarsPalette();
             _textWidget = textWidget;
@@ -45,7 +45,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
                 currentBounds.Bottom = currentBounds.Top + textSize.Y;
 
                 LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left,
-                    _palette.FrontColor(Ornament.Visible));
+                    _palette.FrontColor(OrnamentStyle.Visible));
 
                 yOffset += textSize.Y;
             }

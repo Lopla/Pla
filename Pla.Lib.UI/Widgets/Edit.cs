@@ -7,7 +7,7 @@ namespace Pla.Lib.UI.Widgets
 {
     public class Edit : TextWidget
     {
-        public Edit() : base(Ornament.Modifiable)
+        public Edit() : base(OrnamentStyle.Modifiable)
         {
             _cursorLocation = 0;
         }

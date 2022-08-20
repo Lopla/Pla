@@ -14,7 +14,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         }
 
         public void Draw(PaintContext context,
-            Ornament ornamentType)
+            OrnamentStyle ornamentType)
         {
 
             new Frame().Draw(context, ornamentType);
@@ -27,7 +27,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         /// </summary>
         /// <returns></returns>
         public OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement,
-            Ornament ornamentType)
+            OrnamentStyle ornamentType)
         {
             return
                 new Frame().GetSizeAroundElement(internalElement.GetSize());

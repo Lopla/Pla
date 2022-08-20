@@ -7,7 +7,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
     {
         private readonly IDesign _style = new LCarsStyle();
 
-        public void Draw(PaintContext context, Ornament ornamentType)
+        public void Draw(PaintContext context, OrnamentStyle ornamentType)
         {
             using (var painterBack = new SKPaint
                    {

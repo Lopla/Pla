@@ -1,6 +1,6 @@
 ﻿namespace Pla.Lib.UI.Interfaces
 {
-    public enum Ornament
+    public enum OrnamentStyle
     {
         Visible = 1,
         Modifiable = 2,

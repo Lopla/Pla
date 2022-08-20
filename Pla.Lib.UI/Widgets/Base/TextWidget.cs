@@ -6,12 +6,12 @@ namespace Pla.Lib.UI.Widgets.Base
 {
     public class TextWidget : Widget
     {
-        private readonly Ornament _ornamentType;
+        private readonly OrnamentStyle _ornamentType;
         
         private string _text;
         private readonly TextActiveElement _painter;
 
-        public TextWidget(Ornament ornamentType = Ornament.Visible)
+        public TextWidget(OrnamentStyle ornamentType)
         {
             _ornamentType = ornamentType;
             _painter = new TextActiveElement(ornamentType, this);

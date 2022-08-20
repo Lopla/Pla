@@ -7,7 +7,7 @@ namespace Pla.Lib.UI.Widgets
 {
     public class Button : TextWidget
     {
-        public Button() : base(Ornament.Active)
+        public Button() : base(OrnamentStyle.Active)
         {
 
         }

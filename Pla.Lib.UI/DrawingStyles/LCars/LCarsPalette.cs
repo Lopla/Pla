@@ -38,27 +38,27 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             return _colors[(int)styleInColor];
         }
 
-        public SKColor FrontColor(Ornament styleInColor)
+        public SKColor FrontColor(OrnamentStyle styleInColor)
         {
-            Dictionary<Ornament, Styling> colour = new Dictionary<Ornament, Styling>()
+            Dictionary<OrnamentStyle, Styling> colour = new Dictionary<OrnamentStyle, Styling>()
             {
-                { Ornament.Visible, Styling.Background },
-                { Ornament.Active, Styling.Background },
-                { Ornament.Modifiable, Styling.Border3 },
-                { Ornament.WidgetContainer, Styling.Border7 },
+                { OrnamentStyle.Visible, Styling.Background },
+                { OrnamentStyle.Active, Styling.Background },
+                { OrnamentStyle.Modifiable, Styling.Border3 },
+                { OrnamentStyle.WidgetContainer, Styling.Border7 },
             };
 
             return Color(colour[styleInColor]);
         }
 
-        public SKColor BackColor(Ornament styleInColor)
+        public SKColor BackColor(OrnamentStyle styleInColor)
         {
-            Dictionary<Ornament, Styling> colour = new Dictionary<Ornament, Styling>()
+            Dictionary<OrnamentStyle, Styling> colour = new Dictionary<OrnamentStyle, Styling>()
             {
-                { Ornament.Visible, Styling.Border1 },
-                { Ornament.Active, Styling.Border2 },
-                { Ornament.Modifiable, Styling.Background },
-                { Ornament.WidgetContainer, Styling.Background },
+                { OrnamentStyle.Visible, Styling.Border1 },
+                { OrnamentStyle.Active, Styling.Border2 },
+                { OrnamentStyle.Modifiable, Styling.Background },
+                { OrnamentStyle.WidgetContainer, Styling.Background },
             };
 
             return Color(colour[styleInColor]);

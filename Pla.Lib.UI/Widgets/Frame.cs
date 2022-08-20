@@ -12,14 +12,16 @@ namespace Pla.Lib.UI.Widgets
     /// </summary>
     public class Frame : Widget, IWidgetContainer
     {
+        private readonly OrnamentStyle _ornamentStyle;
 
         private readonly List<Widget> _widgets = new List<Widget>();
         
         private SKRect _canvasSize;
         private readonly FrameActiveElement _painter;
 
-        public Frame(FrameStyle style = FrameStyle.Vertical) 
+        public Frame(FrameStyle style = FrameStyle.Vertical, OrnamentStyle ornamentStyle = OrnamentStyle.Visible) 
         {
+            _ornamentStyle = ornamentStyle;
             Orientation = style;
             _painter = new FrameActiveElement(this);
         }
@@ -72,6 +74,13 @@ namespace Pla.Lib.UI.Widgets
 
                 RecalculateChildSizes(style);
             }
+        }
+
+        public override SKPoint CalculateRequestedSize(IDesign style)
+        {
+
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_painter, this._ornamentStyle);
+            return ornamentedElement.RequestedSize();
         }
 
         private void RecalculateChildSizes(IDesign design)
