@@ -4,13 +4,13 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
 {
-    public class Frame : IOrnamentPainter
+    public class TwoThinBorders : IOrnamentPainter
     {
         public void Draw(PaintContext context)
         {
             using (var painterBack = new SKPaint
                    {
-                       Color = new LCarsStyle().Palette.BackColor(OrnamentType.WidgetContainer),
+                       Color = new LCarsStyle().Palette.Color(Styling.Border1),
                        Style = SKPaintStyle.Fill
                    })
             {

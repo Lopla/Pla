@@ -1,16 +1,25 @@
-﻿using Pla.Lib.UI.DrawingStyles.LCars.Ornaments;
+﻿using System.Collections.Generic;
+using Pla.Lib.UI.DrawingStyles.LCars.ActiveElements;
+using Pla.Lib.UI.DrawingStyles.LCars.Ornaments;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Enums;
-using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars
 {
     public class LCarsOrnaments : IOrnamentsPainter
     {
+        public Dictionary<OrnamentType, IOrnamentPainter> Ornaments = new Dictionary<OrnamentType, IOrnamentPainter>
+        {
+            { OrnamentType.WidgetContainer, new Frame() },
+            { OrnamentType.Active, new TwoThinBorders() },
+            { OrnamentType.Modifiable, new TwoThinBorders() },
+            { OrnamentType.Visible, new TwoThinBorders() },
+        };
+
         public void Draw(PaintContext context,
             OrnamentType ornamentType)
         {
-            new Frame().Draw(context, ornamentType);
+            Ornaments[ornamentType].Draw(context);
         }
 
 
@@ -21,8 +30,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         public OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement,
             OrnamentType ornamentType)
         {
-            return
-                new Frame().GetSizeAroundElement(internalElement.GetSize());
+            return Ornaments[ornamentType].GetSizeAroundElement(internalElement.GetSize());
         }
     }
 }
