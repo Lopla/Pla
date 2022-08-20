@@ -80,7 +80,7 @@ namespace Pla.Lib.UI.Widgets
 
             var offset = new SKPoint();
 
-            var offestDelta = new SKPoint(
+            var offsetDelta = new SKPoint(
                 Orientation == FrameStyle.Horizontal ? 1 : 0,
                 Orientation == FrameStyle.Vertical ? 1 : 0
             );
@@ -89,6 +89,7 @@ namespace Pla.Lib.UI.Widgets
             foreach (var w in Widgets)
             {
                 var childSize = w.CalculateRequestedSize(design);
+
                 var dY = padding + padding + childSize.Y;
                 var dX = padding + padding + childSize.X;
 
@@ -99,7 +100,7 @@ namespace Pla.Lib.UI.Widgets
                     Bounds.Top + offset.Y + dY - padding
                 );
 
-                offset.Offset(dX * offestDelta.X, dY * offestDelta.Y);
+                offset.Offset(dX * offsetDelta.X, dY * offsetDelta.Y);
 
                 w.Bounds = rect;
                 if (w is Frame f)
