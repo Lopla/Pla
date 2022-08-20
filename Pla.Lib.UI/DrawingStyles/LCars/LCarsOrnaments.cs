@@ -1,4 +1,5 @@
-﻿using Pla.Lib.UI.Interfaces;
+﻿using Pla.Lib.UI.DrawingStyles.LCars.Ornaments;
+using Pla.Lib.UI.Interfaces;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars
@@ -10,28 +11,16 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         public LCarsOrnaments(IDesign style)
         {
             _style = style;
-            BorderWidth = 20;
         }
-
-        public int BorderWidth { get; set; }
 
         public void Draw(PaintContext context,
             Ornament ornamentType)
         {
-            this.DrawFrameLrtb(context, ornamentType);
+
+            new Frame().Draw(context, ornamentType);
+
         }
 
-        private void DrawFrameLrtb(PaintContext context, Ornament ornamentType)
-        {
-            using (var painterBack = new SKPaint
-                   {
-                       Color = _style.Palette.BackColor(ornamentType),
-                       Style = SKPaintStyle.Fill
-                   })
-            {
-                context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBack);
-            }
-        }
 
         /// <summary>
         ///     Grow ornaments around this element
@@ -40,21 +29,8 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         public OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement,
             Ornament ornamentType)
         {
-            return this.GetSizeAroundElementFrameLrtb(internalElement.GetSize());
-        }
-
-        private OrnamentBounds GetSizeAroundElementFrameLrtb(SKPoint internalElementSize)
-        {
-            //// minimal frame size
-            var ornamentSize = new SKRect(0, 0, 
-                BorderWidth * 2 + internalElementSize.X, 
-                BorderWidth * 2 + internalElementSize.Y);
-            
-            return new OrnamentBounds
-            {
-                Bounds = ornamentSize,
-                InternalBounds = new SKRect(BorderWidth, BorderWidth, internalElementSize.X, internalElementSize.Y)
-            };
+            return
+                new Frame().GetSizeAroundElement(internalElement.GetSize());
         }
     }
 }

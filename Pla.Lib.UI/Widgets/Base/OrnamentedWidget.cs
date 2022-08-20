@@ -28,7 +28,7 @@ namespace Pla.Lib.UI.Widgets.Base
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            style.Ornaments.Draw(new PaintContext(this, canvas));
+            style.Ornaments.Draw(new PaintContext(this, canvas), _ornamentStyle);
         }
     }
 }
