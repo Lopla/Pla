@@ -19,7 +19,7 @@ namespace Pla.Lib.UI.Widgets
 
         private SKRect _canvasSize;
 
-        public Frame(FrameStyle style = FrameStyle.Vertical, OrnamentType ornamentStyle = OrnamentType.Visible)
+        public Frame(FrameStyle style = FrameStyle.Vertical, OrnamentType ornamentStyle = OrnamentType.WidgetContainer)
         {
             _ornamentStyle = ornamentStyle;
             Orientation = style;
@@ -76,7 +76,7 @@ namespace Pla.Lib.UI.Widgets
 
         private void RecalculateChildSizes(IDesign design)
         {
-            var padding = 5;
+            var padding = 0;
 
             var offset = new SKPoint();
 
@@ -135,12 +135,16 @@ namespace Pla.Lib.UI.Widgets
                 _canvasSize = currentCanvasSize;
                 RecalculateControls();
             }
+            
+            style
+                .Ornaments
+                .Draw(new PaintContext(Bounds, canvas), this._ornamentStyle);
 
-            style.Ornaments.Draw(new PaintContext(this, canvas), OrnamentType.WidgetContainer);
-            //if (!(Parent is Manager))
-            //    style.Ornaments.Draw(new PaintContext(this, canvas), ornamentType);
-
-            _painter.Draw(new PaintContext(this, canvas));
+            var ornamentedElement =
+                style.Ornaments.GetSizeAroundElement(_painter, this._ornamentStyle);
+            
+            var internalElementBounds = ornamentedElement.OffsetForInternalBounds(Bounds);
+            _painter.Draw(new PaintContext(internalElementBounds, canvas));
         }
 
         public override SKPoint CalculateRequestedSize(IDesign style)

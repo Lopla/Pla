@@ -14,6 +14,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             this.Ornaments= new Dictionary<OrnamentType, IOrnamentPainter>
             {
                 { OrnamentType.WidgetContainer, new Frame(lCarsStyle) },
+
                 { OrnamentType.Active, new EmptyFrame(lCarsStyle) },
                 { OrnamentType.Modifiable, new EmptyFrame(lCarsStyle) },
                 { OrnamentType.Visible, new EmptyFrame(lCarsStyle) }
