@@ -10,24 +10,18 @@ namespace Pla.Lib.UI.Widgets
     /// <summary>
     ///     Container for other controls, handles resizing of objects contained in it.
     /// </summary>
-    public class Frame : OrnamentedWidget, IWidgetContainer
+    public class Frame : Widget, IWidgetContainer
     {
-        private FrameActiveElement FrameActiveElement
-        {
-            get
-            {
-                return new FrameActiveElement(this);
-            }
-        }
 
         private readonly List<Widget> _widgets = new List<Widget>();
         
         private SKRect _canvasSize;
+        private readonly FrameActiveElement _painter;
 
         public Frame(FrameStyle style = FrameStyle.Vertical) 
-            : base(Ornament.WidgetContainer, new FrameActiveElement())
         {
             Orientation = style;
+            _painter = new FrameActiveElement(this);
         }
 
         public FrameStyle Orientation { get; }
@@ -143,7 +137,7 @@ namespace Pla.Lib.UI.Widgets
             //if (!(Parent is Manager))
             //    style.Ornaments.Draw(new PaintContext(this, canvas), ornamentType);
 
-            FrameActiveElement.Draw(new PaintContext(this, canvas));
+            _painter.Draw(new PaintContext(this, canvas));
         }
     }
 }

@@ -4,20 +4,17 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets.Base
 {
-    public abstract class TextWidget : OrnamentedWidget
+    public class TextWidget : Widget
     {
         private readonly Ornament _ornamentType;
-
-        private IActiveElementPainter TextOrnamentPainter
-        {
-            get { return new TextActiveElement(this, _ornamentType); }
-        }
+        
         private string _text;
+        private readonly TextActiveElement _painter;
 
         public TextWidget(Ornament ornamentType = Ornament.Visible)
-            :base(ornamentType, new TextActiveElement(ornamentType ))
         {
             _ornamentType = ornamentType;
+            _painter = new TextActiveElement(ornamentType, this);
         }
 
         public string Text
@@ -35,26 +32,21 @@ namespace Pla.Lib.UI.Widgets.Base
 
         public override SKPoint CalculateRequestedSize(IDesign style)
         {
-            var textSize = TextOrnamentPainter.GetSize();
-
-            var ornamentedElement =
-                style.Ornaments.GetSizeAroundElement(TextOrnamentPainter, _ornamentType);
-
-            var size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
-
-            return size;
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_painter, this._ornamentType);
+            return ornamentedElement.RequestedSize();
         }
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {
-            var ornamentedElement = style.Ornaments.GetSizeAroundElement(TextOrnamentPainter);
+
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_painter);
 
             style
                 .Ornaments
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
             var newTextBounds = ornamentedElement.OffsetForInternalBounds(Bounds);
-            TextOrnamentPainter.Draw(new PaintContext(newTextBounds, canvas));
+            _painter.Draw(new PaintContext(newTextBounds, canvas));
         }
 
         public string[] TextLines()
