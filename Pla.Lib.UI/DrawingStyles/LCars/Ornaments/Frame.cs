@@ -6,11 +6,18 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
 {
     public class Frame : IOrnamentPainter
     {
+        private readonly IDesign _lCarsStyle;
+
+        public Frame(IDesign lCarsStyle)
+        {
+            _lCarsStyle = lCarsStyle;
+        }
+
         public void Draw(PaintContext context)
         {
             using (var painterBack = new SKPaint
                    {
-                       Color = new LCarsStyle().Palette.BackColor(OrnamentType.WidgetContainer),
+                       Color = _lCarsStyle.Palette.BackColor(OrnamentType.WidgetContainer),
                        Style = SKPaintStyle.Fill
                    })
             {

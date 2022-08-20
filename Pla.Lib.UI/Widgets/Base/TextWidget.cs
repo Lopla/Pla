@@ -40,7 +40,7 @@ namespace Pla.Lib.UI.Widgets.Base
         public override void Draw(SKCanvas canvas, IDesign style)
         {
             var ornamentedElement = 
-                style.Ornaments.GetSizeAroundElement(_painter);
+                style.Ornaments.GetSizeAroundElement(_painter, _ornamentType);
 
             style
                 .Ornaments

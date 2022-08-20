@@ -1,16 +1,22 @@
 ﻿using Pla.Lib.UI.Interfaces;
-using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
 {
     public class TwoThinBorders : IOrnamentPainter
     {
+        private readonly IDesign _lCarsStyle;
+
+        public TwoThinBorders(IDesign lCarsStyle)
+        {
+            _lCarsStyle = lCarsStyle;
+        }
+
         public void Draw(PaintContext context)
         {
             using (var painterBack = new SKPaint
                    {
-                       Color = new LCarsStyle().Palette.Color(Styling.Border1),
+                       Color = _lCarsStyle.Palette.Color(Styling.Border1),
                        Style = SKPaintStyle.Fill
                    })
             {

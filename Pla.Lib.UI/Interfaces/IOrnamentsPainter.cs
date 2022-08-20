@@ -1,7 +1,5 @@
-﻿using System;
-using Pla.Lib.UI.DrawingStyles;
+﻿using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.Widgets.Enums;
-using SkiaSharp;
 
 namespace Pla.Lib.UI.Interfaces
 {
@@ -11,8 +9,9 @@ namespace Pla.Lib.UI.Interfaces
         ///     Grow ornaments around this element
         /// </summary>
         /// <returns></returns>
-        OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement, OrnamentType ornament = OrnamentType.Visible);
+        OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement,
+            OrnamentType ornament);
 
-        void Draw(PaintContext context, OrnamentType ornament = OrnamentType.Visible);
+        void Draw(PaintContext context, OrnamentType ornament);
     }
 }
