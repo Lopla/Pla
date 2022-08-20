@@ -136,6 +136,7 @@ namespace Pla.Lib.UI.Widgets
                 RecalculateControls();
             }
 
+            style.Ornaments.Draw(new PaintContext(this, canvas), OrnamentType.WidgetContainer);
             //if (!(Parent is Manager))
             //    style.Ornaments.Draw(new PaintContext(this, canvas), ornamentType);
 

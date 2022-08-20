@@ -3,11 +3,11 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
 {
-    public class TwoThinBorders : IOrnamentPainter
+    public class EmptyFrame : IOrnamentPainter
     {
         private readonly IDesign _lCarsStyle;
 
-        public TwoThinBorders(IDesign lCarsStyle)
+        public EmptyFrame(IDesign lCarsStyle)
         {
             _lCarsStyle = lCarsStyle;
         }

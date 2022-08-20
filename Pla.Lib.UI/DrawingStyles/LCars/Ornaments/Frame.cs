@@ -18,7 +18,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
             using (var painterBack = new SKPaint
                    {
                        Color = _lCarsStyle.Palette.BackColor(OrnamentType.WidgetContainer),
-                       Style = SKPaintStyle.Fill
+                       Style = SKPaintStyle.Stroke
                    })
             {
                 context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBack);
