@@ -5,25 +5,20 @@ namespace Pla.Lib.UI.Widgets.Base
 {
     public abstract class OrnamentedWidget : Widget
     {
-        private readonly IActiveElementPainter _painter;
         private readonly Ornament _ornamentStyle;
+        private readonly IActiveElementPainter _elementPainter;
 
-        public OrnamentedWidget(Ornament ornamentStyle)
+        public OrnamentedWidget(Ornament ornamentStyle, IActiveElementPainter elementPainter)
         {
             _ornamentStyle = ornamentStyle;
-            _painter = GetPainter();
+            _elementPainter = elementPainter;
         }
-
-        protected abstract IActiveElementPainter GetPainter();
         
         public override SKPoint CalculateRequestedSize(IDesign style)
         {
-            var ornamentedElement =
-                style.Ornaments.GetSizeAroundElement(_painter, _ornamentStyle);
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_elementPainter, _ornamentStyle);
 
-            var size = new SKPoint(ornamentedElement.Bounds.Width, ornamentedElement.Bounds.Height);
-
-            return size;
+            return ornamentedElement.RequestedSize();
         }
 
         public override void Draw(SKCanvas canvas, IDesign style)

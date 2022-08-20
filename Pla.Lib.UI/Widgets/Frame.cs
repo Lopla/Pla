@@ -19,12 +19,13 @@ namespace Pla.Lib.UI.Widgets
                 return new FrameActiveElement(this);
             }
         }
+
         private readonly List<Widget> _widgets = new List<Widget>();
         
         private SKRect _canvasSize;
 
         public Frame(FrameStyle style = FrameStyle.Vertical) 
-            : base(Ornament.WidgetContainer)
+            : base(Ornament.WidgetContainer, new FrameActiveElement())
         {
             Orientation = style;
         }
@@ -128,12 +129,7 @@ namespace Pla.Lib.UI.Widgets
 
             return null;
         }
-
-        protected override IActiveElementPainter GetPainter()
-        {
-            return FrameActiveElement;
-        }
-
+        
         public override void Draw(SKCanvas canvas, IDesign style)
         {
             canvas.GetLocalClipBounds(out var currentCanvasSize);

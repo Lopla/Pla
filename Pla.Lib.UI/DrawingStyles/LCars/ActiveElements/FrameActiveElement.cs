@@ -45,7 +45,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
         {
             foreach (var w in _container.Widgets)
             {
-                w.Draw(paintContext.Canvas, new LCarsStyle());
+                w.Draw(paintContext.Canvas, _style);
             }
         }
     }

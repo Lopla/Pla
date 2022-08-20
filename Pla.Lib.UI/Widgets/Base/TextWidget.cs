@@ -10,12 +10,12 @@ namespace Pla.Lib.UI.Widgets.Base
 
         private IActiveElementPainter TextOrnamentPainter
         {
-            get { return new TextActiveElement(this); }
+            get { return new TextActiveElement(this, _ornamentType); }
         }
         private string _text;
 
         public TextWidget(Ornament ornamentType = Ornament.Visible)
-            :base(ornamentType)
+            :base(ornamentType, new TextActiveElement(ornamentType ))
         {
             _ornamentType = ornamentType;
         }
@@ -31,11 +31,6 @@ namespace Pla.Lib.UI.Widgets.Base
                     Parent?.RequestResize();
                 }
             }
-        }
-
-        protected override IActiveElementPainter GetPainter()
-        {
-            return this.TextOrnamentPainter;
         }
 
         public override SKPoint CalculateRequestedSize(IDesign style)

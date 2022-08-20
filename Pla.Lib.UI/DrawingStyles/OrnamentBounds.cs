@@ -17,5 +17,10 @@ namespace Pla.Lib.UI.DrawingStyles
 
             return offsetBounds;
         }
+
+        public SKPoint RequestedSize()
+        {
+            return new SKPoint(Bounds.Width, Bounds.Height);
+        }
     }
 }
