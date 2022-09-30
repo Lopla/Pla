@@ -5,13 +5,13 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
 {
-    internal class FrameActiveElement : IActiveElementPainter
+    internal class EmptyFrame : IActiveElementPainter
     {
         private readonly IWidgetContainer _container;
 
         private readonly IDesign _style= new LCarsStyle();
 
-        public FrameActiveElement(IWidgetContainer widgetContainer)
+        public EmptyFrame(IWidgetContainer widgetContainer)
         {
             this._container = widgetContainer;
         }

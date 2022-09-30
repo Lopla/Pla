@@ -1,12 +1,14 @@
 using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets.Base;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets
 {
-    public class Edit : BaseTextWidget
+    public class Edit : TextWidget
     {
-        public Edit() : base(Ornament.Modifiable)
+        public Edit() : base(OrnamentType.Modifiable)
         {
             _cursorLocation = 0;
         }

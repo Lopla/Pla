@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars
@@ -38,25 +39,27 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             return _colors[(int)styleInColor];
         }
 
-        public SKColor FrontColor(Ornament styleInColor)
+        public SKColor FrontColor(OrnamentType styleInColor)
         {
-            Dictionary<Ornament, Styling> colour = new Dictionary<Ornament, Styling>()
+            Dictionary<OrnamentType, Styling> colour = new Dictionary<OrnamentType, Styling>()
             {
-                { Ornament.Visible, Styling.Background },
-                { Ornament.Active, Styling.Background },
-                { Ornament.Modifiable, Styling.Border3 },
+                { OrnamentType.Visible, Styling.Background },
+                { OrnamentType.Active, Styling.Background },
+                { OrnamentType.Modifiable, Styling.Background },
+                { OrnamentType.WidgetContainer, Styling.Border3 },
             };
 
             return Color(colour[styleInColor]);
         }
 
-        public SKColor BackColor(Ornament styleInColor)
+        public SKColor BackColor(OrnamentType styleInColor)
         {
-            Dictionary<Ornament, Styling> colour = new Dictionary<Ornament, Styling>()
+            Dictionary<OrnamentType, Styling> colour = new Dictionary<OrnamentType, Styling>()
             {
-                { Ornament.Visible, Styling.Border1 },
-                { Ornament.Active, Styling.Border2 },
-                { Ornament.Modifiable, Styling.Background },
+                { OrnamentType.Visible, Styling.Border1 },
+                { OrnamentType.Active, Styling.Border2 },
+                { OrnamentType.Modifiable, Styling.Border3 },
+                { OrnamentType.WidgetContainer, Styling.Background },
             };
 
             return Color(colour[styleInColor]);

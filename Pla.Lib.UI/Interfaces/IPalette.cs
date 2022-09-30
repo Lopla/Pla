@@ -1,4 +1,5 @@
 ﻿using Pla.Lib.UI.DrawingStyles;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.Interfaces
@@ -6,7 +7,7 @@ namespace Pla.Lib.UI.Interfaces
     public interface IPalette
     {
         SKColor Color(Styling styleInColor);
-        SKColor FrontColor(Ornament styleInColor);
-        SKColor BackColor(Ornament styleInColor);
+        SKColor FrontColor(OrnamentType styleInColor);
+        SKColor BackColor(OrnamentType styleInColor);
     }
 }

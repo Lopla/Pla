@@ -1,21 +1,24 @@
 ﻿using Pla.Lib.UI.Interfaces;
-using Pla.Lib.UI.Widgets;
+using Pla.Lib.UI.Widgets.Base;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
 {
     public class TextActiveElement : IActiveElementPainter
     {
-        private readonly IPalette _palette;
-        private readonly BaseTextWidget _textWidget;
+        private readonly SKColor _color;
 
-        public TextActiveElement(BaseTextWidget textWidget)
+        private readonly SKTypeface _font = SKTypeface.Default;
+        private readonly IPalette _palette;
+        private readonly TextWidget _textWidget;
+
+        public TextActiveElement(OrnamentType style, TextWidget textWidget)
         {
             _palette = new LCarsPalette();
             _textWidget = textWidget;
+            _color = _palette.FrontColor(style);
         }
-
-        private readonly SKTypeface _font = SKTypeface.Default;
 
         public float TextLineHeight { get; set; } = 16;
 
@@ -32,26 +35,6 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
             return newSize;
         }
 
-        private SKPaint GetTextPainter(SKTextAlign align = SKTextAlign.Center, SKColor? color = null)
-        {
-            return new SKPaint
-            {
-                TextSize = TextLineHeight,
-                TextAlign = align,
-                Typeface = _font,
-                Color = color  ?? new SKColor(0,0,0)
-            };
-        }
-
-        public SKPoint CalculateTextSize(string text)
-        {
-            SKRect bounds = default;
-            var painter = GetTextPainter();
-            painter.MeasureText(text, ref bounds);
-
-            return new SKPoint(bounds.Width, painter.FontSpacing);
-        }
-
         public void Draw(PaintContext paintContext)
         {
             float yOffset = 0;
@@ -62,10 +45,31 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
                 var textSize = CalculateTextSize(t);
                 currentBounds.Bottom = currentBounds.Top + textSize.Y;
 
-                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left, _palette.FrontColor(Ornament.Visible));
+                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left,
+                    _palette.FrontColor(OrnamentType.Visible));
 
                 yOffset += textSize.Y;
             }
+        }
+
+        private SKPaint GetTextPainter(SKTextAlign align = SKTextAlign.Center)
+        {
+            return new SKPaint
+            {
+                TextSize = TextLineHeight,
+                TextAlign = align,
+                Typeface = _font,
+                Color = _color
+            };
+        }
+
+        public SKPoint CalculateTextSize(string text)
+        {
+            SKRect bounds = default;
+            var painter = GetTextPainter();
+            painter.MeasureText(text, ref bounds);
+
+            return new SKPoint(bounds.Width, painter.FontSpacing);
         }
 
         private void LineOfText(PaintContext context, string text, SKTextAlign align, SKColor color)
@@ -85,7 +89,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
                     break;
             }
 
-            using (var textPainter = GetTextPainter(align, color))
+            using (var textPainter = GetTextPainter(align))
             {
                 point.Offset(0, textPainter.TextSize);
                 if (text != null)

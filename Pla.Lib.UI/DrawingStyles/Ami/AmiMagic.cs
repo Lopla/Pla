@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SkiaSharp;
 
-namespace Pla.Lib.UI.DrawingStyles
+namespace Pla.Lib.UI.DrawingStyles.Ami
 {
     internal class AmiMagic
     {

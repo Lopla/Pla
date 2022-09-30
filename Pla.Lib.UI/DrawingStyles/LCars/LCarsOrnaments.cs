@@ -1,60 +1,41 @@
-﻿using Pla.Lib.UI.Interfaces;
-using SkiaSharp;
+﻿using System.Collections.Generic;
+using Pla.Lib.UI.DrawingStyles.LCars.Ornaments;
+using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets.Enums;
 
 namespace Pla.Lib.UI.DrawingStyles.LCars
 {
     public class LCarsOrnaments : IOrnamentsPainter
     {
-        private readonly IDesign _style;
+        public Dictionary<OrnamentType, IOrnamentPainter> Ornaments;
 
-        public LCarsOrnaments(IDesign style)
+        public LCarsOrnaments(IDesign lCarsStyle)
         {
-            _style = style;
-            BorderWidth = 20;
-        }
+            this.Ornaments= new Dictionary<OrnamentType, IOrnamentPainter>
+            {
+                { OrnamentType.WidgetContainer, new Frame(lCarsStyle) },
 
-        public int BorderWidth { get; set; }
+                { OrnamentType.Active, new EmptyFrame(lCarsStyle) },
+                { OrnamentType.Modifiable, new EmptyFrame(lCarsStyle) },
+                { OrnamentType.Visible, new EmptyFrame(lCarsStyle) }
+            };
+        }
 
         public void Draw(PaintContext context,
-            Ornament ornamentType)
+            OrnamentType ornamentType)
         {
-            this.DrawFrameLrtb(context, ornamentType);
+            Ornaments[ornamentType].Draw(context);
         }
 
-        private void DrawFrameLrtb(PaintContext context, Ornament ornamentType)
-        {
-            using (var painterBack = new SKPaint
-                   {
-                       Color = _style.Palette.BackColor(ornamentType),
-                       Style = SKPaintStyle.Fill
-                   })
-            {
-                context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBack);
-            }
-        }
 
         /// <summary>
         ///     Grow ornaments around this element
         /// </summary>
         /// <returns></returns>
         public OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement,
-            Ornament ornamentType)
+            OrnamentType ornamentType)
         {
-            return this.GetSizeAroundElementFrameLrtb(internalElement.GetSize());
-        }
-
-        private OrnamentBounds GetSizeAroundElementFrameLrtb(SKPoint internalElementSize)
-        {
-            //// minimal frame size
-            var ornamentSize = new SKRect(0, 0, 
-                BorderWidth * 2 + internalElementSize.X, 
-                BorderWidth * 2 + internalElementSize.Y);
-            
-            return new OrnamentBounds
-            {
-                Bounds = ornamentSize,
-                InternalBounds = new SKRect(BorderWidth, BorderWidth, internalElementSize.X, internalElementSize.Y)
-            };
+            return Ornaments[ornamentType].GetSizeAroundElement(internalElement.GetSize());
         }
     }
 }

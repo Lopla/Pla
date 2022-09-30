@@ -2,6 +2,7 @@
 using Pla.Lib.UI;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
+using Pla.Lib.UI.Widgets.Enums;
 
 namespace Pla.App.Pilot
 {
@@ -27,7 +28,7 @@ namespace Pla.App.Pilot
 
             var container =
                     this._manager
-                    .AddWidget(new Frame())
+                    //.AddWidget(new Frame())
                 ;
 
             ShowLabelAndSelectedWidgetEvent(container);
