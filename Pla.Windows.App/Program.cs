@@ -23,7 +23,7 @@ namespace Pla.Windows.App
     internal class ExperimentsContext : IContext, IPainter, IControl
     {
         private List<SKPoint> points = new List<SKPoint>();
-        private IEngine e;
+        private IEngine e = null;
 
         public void Init(IEngine engine)
         {

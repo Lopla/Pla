@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 
     <PackageId>Pla.Lib</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>Paweł Gałęzowski</Authors>
     <Company>lagcorp</Company>
     <Description>Base packge for creating pla platform componenets.</Description>

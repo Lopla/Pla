@@ -63,4 +63,9 @@ public partial class PlaControl : UserControl, IEngine
         
         ctx.Init(this);
     }
+
+    public void RequestQuit()
+    {
+        Application.Exit();
+    }
 }

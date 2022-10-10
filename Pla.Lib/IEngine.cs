@@ -9,6 +9,8 @@ namespace Pla.Lib
 
         void RequestRefresh();
 
+        void RequestQuit();
+
         DeviceInfo GetDeviceInfo();
     }
 }
