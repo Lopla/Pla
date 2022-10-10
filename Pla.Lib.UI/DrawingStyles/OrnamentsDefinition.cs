@@ -1,24 +1,25 @@
 ﻿using System.Collections.Generic;
-using Pla.Lib.UI.DrawingStyles.LCars.Ornaments;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Enums;
 
-namespace Pla.Lib.UI.DrawingStyles.LCars
+namespace Pla.Lib.UI.DrawingStyles
 {
-    public class LCarsOrnaments : IOrnamentsPainter
+    public class OrnamentsDefinition : IOrnamentsPainter
     {
         public Dictionary<OrnamentType, IOrnamentPainter> Ornaments;
 
-        public LCarsOrnaments(IDesign lCarsStyle)
+        public OrnamentsDefinition(IDesign lCarsStyle)
         {
-            this.Ornaments= new Dictionary<OrnamentType, IOrnamentPainter>
-            {
-                { OrnamentType.WidgetContainer, new Frame(lCarsStyle) },
+            this.Init(lCarsStyle);
+        }
 
-                { OrnamentType.Active, new EmptyFrame(lCarsStyle) },
-                { OrnamentType.Modifiable, new EmptyFrame(lCarsStyle) },
-                { OrnamentType.Visible, new EmptyFrame(lCarsStyle) }
-            };
+        private void Init(IDesign lCarsStyle)
+        {
+            this.Ornaments = new Dictionary<OrnamentType, IOrnamentPainter>();
+            foreach (var oType in new []{ OrnamentType.Active, OrnamentType.Modifiable, OrnamentType.Visible, OrnamentType.WidgetContainer})
+            {
+                this.Ornaments.Add(oType, lCarsStyle.GetOrnamentPainter(oType));
+            }
         }
 
         public void Draw(PaintContext context,

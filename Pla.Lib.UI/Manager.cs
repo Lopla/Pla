@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Pla.Lib.UI.DrawingStyles.LCars;
+using Pla.Lib.UI.DrawingStyles.Ami;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
 using Pla.Lib.UI.Widgets.Base;
@@ -13,10 +13,12 @@ namespace Pla.Lib.UI
     {
         private readonly IEngine _painter;
         private readonly Frame _rootFrame = new Frame();
+        private readonly IDesign _style;
 
-        public Manager(IEngine painter)
+        public Manager(IEngine painter, IDesign style = null)
         {
             _painter = painter;
+            _style = style ?? new AmiMagic();
             _rootFrame.Parent = this;
         }
 
@@ -42,14 +44,13 @@ namespace Pla.Lib.UI
         {
             surface.Canvas.Clear();
 
-            var style = new LCarsStyle();
-            _rootFrame.Draw(surface.Canvas, style);
+            _rootFrame.Draw(surface.Canvas, _style);
 
             surface.Canvas.Flush();
         }
 
         public IEnumerable<Widget> Widgets => _rootFrame.Widgets;
-        
+
         public Widget Add(Widget widget)
         {
             _rootFrame.Add(widget);
@@ -71,12 +72,12 @@ namespace Pla.Lib.UI
 
         public IDesign GetStyle()
         {
-            return new LCarsStyle();
+            return _style;
         }
 
         public void RequestClose()
         {
-            this._painter.RequestQuit();
+            _painter.RequestQuit();
         }
     }
 }
