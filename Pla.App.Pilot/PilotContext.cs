@@ -28,7 +28,7 @@ namespace Pla.App.Pilot
 
             var container =
                     this._manager
-                    //.AddWidget(new Frame())
+                    .AddWidget(new Frame())
                 ;
 
             ShowLabelAndSelectedWidgetEvent(container);
@@ -46,7 +46,10 @@ namespace Pla.App.Pilot
                 Text = "Close",
             });
 
-            b.ClickedHandler += point => { throw new Exception("How to close it?"); };
+            b.ClickedHandler += point =>
+            {
+                this._manager.RequestClose();
+            };
         }
 
         private void Editor(IWidgetContainer container)
@@ -78,6 +81,7 @@ namespace Pla.App.Pilot
             var horizontalFrame = container.AddWidget(new Frame(
                 FrameStyle.Horizontal));
             horizontalFrame.AddWidget(new Button() { Text = "Frame1/1" });
+
             var inhorizontal = horizontalFrame.AddWidget(new Frame());
             inhorizontal.AddWidget(new Button() { Text = "Frame1/2/1" });
             inhorizontal.AddWidget(new Edit() { Text = "Editor/2/2" });

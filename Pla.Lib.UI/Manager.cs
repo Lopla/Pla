@@ -49,9 +49,7 @@ namespace Pla.Lib.UI
         }
 
         public IEnumerable<Widget> Widgets => _rootFrame.Widgets;
-
-        public IWidgetContainer Parent { get; set; }
-
+        
         public Widget Add(Widget widget)
         {
             _rootFrame.Add(widget);
@@ -74,6 +72,11 @@ namespace Pla.Lib.UI
         public IDesign GetStyle()
         {
             return new LCarsStyle();
+        }
+
+        public void RequestClose()
+        {
+            this._painter.RequestQuit();
         }
     }
 }

@@ -39,7 +39,10 @@ public partial class PlaControl : UserControl, IEngine
     {
         var sw = new SkiaWrapper(ctx);
 
-        skControl.PaintSurface += (sender, args) => { sw.OnSkOnPaintSurface(args.Info, args.Surface); };
+        skControl.PaintSurface += (sender, args) =>
+        {
+            sw.OnSkOnPaintSurface(args.Info, args.Surface);
+        };
 
         skControl.Click += (sender, args) =>
         {
