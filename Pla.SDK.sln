@@ -5,8 +5,6 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.Lib", "Pla.Lib\Pla.Lib.csproj", "{8D73B847-6B97-4138-9480-B67EED1D7473}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.IDE", "Pla.IDE\Pla.IDE.csproj", "{90D1B5D3-81A7-491A-838D-DA29BC4771B3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.Shared", "Pla.Shared\Pla.Shared.csproj", "{B9ACB888-5F0F-4CDD-98F5-1A4C6C05D1C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.Gtk", "Pla.Gtk\Pla.Gtk.csproj", "{B485CA60-8FD2-4F66-B5E6-BE1E0E18DEFB}"
@@ -25,9 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.Gtk.App", "Pla.Gtk.App\Pla.Gtk.App.csproj", "{7FE1D23B-ED72-496D-BA13-7563B01699EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pla.Maui.App", "Pla.Maui.App\Pla.Maui.App.csproj", "{14EE64CD-6846-48DF-869A-9C7644F58F9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.Maui.App", "Pla.Maui.App\Pla.Maui.App.csproj", "{14EE64CD-6846-48DF-869A-9C7644F58F9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pla.Maui", "Pla.Maui\Pla.Maui.csproj", "{0A124F4C-DCBE-4A80-90F2-3058262FB23F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pla.Maui", "Pla.Maui\Pla.Maui.csproj", "{0A124F4C-DCBE-4A80-90F2-3058262FB23F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,18 +49,6 @@ Global
 		{8D73B847-6B97-4138-9480-B67EED1D7473}.Release|x64.Build.0 = Release|Any CPU
 		{8D73B847-6B97-4138-9480-B67EED1D7473}.Release|x86.ActiveCfg = Release|Any CPU
 		{8D73B847-6B97-4138-9480-B67EED1D7473}.Release|x86.Build.0 = Release|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Debug|x64.Build.0 = Debug|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Debug|x86.Build.0 = Debug|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Release|x64.ActiveCfg = Release|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Release|x64.Build.0 = Release|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Release|x86.ActiveCfg = Release|Any CPU
-		{90D1B5D3-81A7-491A-838D-DA29BC4771B3}.Release|x86.Build.0 = Release|Any CPU
 		{B9ACB888-5F0F-4CDD-98F5-1A4C6C05D1C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B9ACB888-5F0F-4CDD-98F5-1A4C6C05D1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9ACB888-5F0F-4CDD-98F5-1A4C6C05D1C5}.Debug|x64.ActiveCfg = Debug|Any CPU
