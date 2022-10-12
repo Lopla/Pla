@@ -14,7 +14,6 @@ public class MainPlaPage : ContentPage
 					VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center
                 }
 			},
-
-		};
+        };
 	}
 }
