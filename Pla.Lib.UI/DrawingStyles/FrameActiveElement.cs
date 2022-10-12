@@ -10,11 +10,12 @@ namespace Pla.Lib.UI.DrawingStyles
     {
         private readonly IWidgetContainer _container;
 
-        private readonly IDesign _style = new LCarsStyle();
+        private readonly IDesign _style = null;
 
-        public FrameActiveElement(IWidgetContainer widgetContainer)
+        public FrameActiveElement(IWidgetContainer widgetContainer, IDesign style)
         {
             _container = widgetContainer;
+            _style = style;
         }
 
         public SKPoint GetSize()
