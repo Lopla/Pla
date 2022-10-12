@@ -1,4 +1,6 @@
-﻿namespace Pla.Maui.App
+﻿using SkiaSharp.Views.Maui.Controls.Hosting;
+
+namespace Pla.Maui.App
 {
     public static class MauiProgram
     {
@@ -7,6 +9,7 @@
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
