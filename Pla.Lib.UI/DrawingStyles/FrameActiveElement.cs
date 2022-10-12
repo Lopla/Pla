@@ -1,19 +1,20 @@
 ﻿using System;
+using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
-namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
+namespace Pla.Lib.UI.DrawingStyles
 {
-    internal class EmptyFrame : IActiveElementPainter
+    internal class FrameActiveElement : IActiveElementPainter
     {
         private readonly IWidgetContainer _container;
 
-        private readonly IDesign _style= new LCarsStyle();
+        private readonly IDesign _style = new LCarsStyle();
 
-        public EmptyFrame(IWidgetContainer widgetContainer)
+        public FrameActiveElement(IWidgetContainer widgetContainer)
         {
-            this._container = widgetContainer;
+            _container = widgetContainer;
         }
 
         public SKPoint GetSize()
@@ -24,7 +25,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
             float maxY = 0;
             float dy = 0;
             float dx = 0;
-            foreach (var w in this._container.Widgets)
+            foreach (var w in _container.Widgets)
             {
                 var childSize = w.CalculateRequestedSize(_style);
                 var ex = 2 * padding + childSize.X;
@@ -38,7 +39,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
             }
 
             return
-                this._container.Orientation == FrameStyle.Horizontal ? new SKPoint(dx, maxY) : new SKPoint(maxX, dy);
+                _container.Orientation == FrameStyle.Horizontal ? new SKPoint(dx, maxY) : new SKPoint(maxX, dy);
         }
 
         public void Draw(PaintContext paintContext)

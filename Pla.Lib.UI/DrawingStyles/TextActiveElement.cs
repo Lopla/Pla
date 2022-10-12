@@ -1,9 +1,10 @@
-﻿using Pla.Lib.UI.Interfaces;
+﻿using Pla.Lib.UI.DrawingStyles.LCars;
+using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Base;
 using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
-namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
+namespace Pla.Lib.UI.DrawingStyles
 {
     public class TextActiveElement : IActiveElementPainter
     {
@@ -13,9 +14,9 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
         private readonly IPalette _palette;
         private readonly TextWidget _textWidget;
 
-        public TextActiveElement(OrnamentType style, TextWidget textWidget)
+        public TextActiveElement(OrnamentType style, TextWidget textWidget, IPalette palette)
         {
-            _palette = new LCarsPalette();
+            _palette = palette;
             _textWidget = textWidget;
             _color = _palette.FrontColor(style);
         }
@@ -45,7 +46,10 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.ActiveElements
                 var textSize = CalculateTextSize(t);
                 currentBounds.Bottom = currentBounds.Top + textSize.Y;
 
-                LineOfText(new PaintContext(currentBounds, paintContext.Canvas), t, SKTextAlign.Left,
+                LineOfText(
+                    new PaintContext(currentBounds, paintContext.Canvas),
+                    t,
+                    SKTextAlign.Left,
                     _palette.FrontColor(OrnamentType.Visible));
 
                 yOffset += textSize.Y;

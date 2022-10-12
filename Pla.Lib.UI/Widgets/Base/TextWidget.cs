@@ -1,4 +1,4 @@
-using Pla.Lib.UI.DrawingStyles.LCars.ActiveElements;
+using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
@@ -10,12 +10,15 @@ namespace Pla.Lib.UI.Widgets.Base
         private readonly OrnamentType _ornamentType;
         
         private string _text;
-        private readonly TextActiveElement _painter;
 
         public TextWidget(OrnamentType ornamentType)
         {
             _ornamentType = ornamentType;
-            _painter = new TextActiveElement(ornamentType, this);
+        }
+
+        TextActiveElement GetPainterElement(IDesign style)
+        {
+            return new TextActiveElement(_ornamentType, this, style.Palette);
         }
 
         public string Text
@@ -33,21 +36,21 @@ namespace Pla.Lib.UI.Widgets.Base
 
         public override SKPoint CalculateRequestedSize(IDesign style)
         {
-            var ornamentedElement = style.Ornaments.GetSizeAroundElement(_painter, this._ornamentType);
+            var ornamentedElement = style.Ornaments.GetSizeAroundElement(GetPainterElement(style), this._ornamentType);
             return ornamentedElement.RequestedSize();
         }
 
         public override void Draw(SKCanvas canvas, IDesign style)
         {
             var ornamentedElement = 
-                style.Ornaments.GetSizeAroundElement(_painter, _ornamentType);
+                style.Ornaments.GetSizeAroundElement(GetPainterElement(style), _ornamentType);
 
             style
                 .Ornaments
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
             var newTextBounds = ornamentedElement.OffsetForInternalBounds(Bounds);
-            _painter.Draw(new PaintContext(newTextBounds, canvas));
+            GetPainterElement(style).Draw(new PaintContext(newTextBounds, canvas));
         }
 
         public string[] TextLines()
