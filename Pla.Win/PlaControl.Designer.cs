@@ -36,9 +36,9 @@
             this.skControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.skControl.Location = new System.Drawing.Point(15, 16);
+            this.skControl.Location = new System.Drawing.Point(0, 0);
             this.skControl.Name = "skControl";
-            this.skControl.Size = new System.Drawing.Size(114, 114);
+            this.skControl.Size = new System.Drawing.Size(150, 150);
             this.skControl.TabIndex = 0;
             this.skControl.Text = "Pla skia control";
             // 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Pla.Lib.UI.DrawingStyles.Ami;
+using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
 using Pla.Lib.UI.Widgets.Base;
@@ -18,7 +19,7 @@ namespace Pla.Lib.UI
         public Manager(IEngine painter, IDesign style = null)
         {
             _painter = painter;
-            _style = style ?? new AmiMagic();
+            _style = style ?? new LCarsStyle();
             _rootFrame.Parent = this;
         }
 
@@ -42,7 +43,7 @@ namespace Pla.Lib.UI
 
         public void Paint(SKImageInfo info, SKSurface surface)
         {
-            surface.Canvas.Clear();
+            surface.Canvas.Clear(_style.Palette.Color(DrawingStyles.Styling.Background));
 
             _rootFrame.Draw(surface.Canvas, _style);
 
