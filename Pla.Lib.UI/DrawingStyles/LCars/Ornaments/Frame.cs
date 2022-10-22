@@ -19,7 +19,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
             // top header
             using (var painterBack = new SKPaint
             {
-                Color = _lCarsStyle.Palette.FrontColor(OrnamentType.WidgetContainer),
+                Color = _lCarsStyle.Palette.Color(OrnamentType.WidgetContainer),
                 Style = SKPaintStyle.StrokeAndFill
             })
             {

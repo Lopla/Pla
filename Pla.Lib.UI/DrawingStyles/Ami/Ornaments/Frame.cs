@@ -1,4 +1,5 @@
 ﻿using Pla.Lib.UI.Interfaces;
+using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
@@ -18,7 +19,7 @@ namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
         {
             using (var painterBack = new SKPaint
                    {
-                       Color = _palette.Palette.Color(Styling.Border1),
+                       Color = _palette.Palette.Color(OrnamentType.WidgetContainer),
                        Style = SKPaintStyle.Stroke
                    })
             {

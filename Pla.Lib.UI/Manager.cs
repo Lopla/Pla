@@ -44,7 +44,7 @@ namespace Pla.Lib.UI
 
         public void Paint(SKImageInfo info, SKSurface surface)
         {
-            surface.Canvas.Clear(_style.Palette.Color(Styling.Background));
+            surface.Canvas.Clear(_style.Palette.Color(Styling.ScreenBackground));
 
             _rootFrame.Draw(surface.Canvas, _style);
 

@@ -27,15 +27,15 @@ namespace Pla.Lib.UI.DrawingStyles.Ami
             return Colors[(int) styleInColor];
         }
 
-        public SKColor FrontColor(OrnamentType styleInColor)
+        public SKColor Color(OrnamentType styleInColor)
         {
             var color = new Dictionary<OrnamentType, Styling>
             {
 
-                {OrnamentType.Visible, Styling.Border1},
-                {OrnamentType.Active, Styling.Border2},
-                {OrnamentType.Modifiable, Styling.Border3},
-                {OrnamentType.WidgetContainer, Styling.Background}
+                { OrnamentType.Visible, (Styling)1 },
+                { OrnamentType.Active, (Styling)2 },
+                { OrnamentType.Modifiable, (Styling)3 },
+                { OrnamentType.WidgetContainer, (Styling)4 },
             };
 
             return Color(color[styleInColor]);

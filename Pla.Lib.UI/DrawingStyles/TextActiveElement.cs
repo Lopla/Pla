@@ -17,7 +17,7 @@ namespace Pla.Lib.UI.DrawingStyles
         {
             _palette = palette;
             _textWidget = textWidget;
-            _color = _palette.FrontColor(style);
+            _color = _palette.Color(style);
         }
 
         public float TextLineHeight { get; set; } = 16;
@@ -49,7 +49,7 @@ namespace Pla.Lib.UI.DrawingStyles
                     new PaintContext(currentBounds, paintContext.Canvas),
                     t,
                     SKTextAlign.Left,
-                    _palette.FrontColor(OrnamentType.Visible));
+                    _palette.Color(OrnamentType.Visible));
 
                 yOffset += textSize.Y;
             }

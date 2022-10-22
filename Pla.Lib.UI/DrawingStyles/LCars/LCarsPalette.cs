@@ -40,7 +40,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             return _colors[(int)styleInColor];
         }
 
-        public SKColor FrontColor(OrnamentType styleInColor)
+        public SKColor Color(OrnamentType styleInColor)
         {
             Dictionary<OrnamentType, Styling> colour = new Dictionary<OrnamentType, Styling>()
             {
