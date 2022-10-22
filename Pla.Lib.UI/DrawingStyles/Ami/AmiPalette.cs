@@ -9,6 +9,8 @@ namespace Pla.Lib.UI.DrawingStyles.Ami
     {
         public List<SKColor> Colors = new List<SKColor>
         {
+            new SKColor(175, 175, 175),
+
             new SKColor(149, 149, 149),
             new SKColor(000, 000, 000),
             new SKColor(255, 255, 255),
@@ -27,21 +29,9 @@ namespace Pla.Lib.UI.DrawingStyles.Ami
 
         public SKColor FrontColor(OrnamentType styleInColor)
         {
-            var colour = new Dictionary<OrnamentType, Styling>
-            {
-                {OrnamentType.Visible, Styling.Background},
-                {OrnamentType.Active, Styling.Background},
-                {OrnamentType.Modifiable, Styling.Background},
-                {OrnamentType.WidgetContainer, Styling.Border3}
-            };
-
-            return Color(colour[styleInColor]);
-        }
-
-        public SKColor BackColor(OrnamentType styleInColor)
-        {
             var color = new Dictionary<OrnamentType, Styling>
             {
+
                 {OrnamentType.Visible, Styling.Border1},
                 {OrnamentType.Active, Styling.Border2},
                 {OrnamentType.Modifiable, Styling.Border3},

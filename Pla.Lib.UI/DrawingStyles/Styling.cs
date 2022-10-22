@@ -2,7 +2,8 @@
 {
     public enum Styling
     {
-        Background = 0,
+        ScreenBackground = 0,
+        Background = 1,
         Border1,
         Alert,
         Success,

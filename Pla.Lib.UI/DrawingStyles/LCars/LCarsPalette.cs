@@ -11,6 +11,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
         private readonly string[] _colorMap =
         {
             "#000000", // background and text
+            "#000000", // background and text
             "#ff7700", // orange - normal border
             "#ff2200", // red
             "#33cc99", // green
@@ -47,19 +48,6 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
                 { OrnamentType.Active, Styling.Background },
                 { OrnamentType.Modifiable, Styling.Background },
                 { OrnamentType.WidgetContainer, Styling.Border3 },
-            };
-
-            return Color(colour[styleInColor]);
-        }
-
-        public SKColor BackColor(OrnamentType styleInColor)
-        {
-            Dictionary<OrnamentType, Styling> colour = new Dictionary<OrnamentType, Styling>()
-            {
-                { OrnamentType.Visible, Styling.Border1 },
-                { OrnamentType.Active, Styling.Border2 },
-                { OrnamentType.Modifiable, Styling.Border3 },
-                { OrnamentType.WidgetContainer, Styling.Background },
             };
 
             return Color(colour[styleInColor]);

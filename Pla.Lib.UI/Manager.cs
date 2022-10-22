@@ -20,7 +20,7 @@ namespace Pla.Lib.UI
         public Manager(IEngine painter, IDesign style = null)
         {
             _painter = painter;
-            _style = style ?? new LCarsStyle();
+            _style = style ?? new AmiMagic();
             _rootFrame.Parent = this;
         }
 

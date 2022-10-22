@@ -8,6 +8,5 @@ namespace Pla.Lib.UI.Interfaces
     {
         SKColor Color(Styling styleInColor);
         SKColor FrontColor(OrnamentType styleInColor);
-        SKColor BackColor(OrnamentType styleInColor);
     }
 }
