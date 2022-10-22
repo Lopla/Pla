@@ -34,10 +34,9 @@ namespace Pla.Lib.UI.DrawingStyles.Ami
         {
             var color = new Dictionary<OrnamentType, Styling>
             {
-
                 { OrnamentType.Visible, (Styling)1 },
-                { OrnamentType.Active, (Styling)2 },
-                { OrnamentType.Modifiable, (Styling)3 },
+                { OrnamentType.Active, (Styling)1 },
+                { OrnamentType.Modifiable, (Styling)1 },
                 { OrnamentType.WidgetContainer, (Styling)4 },
             };
 

@@ -1,5 +1,4 @@
 ﻿using Pla.Lib.UI.Interfaces;
-using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
@@ -7,12 +6,23 @@ namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
     public class Frame : IOrnamentPainter
     {
         private readonly IDesign _palette;
+        private readonly bool _accentAround;
+        private readonly FrameStyle _frameStyling;
 
-        public Frame(IDesign style)
+        public enum FrameStyle
+        {
+            Sunken,
+            Raised,
+            None
+        }
+
+        public Frame(IDesign style, bool accentAround=true, FrameStyle frameStyling = FrameStyle.None)
         {
             _palette = style;
+            _accentAround = accentAround;
+            _frameStyling = frameStyling;
         }
-        
+
         public void Draw(PaintContext context)
         {
             using (var painterBack = new SKPaint
@@ -26,14 +36,24 @@ namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
                        Style = SKPaintStyle.Stroke
                    })
             {
-                context.Canvas.DrawRect(context.Bounds, painterBack);
+                if(_accentAround)
+                    context.Canvas.DrawRect(context.Bounds, painterBack);
 
                 var b = context.Bounds;
-                b.Inflate(-1,-1);
-                context.Canvas.DrawLine(b.Right, b.Top, b.Right, b.Bottom, painterBack);
-                context.Canvas.DrawLine(b.Left, b.Bottom, b.Right, b.Bottom, painterBack);
-                context.Canvas.DrawLine(b.Left, b.Top, b.Right, b.Top, painterSecond);
-                context.Canvas.DrawLine(b.Left, b.Top, b.Left, b.Bottom, painterSecond);
+                b.Inflate(-1, -1);
+                if (_frameStyling == FrameStyle.Raised)
+                {
+                    context.Canvas.DrawLine(b.Right, b.Top, b.Right, b.Bottom, painterBack);
+                    context.Canvas.DrawLine(b.Left, b.Bottom, b.Right, b.Bottom, painterBack);
+                    context.Canvas.DrawLine(b.Left, b.Top, b.Right, b.Top, painterSecond);
+                    context.Canvas.DrawLine(b.Left, b.Top, b.Left, b.Bottom, painterSecond);
+                }else if (_frameStyling == FrameStyle.Sunken)
+                {
+                    context.Canvas.DrawLine(b.Right, b.Top, b.Right, b.Bottom, painterSecond);
+                    context.Canvas.DrawLine(b.Left, b.Bottom, b.Right, b.Bottom, painterSecond);
+                    context.Canvas.DrawLine(b.Left, b.Top, b.Right, b.Top, painterBack);
+                    context.Canvas.DrawLine(b.Left, b.Top, b.Left, b.Bottom, painterBack);
+                }
             }
         }
 
@@ -44,13 +64,14 @@ namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
             //// minimal frame size
             var ornamentSize = new SKRect(
                 0, 0,
-                internalElementSize.X + 2 * frame +2*padding,
-                internalElementSize.Y + 2 * frame + 2*padding);
+                internalElementSize.X + 2 * frame + 2 * padding,
+                internalElementSize.Y + 2 * frame + 2 * padding);
 
             return new OrnamentBounds
             {
                 Bounds = ornamentSize,
-                InternalBounds = new SKRect(frame+padding, frame+padding, internalElementSize.X, internalElementSize.Y)
+                InternalBounds = new SKRect(frame + padding, frame + padding, internalElementSize.X,
+                    internalElementSize.Y)
             };
         }
     }
