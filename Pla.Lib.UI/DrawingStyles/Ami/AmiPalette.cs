@@ -13,6 +13,7 @@ namespace Pla.Lib.UI.DrawingStyles.Ami
             new SKColor(000, 000, 000),
             new SKColor(255, 255, 255),
             new SKColor(59, 103, 162),
+
             new SKColor(123, 123, 123),
             new SKColor(175, 175, 175),
             new SKColor(170, 144, 124),

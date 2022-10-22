@@ -7,9 +7,9 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
     {
         private readonly IDesign _lCarsStyle;
 
-        public EmptyFrame(IDesign designStyle)
+        public EmptyFrame(IDesign lCarsStyle)
         {
-            _lCarsStyle = designStyle;
+            _lCarsStyle = lCarsStyle;
         }
 
         public void Draw(PaintContext context)
@@ -17,10 +17,10 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
             using (var painterBack = new SKPaint
                    {
                        Color = _lCarsStyle.Palette.Color(Styling.Border1),
-                       Style = SKPaintStyle.Stroke
+                       Style = SKPaintStyle.Fill
                    })
             {
-                context.Canvas.DrawRect(context.Bounds, painterBack);
+                context.Canvas.DrawRoundRect(context.Bounds, BorderWidth, BorderWidth, painterBack);
             }
         }
 
@@ -28,13 +28,13 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
         {
             //// minimal frame size
             var ornamentSize = new SKRect(0, 0,
-                internalElementSize.X,
-                internalElementSize.Y);
+                BorderWidth * 2 + internalElementSize.X,
+                BorderWidth * 2 + internalElementSize.Y);
 
             return new OrnamentBounds
             {
                 Bounds = ornamentSize,
-                InternalBounds = new SKRect(0, 0, internalElementSize.X, internalElementSize.Y)
+                InternalBounds = new SKRect(BorderWidth, BorderWidth, internalElementSize.X, internalElementSize.Y)
             };
         }
 

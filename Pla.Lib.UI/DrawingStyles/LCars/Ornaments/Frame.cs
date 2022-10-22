@@ -16,13 +16,57 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
 
         public void Draw(PaintContext context)
         {
+
+
+            //using (var painterBack = new SKPaint
+            //       {
+            //           Color = new SKColor(0, 0, 0),
+            //           Style = SKPaintStyle.Stroke
+            //       })
+            //{
+            //    context.Canvas.DrawRect(context.Bounds, painterBack);
+            //}
+
+
+            // top header
             using (var painterBack = new SKPaint
-                   {
-                       Color = _lCarsStyle.Palette.Color(Styling.Border1),
-                       Style = SKPaintStyle.Stroke
-                   })
             {
-                context.Canvas.DrawRect(context.Bounds, painterBack);
+                Color = _lCarsStyle.Palette.FrontColor(OrnamentType.WidgetContainer),
+                Style = SKPaintStyle.StrokeAndFill
+            })
+            {
+
+                ///   top
+                context.Canvas.DrawCircle(
+                    context.Bounds.Left + Border / 2,
+                    context.Bounds.Top + Border / 2, Border / 2, painterBack);
+
+                context.Canvas.DrawRect(
+                    new SKRect(context.Bounds.Left + Border / 2,
+                        context.Bounds.Top,
+                        context.Bounds.Right,
+                        context.Bounds.Top + Border), painterBack);
+
+                /// left
+                context.Canvas.DrawRect(
+                    new SKRect(context.Bounds.Left,
+                        context.Bounds.Top + Border / 2,
+                        context.Bounds.Left + Border,
+                        context.Bounds.Bottom - Border / 2), painterBack);
+
+                /// bottom
+                context.Canvas.DrawCircle(
+                    context.Bounds.Left + Border / 2,
+                    context.Bounds.Bottom - Border / 2,
+                    Border / 2, painterBack);
+
+                context.Canvas.DrawRect(
+                    new SKRect(context.Bounds.Left + Border / 2,
+                        context.Bounds.Bottom - Border,
+                        context.Bounds.Right,
+                        context.Bounds.Bottom), painterBack);
+
+
             }
         }
 
@@ -36,7 +80,7 @@ namespace Pla.Lib.UI.DrawingStyles.LCars.Ornaments
             return new OrnamentBounds
             {
                 Bounds = ornamentSize,
-                InternalBounds = new SKRect(Border, Border , internalElementSize.X, internalElementSize.Y)
+                InternalBounds = new SKRect(Border, Border, internalElementSize.X, internalElementSize.Y)
             };
         }
 
