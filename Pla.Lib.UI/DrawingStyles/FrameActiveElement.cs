@@ -1,5 +1,4 @@
 ﻿using System;
-using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
@@ -10,9 +9,11 @@ namespace Pla.Lib.UI.DrawingStyles
     {
         private readonly IWidgetContainer _container;
 
-        private readonly IDesign _style = null;
+        private readonly IDesign _style;
 
-        public FrameActiveElement(IWidgetContainer widgetContainer, IDesign style)
+        public FrameActiveElement(
+            IWidgetContainer widgetContainer, 
+            IDesign style)
         {
             _container = widgetContainer;
             _style = style;
@@ -45,10 +46,7 @@ namespace Pla.Lib.UI.DrawingStyles
 
         public void Draw(PaintContext paintContext)
         {
-            foreach (var w in _container.Widgets)
-            {
-                w.Draw(paintContext.Canvas, _style);
-            }
+            foreach (var w in _container.Widgets) w.Draw(paintContext.Canvas, _style);
         }
     }
 }

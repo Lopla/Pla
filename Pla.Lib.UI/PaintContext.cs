@@ -5,6 +5,8 @@ namespace Pla.Lib.UI
 {
     public class PaintContext
     {
+        public SKCanvas Canvas;
+        public bool Focused;
 
         public PaintContext(Widget widget, SKCanvas canvas, bool focused = false)
             : this(widget.Bounds, canvas, focused)
@@ -17,8 +19,7 @@ namespace Pla.Lib.UI
             Focused = focused;
             Bounds = bounds;
         }
-        public SKCanvas Canvas;
-        public bool Focused;
+
         public SKRect Bounds { get; set; }
     }
 }
