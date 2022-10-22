@@ -13,12 +13,12 @@ namespace Pla.Lib.UI.DrawingStyles
             this.Init(lCarsStyle);
         }
 
-        private void Init(IDesign lCarsStyle)
+        private void Init(IDesign desingStyle)
         {
             this.Ornaments = new Dictionary<OrnamentType, IOrnamentPainter>();
             foreach (var oType in new []{ OrnamentType.Active, OrnamentType.Modifiable, OrnamentType.Visible, OrnamentType.WidgetContainer})
             {
-                this.Ornaments.Add(oType, lCarsStyle.GetOrnamentPainter(oType));
+                this.Ornaments.Add(oType, desingStyle.GetOrnamentPainter(oType));
             }
         }
 

@@ -1,5 +1,4 @@
 ﻿using Pla.Lib.UI.Interfaces;
-using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
@@ -7,30 +6,23 @@ namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
     public class Frame : IOrnamentPainter
     {
         private readonly IDesign _palette;
-        private float Border { get; set; } = 1;
 
-        public Frame(IDesign lCarsStyle)
+        public Frame(IDesign style)
         {
-            _palette = lCarsStyle;
+            _palette = style;
         }
+
+        private float Border { get; } = 1;
 
         public void Draw(PaintContext context)
         {
-            // top header
             using (var painterBack = new SKPaint
+                   {
+                       Color = _palette.Palette.Color(Styling.Border1),
+                       Style = SKPaintStyle.Stroke
+                   })
             {
-                Color = _palette.Palette.FrontColor(OrnamentType.Active),
-                Style = SKPaintStyle.Stroke,
-                StrokeWidth = 1,
-            })
-            {
-                context.Canvas.DrawLine(
-                    new SKPoint(
-                        context.Bounds.Left,
-                        context.Bounds.Top),
-                    new SKPoint(
-                        context.Bounds.Right,
-                        context.Bounds.Top), painterBack);
+                context.Canvas.DrawRect(context.Bounds, painterBack);
             }
         }
 
@@ -38,8 +30,8 @@ namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
         {
             //// minimal frame size
             var ornamentSize = new SKRect(0, 0,
-                Border * 2 + internalElementSize.X,
-                Border * 2 + internalElementSize.Y);
+                internalElementSize.X,
+                internalElementSize.Y);
 
             return new OrnamentBounds
             {
@@ -47,6 +39,5 @@ namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
                 InternalBounds = new SKRect(Border, Border, internalElementSize.X, internalElementSize.Y)
             };
         }
-
     }
 }
