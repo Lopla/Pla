@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.DrawingStyles.Ami;
 using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
@@ -43,7 +44,7 @@ namespace Pla.Lib.UI
 
         public void Paint(SKImageInfo info, SKSurface surface)
         {
-            surface.Canvas.Clear(_style.Palette.Color(DrawingStyles.Styling.Background));
+            surface.Canvas.Clear(_style.Palette.Color(Styling.Background));
 
             _rootFrame.Draw(surface.Canvas, _style);
 
