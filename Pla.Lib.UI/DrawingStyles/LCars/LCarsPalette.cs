@@ -35,6 +35,11 @@ namespace Pla.Lib.UI.DrawingStyles.LCars
             _colors = _colorMap.Select(SKColor.Parse).ToArray();
         }
 
+        public SKColor Color(int i)
+        {
+            return _colors[i];
+        }
+
         public SKColor Color(Styling styleInColor)
         {
             return _colors[(int)styleInColor];
