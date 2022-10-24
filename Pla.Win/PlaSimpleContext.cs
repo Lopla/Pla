@@ -5,7 +5,7 @@ namespace Pla.Win;
 
 public class PlaSimpleContext : IContext, IPainter, IControl
 {
-    private IEngine engine;
+    private IEngine engine = null!;
 
     public void Init(IEngine engine)
     {

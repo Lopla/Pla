@@ -1,8 +1,5 @@
-using Pla.Lib.UI.DrawingStyles;
-using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Base;
 using Pla.Lib.UI.Widgets.Enums;
-using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets
 {
@@ -11,6 +8,7 @@ namespace Pla.Lib.UI.Widgets
         public Edit() : base(OrnamentType.Modifiable)
         {
             _cursorLocation = 0;
+            ConsmesKeys = true;
         }
 
         private readonly int _cursorLocation;

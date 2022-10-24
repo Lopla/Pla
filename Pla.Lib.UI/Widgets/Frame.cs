@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Pla.Lib.UI.DrawingStyles;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Base;
@@ -40,6 +42,26 @@ namespace Pla.Lib.UI.Widgets
             Parent.RequestResize();
             return widget;
         }
+
+        public Widget FindFirstSelecatableWidget()
+        {
+            var w = 
+                this.Widgets.FirstOrDefault(e=>e is Widget && !(e is IWidgetContainer));
+            if(w!=null)
+            {
+                foreach(var c in this.Widgets.Where(c => c is IWidgetContainer))
+                {
+                    w = (c as IWidgetContainer).FindFirstSelecatableWidget();
+                    if(w!=null)
+                    {
+                        return w;
+                    }
+                }
+            }
+
+            return null;
+        }
+        
 
         public void RequestResize()
         {

@@ -5,7 +5,7 @@ using Frame = Pla.Lib.UI.DrawingStyles.Ami.Ornaments.Frame;
 
 namespace Pla.Lib.UI.DrawingStyles.Ami
 {
-    internal class AmiMagic : IDesign
+    public class AmiMagic : IDesign
     {
         public AmiMagic()
         {

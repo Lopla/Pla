@@ -63,7 +63,22 @@ public partial class PlaControl : UserControl, IEngine
             var key = args.KeyChar;
             sw.OnKey(key);
         };
-        
+
+        var keyCodes = new []{Keys.Down, Keys.Up, Keys.Left, Keys.Right};
+
+        skControl.KeyDown += (sender, args) =>
+        {
+            if(keyCodes.Contains(args.KeyCode))
+                sw.OnControlKey(args.KeyValue);
+        };
+
+        skControl.PreviewKeyDown += (sender, args) =>
+        {
+            if(keyCodes.Contains(args.KeyCode))
+            {
+                args.IsInputKey = true;
+            }
+        };
         ctx.Init(this);
     }
 

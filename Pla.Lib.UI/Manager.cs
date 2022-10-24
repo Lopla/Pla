@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using Pla.Lib.UI.DrawingStyles;
-using Pla.Lib.UI.DrawingStyles.Ami;
-using Pla.Lib.UI.DrawingStyles.LCars;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets;
 using Pla.Lib.UI.Widgets.Base;
@@ -17,10 +15,10 @@ namespace Pla.Lib.UI
         private readonly Frame _rootFrame = new Frame();
         private readonly IDesign _style;
 
-        public Manager(IEngine painter, IDesign style = null)
+        public Manager(IEngine painter, IDesign style)
         {
             _painter = painter;
-            _style = style ?? new AmiMagic();
+            _style = style;
             _rootFrame.Parent = this;
         }
 
@@ -28,7 +26,17 @@ namespace Pla.Lib.UI
 
         public void KeyDown(uint key)
         {
-            Selected?.OnKeyDow(key);
+            if(this.Selected!=null && this.Selected.ConsmesKeys)
+            {
+                Selected?.OnKeyDow(key);
+            }
+            else
+            {
+                if(key=='\t')
+                {
+                    this.Selected = this._rootFrame.FindFirstSelecatableWidget();
+                }
+            }
         }
 
         public void Click(SKPoint argsLocation)
@@ -80,6 +88,11 @@ namespace Pla.Lib.UI
         public void RequestClose()
         {
             _painter.RequestQuit();
+        }
+
+        public Widget FindFirstSelecatableWidget()
+        {
+            return _rootFrame.FindFirstSelecatableWidget();
         }
     }
 }

@@ -12,5 +12,7 @@ namespace Pla.Lib.UI.Interfaces
         void Invalidate();
         void RequestResize();
         FrameStyle Orientation { get; }
+
+        Widget FindFirstSelecatableWidget();
     }
 }

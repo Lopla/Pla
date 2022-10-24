@@ -8,8 +8,8 @@ namespace Pla.App.Pilot
 {
     public class PilotContext : IContext
     {
-        private IEngine _engine = null;
-        private Manager _manager = null;
+        private IEngine _engine = null!;
+        private Manager _manager = null!;
 
         public IControl GetControl()
         {
@@ -24,7 +24,7 @@ namespace Pla.App.Pilot
         public void Init(IEngine engine)
         {
             this._engine = engine;
-            this._manager = new Manager(engine);
+            this._manager = new Manager(engine, new Pla.Lib.UI.DrawingStyles.Ami.AmiMagic());
 
             var container =
                     this._manager

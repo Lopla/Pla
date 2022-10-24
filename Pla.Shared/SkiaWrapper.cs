@@ -1,4 +1,5 @@
-﻿using Pla.Lib;
+﻿using System;
+using Pla.Lib;
 using SkiaSharp;
 
 namespace Pla.Shared
@@ -34,6 +35,11 @@ namespace Pla.Shared
         public void OnKey(uint key)
         {
             _context.GetControl()?.KeyDown(key);
+        }
+
+        public void OnControlKey(int keyValue)
+        {
+            _context.GetControl()?.KeyDown((uint)keyValue);
         }
     }
 }

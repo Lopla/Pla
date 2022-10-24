@@ -1,4 +1,6 @@
-﻿using Pla.Lib.UI.Interfaces;
+﻿using System;
+using System.Threading.Tasks;
+using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Base;
 using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
@@ -8,7 +10,6 @@ namespace Pla.Lib.UI.DrawingStyles
     public class TextActiveElement : IActiveElementPainter
     {
         private readonly SKColor _color;
-
         private readonly SKTypeface _font = SKTypeface.Default;
         private readonly IPalette _palette;
         private readonly TextWidget _textWidget;
@@ -54,6 +55,27 @@ namespace Pla.Lib.UI.DrawingStyles
                 yOffset += textSize.Y;
             }
         }
+
+        class TextCursor{
+            private bool isActive =false;
+            async Task Loop()
+            {
+                while (isActive)
+                {
+                    
+                    //canvasView.InvalidateSurface();
+
+                    await Task.Delay(TimeSpan.FromSeconds(1.0 / 30));
+                }
+            }
+
+            public void Draw(PaintContext paintContext)
+            {
+                
+            }
+        }
+
+        
 
         private SKPaint GetTextPainter(SKTextAlign align = SKTextAlign.Center)
         {

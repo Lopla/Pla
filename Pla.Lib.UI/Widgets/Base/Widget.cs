@@ -9,6 +9,8 @@ namespace Pla.Lib.UI.Widgets.Base
 
         public IWidgetContainer Parent { get; set; } = null;
 
+        public bool ConsmesKeys { get;set; } = false;
+
         public virtual SKPoint CalculateRequestedSize(IDesign style)
         {
             return SKPoint.Empty;
