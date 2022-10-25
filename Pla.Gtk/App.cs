@@ -57,7 +57,7 @@ namespace Pla.Gtk
 
             Add(_sk);
 
-            Show();
+            ShowAll();
         }
 
         public static void PlaMain(IContext ctx)
