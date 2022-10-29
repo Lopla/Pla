@@ -5,7 +5,7 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles
 {
-    internal class FrameActiveElement : IActiveElementPainter
+    internal class FrameActiveElement : IElementPainter
     {
         private readonly IWidgetContainer _container;
 

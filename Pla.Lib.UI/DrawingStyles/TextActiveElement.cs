@@ -7,7 +7,7 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles
 {
-    public class TextActiveElement : IActiveElementPainter
+    public class TextActiveElement : IElementPainter
     {
         private readonly SKColor _color;
         private readonly SKTypeface _font = SKTypeface.Default;

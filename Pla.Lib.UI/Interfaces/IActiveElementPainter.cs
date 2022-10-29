@@ -2,7 +2,7 @@
 
 namespace Pla.Lib.UI.Interfaces
 {
-    public interface IActiveElementPainter
+    public interface IElementPainter
     {
         SKPoint GetSize();
         
