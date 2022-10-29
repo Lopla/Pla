@@ -34,7 +34,7 @@ namespace Pla.Lib.UI
             {
                 if(key=='\t')
                 {
-                    this.Selected = this._rootFrame.FindFirstSelecatableWidget();
+                    this.Selected = this._rootFrame.FindFirstSelectableWidget();
                 }
             }
         }
@@ -92,9 +92,9 @@ namespace Pla.Lib.UI
             _painter.RequestQuit();
         }
 
-        public Widget FindFirstSelecatableWidget()
+        public Widget FindFirstSelectableWidget()
         {
-            return _rootFrame.FindFirstSelecatableWidget();
+            return _rootFrame.FindFirstSelectableWidget();
         }
     }
 }

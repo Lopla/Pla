@@ -43,15 +43,14 @@ namespace Pla.Lib.UI.Widgets
             return widget;
         }
 
-        public Widget FindFirstSelecatableWidget()
+        public Widget FindFirstSelectableWidget()
         {
-            var w = 
-                this.Widgets.FirstOrDefault(e=>e is Widget && !(e is IWidgetContainer));
+            var w = this.Widgets.FirstOrDefault(e=>e != null && !(e is IWidgetContainer));
             if(w!=null)
             {
                 foreach(var c in this.Widgets.Where(c => c is IWidgetContainer))
                 {
-                    w = (c as IWidgetContainer).FindFirstSelecatableWidget();
+                    w = (c as IWidgetContainer)?.FindFirstSelectableWidget();
                     if(w!=null)
                     {
                         return w;
