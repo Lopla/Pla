@@ -10,7 +10,7 @@ namespace Pla.Lib.UI.Widgets.Base
         private readonly OrnamentType _ornamentType;
         
         private string _text;
-
+        
         public TextWidget(OrnamentType ornamentType)
         {
             _ornamentType = ornamentType;
@@ -53,23 +53,14 @@ namespace Pla.Lib.UI.Widgets.Base
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
             var newTextBounds = ornamentedElement.OffsetForInternalBounds(Bounds);
-            GetPainterElement(style).Draw(new PaintContext(newTextBounds, canvas));
+            var paintContext = new PaintContext(newTextBounds, canvas);
+            GetPainterElement(style).Draw(paintContext);
         }
 
         public string[] TextLines()
         {
             return Text?.Split('\r', '\n');
         }
-
-
-        public override void GotFocus()
-        {
-
-        }
-
-        public override void LostFocus()
-        {
-
-        }
+        
     }
 }

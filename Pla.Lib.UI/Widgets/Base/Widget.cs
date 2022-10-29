@@ -14,7 +14,16 @@ namespace Pla.Lib.UI.Widgets.Base
         /// <see cref="Manager.Selected"/> indicates which widget is currently active. Widget can become active when mouse clicks happens.
         /// </summary>
         public bool ConsumeKeys { get;set; } = false;
-
+        
+        /// <summary>
+        /// Helper field to store any information by user. 
+        /// </summary>
+        public object Tag
+        {
+            get;
+            set;
+        }
+        
         public virtual SKPoint CalculateRequestedSize(IDesign style)
         {
             return SKPoint.Empty;
