@@ -175,5 +175,6 @@ namespace Pla.Lib.UI.Widgets
             var ornamentedElement = style.Ornaments.GetSizeAroundElement(painter, _ornamentStyle);
             return ornamentedElement.RequestedSize();
         }
+
     }
 }

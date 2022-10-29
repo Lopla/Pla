@@ -1,24 +1,22 @@
-﻿using System;
-using System.Threading.Tasks;
-using Pla.Lib.UI.Interfaces;
+﻿using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Base;
 using Pla.Lib.UI.Widgets.Enums;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles
 {
-    public class TextActiveElement : IElementPainter
+    public class TextPainter : IElementPainter
     {
         private readonly SKColor _color;
         private readonly SKTypeface _font = SKTypeface.Default;
         private readonly IPalette _palette;
         private readonly TextWidget _textWidget;
 
-        public TextActiveElement(OrnamentType style, TextWidget textWidget, IPalette palette)
+        public TextPainter(TextWidget textWidget, IPalette palette, SKColor color)
         {
             _palette = palette;
             _textWidget = textWidget;
-            _color = _palette.Color(style);
+            _color = color;
         }
 
         public float TextLineHeight { get; set; } = 16;
@@ -55,25 +53,6 @@ namespace Pla.Lib.UI.DrawingStyles
                 yOffset += textSize.Y;
             }
         }
-
-        class TextCursor{
-            private bool isActive =false;
-            async Task Loop()
-            {
-                while (isActive)
-                {
-                    
-                    //canvasView.InvalidateSurface();
-
-                    await Task.Delay(TimeSpan.FromSeconds(1.0 / 30));
-                }
-            }
-
-            public void Draw(PaintContext paintContext)
-            {
-                
-            }
-        }
         
         private SKPaint GetTextPainter(SKTextAlign align = SKTextAlign.Center)
         {
@@ -89,10 +68,11 @@ namespace Pla.Lib.UI.DrawingStyles
         public SKPoint CalculateTextSize(string text)
         {
             SKRect bounds = default;
-            var painter = GetTextPainter();
-            painter.MeasureText(text, ref bounds);
-
-            return new SKPoint(bounds.Width, painter.FontSpacing);
+            using (var painter = GetTextPainter())
+            {
+                painter.MeasureText(text, ref bounds);
+                return new SKPoint(bounds.Width, painter.FontSpacing);
+            }
         }
 
         private void LineOfText(PaintContext context, string text, SKTextAlign align, SKColor color)

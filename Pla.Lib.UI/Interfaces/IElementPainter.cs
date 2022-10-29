@@ -8,4 +8,10 @@ namespace Pla.Lib.UI.Interfaces
         
         void Draw(PaintContext paintContext);
     }
+
+    public interface IActiveElementPainter : IElementPainter
+    {
+        void SetFocus();
+        void LooseFocus();
+    }
 }

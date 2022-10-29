@@ -16,9 +16,12 @@ namespace Pla.Lib.UI.Widgets.Base
             _ornamentType = ornamentType;
         }
 
-        TextActiveElement GetPainterElement(IDesign style)
+        TextPainter GetPainterElement(IDesign style)
         {
-            return new TextActiveElement(_ornamentType, this, style.Palette);
+            return new TextPainter(
+                this, 
+                style.Palette, 
+                style.Palette.Color(_ornamentType));
         }
 
         public string Text
@@ -56,6 +59,17 @@ namespace Pla.Lib.UI.Widgets.Base
         public string[] TextLines()
         {
             return Text?.Split('\r', '\n');
+        }
+
+
+        public override void GotFocus()
+        {
+
+        }
+
+        public override void LostFocus()
+        {
+
         }
     }
 }
