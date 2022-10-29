@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Pla.Gtk</PackageId>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>Paweł Gałęzowski</Authors>
     <Company>lagcorp</Company>
     <Description>Starter package that allows easy running pla platform as stand alone desktop application.</Description>
