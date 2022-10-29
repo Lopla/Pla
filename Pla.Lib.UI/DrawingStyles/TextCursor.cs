@@ -1,61 +1,54 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Pla.Lib.UI.Widgets.Base;
 using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles
 {
-    class TextCursor
+    internal class TextCursor
     {
-        private readonly Widget _w;
+        private readonly Widget _widgetWithText;
+        private bool _isActivated;
 
-        public TextCursor(Widget w)
+        public TextCursor(Widget widgetWithText)
         {
-            _w = w;
+            _widgetWithText = widgetWithText;
         }
-        private bool isActived = false;
-        private TaskAwaiter redrawLoop;
 
-        async Task Loop()
+        public bool Blink { get; set; } = true;
+
+        private async Task Loop()
         {
-            while (isActived)
+            while (_isActivated)
             {
-                _w.Parent.Invalidate();
+                _widgetWithText.Parent.Invalidate();
 
-                this.Blink = !this.Blink;
+                Blink = !Blink;
 
                 await Task.Delay(TimeSpan.FromMilliseconds(250));
             }
         }
 
-        public bool Blink { get; set; } = true;
-
         public void Draw(PaintContext paintContext)
         {
-            if(isActived)
-            {
-                paintContext.Canvas.DrawCircle(paintContext.Bounds.MidX, paintContext.Bounds.MidY,10, new SKPaint()
+            if (_isActivated)
+                paintContext.Canvas.DrawCircle(paintContext.Bounds.MidX, paintContext.Bounds.MidY, 10, new SKPaint
                 {
-                    Color = 
-                        Blink ? 
-                            new SKColor(100,100,100):
-                            new SKColor(0,0,0),
-
+                    Color =
+                        Blink ? new SKColor(100, 100, 100) : new SKColor(0, 0, 0)
                 });
-            }
         }
 
         public void Active(bool isActive)
         {
             if (isActive)
             {
-                isActived = true;
-                this.redrawLoop = Loop().GetAwaiter();
+                _isActivated = true;
+                Loop().GetAwaiter();
             }
             else
             {
-                isActived = false;
+                _isActivated = false;
             }
         }
     }
