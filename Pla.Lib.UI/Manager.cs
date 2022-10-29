@@ -26,7 +26,7 @@ namespace Pla.Lib.UI
 
         public void KeyDown(uint key)
         {
-            if(this.Selected!=null && this.Selected.ConsmesKeys)
+            if(this.Selected!=null && this.Selected.ConsumeKeys)
             {
                 Selected?.OnKeyDow(key);
             }

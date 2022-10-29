@@ -8,12 +8,21 @@ namespace Pla.Lib.UI.Widgets
         public Edit() : base(OrnamentType.Modifiable)
         {
             _cursorLocation = 0;
-            ConsmesKeys = true;
+            ConsumeKeys = true;
         }
 
         private readonly int _cursorLocation;
         private bool _hasFocus;
-        
+
+        /// <summary>
+        /// Helper field to store any information by user. 
+        /// </summary>
+        public object Tag
+        {
+            get;
+            set;
+        }
+
         public override void OnKeyDow(uint key)
         {
             switch (key)
