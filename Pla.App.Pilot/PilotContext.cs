@@ -34,9 +34,30 @@ namespace Pla.App.Pilot
             ShowLabelAndSelectedWidgetEvent(container);
             Editor(container);
             AddButton(container);
-            LotsOfFrames(container);
 
-            //this._engine.RequestTransparentWindow();
+            container.AddWidget(new Button()
+            {
+                Text = "Add lot's of strange frames",
+            }).ClickedHandler += point =>
+            {
+                LotsOfFrames(container);
+            };
+
+            container.AddWidget(new Button()
+            {
+                Text = "Request transparency",
+            }).ClickedHandler += point =>
+            {
+                this._engine.SwitchTransparentWindow(true);
+            };
+
+            container.AddWidget(new Button()
+            {
+                Text = "Disable transparency",
+            }).ClickedHandler += point =>
+            {
+                this._engine.SwitchTransparentWindow(false);
+            };
         }
 
         private void AddButton(IWidgetContainer container)

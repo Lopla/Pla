@@ -61,22 +61,14 @@ namespace Pla.Lib.UI.Widgets
 
             return null;
         }
-        
+
 
         public void RequestResize()
         {
-            if (Parent is Manager)
-            {
-                RecalculateControls();
-                Invalidate();
-            }
-            else
-            {
-                Parent.RequestResize();
-            }
+            Parent.RequestResize();
         }
 
-        private void RecalculateControls()
+        public void RecalculateControls()
         {
             if (Parent is Manager m)
             {

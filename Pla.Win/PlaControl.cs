@@ -11,15 +11,19 @@ public partial class PlaControl : UserControl, IEngine
         InitializeComponent();
     }
 
-    public bool RequestTransparentWindow()
+    public void SwitchTransparentWindow(bool transparent = true)
     {
         if (this.Parent is PlaWindow wnd)
         {
-            wnd.SetTransparent();
-            return true;
+            if (transparent)
+            {
+                wnd.SetTransparent();
+            }
+            else
+            {
+                wnd.DisableTransparent();
+            }
         }
-
-        return false;
     }
 
     public void RequestRefresh()

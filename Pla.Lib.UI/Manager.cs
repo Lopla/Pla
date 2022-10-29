@@ -74,6 +74,8 @@ namespace Pla.Lib.UI
 
         public void RequestResize()
         {
+            _rootFrame.RecalculateControls();
+            Invalidate();
         }
 
         public FrameStyle Orientation => _rootFrame.Orientation;

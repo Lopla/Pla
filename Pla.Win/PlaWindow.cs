@@ -4,6 +4,8 @@ namespace Pla.Win;
 
 public partial class PlaWindow : Form
 {
+    private Color _bforeTransparent;
+
     public PlaWindow()
     {
         InitializeComponent();
@@ -17,7 +19,15 @@ public partial class PlaWindow : Form
     public void SetTransparent()
     {
         BackColor = Color.LimeGreen;
-        TransparencyKey = Color.LimeGreen;
+        TransparencyKey = BackColor;
         FormBorderStyle = FormBorderStyle.None;
     }
+
+    public void DisableTransparent()
+    {
+        BackColor = this._bforeTransparent;
+        TransparencyKey = Color.LimeGreen;
+        FormBorderStyle = FormBorderStyle.Sizable;
+    }
+
 }
