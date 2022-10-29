@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace Pla.Lib.UI.Interfaces
 {

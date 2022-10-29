@@ -74,9 +74,7 @@ namespace Pla.Lib.UI.DrawingStyles
                 
             }
         }
-
         
-
         private SKPaint GetTextPainter(SKTextAlign align = SKTextAlign.Center)
         {
             return new SKPaint

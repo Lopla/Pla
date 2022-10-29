@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Enums;
-using Frame = Pla.Lib.UI.DrawingStyles.Ami.Ornaments.Frame;
+using SolidFrame = Pla.Lib.UI.DrawingStyles.Ami.Ornaments.SolidFrame;
 
 namespace Pla.Lib.UI.DrawingStyles.Ami
 {
@@ -20,10 +20,10 @@ namespace Pla.Lib.UI.DrawingStyles.Ami
         {
             var d = new Dictionary<OrnamentType, IOrnamentPainter>
             {
-                { OrnamentType.WidgetContainer, new Frame(this, accentAround: false, Frame.FrameStyle.Sunken) },
-                { OrnamentType.Active, new Frame(this, true, Frame.FrameStyle.Raised) },
-                { OrnamentType.Modifiable, new Frame(this, true, Frame.FrameStyle.Sunken) },
-                { OrnamentType.Visible, new Frame(this, false, Frame.FrameStyle.None) }
+                { OrnamentType.WidgetContainer, new SolidFrame(this, accentAround: false, SolidFrame.FrameStyle.Sunken) },
+                { OrnamentType.Active, new SolidFrame(this, true, SolidFrame.FrameStyle.Raised) },
+                { OrnamentType.Modifiable, new SolidFrame(this, true, SolidFrame.FrameStyle.Sunken) },
+                { OrnamentType.Visible, new SolidFrame(this, false, SolidFrame.FrameStyle.None) }
             };
 
             return d[type];
