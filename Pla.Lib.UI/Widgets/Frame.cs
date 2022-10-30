@@ -33,6 +33,8 @@ namespace Pla.Lib.UI.Widgets
         public void Remove(Widget widget)
         {
             this._widgets.Remove(widget);
+
+            Parent.RequestResize();
         }
 
         public void Invalidate()
