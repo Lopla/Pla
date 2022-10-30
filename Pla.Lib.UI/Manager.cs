@@ -67,6 +67,11 @@ namespace Pla.Lib.UI
             return widget;
         }
 
+        public void Remove(Widget widget)
+        {
+            this._rootFrame.Remove(widget);
+        }
+
         public void Invalidate()
         {
             _painter.RequestRefresh();

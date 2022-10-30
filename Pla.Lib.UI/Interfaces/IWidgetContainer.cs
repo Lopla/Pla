@@ -20,6 +20,8 @@ namespace Pla.Lib.UI.Interfaces
         /// <returns></returns>
         Widget Add(Widget widget);
 
+        void Remove(Widget widget);
+
         /// <summary>
         /// Request for all kids within this widget container, and the widget container itself.
         /// </summary>

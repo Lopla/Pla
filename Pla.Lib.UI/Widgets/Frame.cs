@@ -30,6 +30,11 @@ namespace Pla.Lib.UI.Widgets
 
         public FrameStyle Orientation { get; }
 
+        public void Remove(Widget widget)
+        {
+            this._widgets.Remove(widget);
+        }
+
         public void Invalidate()
         {
             Parent.Invalidate();
