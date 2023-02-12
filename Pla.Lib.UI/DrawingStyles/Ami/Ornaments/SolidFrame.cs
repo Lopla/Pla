@@ -3,7 +3,7 @@ using SkiaSharp;
 
 namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
 {
-    public class Frame : IOrnamentPainter
+    public class SolidFrame : IOrnamentPainter
     {
         private readonly IDesign _palette;
         private readonly bool _accentAround;
@@ -16,7 +16,7 @@ namespace Pla.Lib.UI.DrawingStyles.Ami.Ornaments
             None
         }
 
-        public Frame(IDesign style, bool accentAround=true, FrameStyle frameStyling = FrameStyle.None)
+        public SolidFrame(IDesign style, bool accentAround=true, FrameStyle frameStyling = FrameStyle.None)
         {
             _palette = style;
             _accentAround = accentAround;

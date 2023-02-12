@@ -30,6 +30,13 @@ namespace Pla.Lib.UI.Widgets
 
         public FrameStyle Orientation { get; }
 
+        public void Remove(Widget widget)
+        {
+            this._widgets.Remove(widget);
+
+            Parent.RequestResize();
+        }
+
         public void Invalidate()
         {
             Parent.Invalidate();
@@ -43,15 +50,14 @@ namespace Pla.Lib.UI.Widgets
             return widget;
         }
 
-        public Widget FindFirstSelecatableWidget()
+        public Widget FindFirstSelectableWidget()
         {
-            var w = 
-                this.Widgets.FirstOrDefault(e=>e is Widget && !(e is IWidgetContainer));
+            var w = this.Widgets.FirstOrDefault(e=>e != null && !(e is IWidgetContainer));
             if(w!=null)
             {
                 foreach(var c in this.Widgets.Where(c => c is IWidgetContainer))
                 {
-                    w = (c as IWidgetContainer).FindFirstSelecatableWidget();
+                    w = (c as IWidgetContainer)?.FindFirstSelectableWidget();
                     if(w!=null)
                     {
                         return w;
@@ -61,22 +67,14 @@ namespace Pla.Lib.UI.Widgets
 
             return null;
         }
-        
+
 
         public void RequestResize()
         {
-            if (Parent is Manager)
-            {
-                RecalculateControls();
-                Invalidate();
-            }
-            else
-            {
-                Parent.RequestResize();
-            }
+            Parent.RequestResize();
         }
 
-        private void RecalculateControls()
+        public void RecalculateControls()
         {
             if (Parent is Manager m)
             {
@@ -184,5 +182,6 @@ namespace Pla.Lib.UI.Widgets
             var ornamentedElement = style.Ornaments.GetSizeAroundElement(painter, _ornamentStyle);
             return ornamentedElement.RequestedSize();
         }
+
     }
 }

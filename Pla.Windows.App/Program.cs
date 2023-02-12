@@ -1,6 +1,4 @@
-using Pla.App;
 using Pla.App.Pilot;
-using Pla.Win;
 
 namespace Pla.Windows.App
 {

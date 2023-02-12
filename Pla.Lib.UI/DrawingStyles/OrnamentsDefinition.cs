@@ -33,7 +33,7 @@ namespace Pla.Lib.UI.DrawingStyles
         ///     Grow ornaments around this element
         /// </summary>
         /// <returns></returns>
-        public OrnamentBounds GetSizeAroundElement(IActiveElementPainter internalElement,
+        public OrnamentBounds GetSizeAroundElement(IElementPainter internalElement,
             OrnamentType ornamentType)
         {
             return Ornaments[ornamentType].GetSizeAroundElement(internalElement.GetSize());

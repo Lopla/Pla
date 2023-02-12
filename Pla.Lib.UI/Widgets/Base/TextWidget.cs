@@ -10,15 +10,18 @@ namespace Pla.Lib.UI.Widgets.Base
         private readonly OrnamentType _ornamentType;
         
         private string _text;
-
+        
         public TextWidget(OrnamentType ornamentType)
         {
             _ornamentType = ornamentType;
         }
 
-        TextActiveElement GetPainterElement(IDesign style)
+        TextPainter GetPainterElement(IDesign style)
         {
-            return new TextActiveElement(_ornamentType, this, style.Palette);
+            return new TextPainter(
+                this, 
+                style.Palette, 
+                style.Palette.Color(_ornamentType));
         }
 
         public string Text
@@ -50,12 +53,14 @@ namespace Pla.Lib.UI.Widgets.Base
                 .Draw(new PaintContext(Bounds, canvas), _ornamentType);
 
             var newTextBounds = ornamentedElement.OffsetForInternalBounds(Bounds);
-            GetPainterElement(style).Draw(new PaintContext(newTextBounds, canvas));
+            var paintContext = new PaintContext(newTextBounds, canvas);
+            GetPainterElement(style).Draw(paintContext);
         }
 
         public string[] TextLines()
         {
             return Text?.Split('\r', '\n');
         }
+        
     }
 }

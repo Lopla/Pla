@@ -26,7 +26,7 @@ namespace Pla.Lib.UI
 
         public void KeyDown(uint key)
         {
-            if(this.Selected!=null && this.Selected.ConsmesKeys)
+            if(this.Selected!=null && this.Selected.ConsumeKeys)
             {
                 Selected?.OnKeyDow(key);
             }
@@ -34,7 +34,7 @@ namespace Pla.Lib.UI
             {
                 if(key=='\t')
                 {
-                    this.Selected = this._rootFrame.FindFirstSelecatableWidget();
+                    this.Selected = this._rootFrame.FindFirstSelectableWidget();
                 }
             }
         }
@@ -67,6 +67,11 @@ namespace Pla.Lib.UI
             return widget;
         }
 
+        public void Remove(Widget widget)
+        {
+            this._rootFrame.Remove(widget);
+        }
+
         public void Invalidate()
         {
             _painter.RequestRefresh();
@@ -74,6 +79,8 @@ namespace Pla.Lib.UI
 
         public void RequestResize()
         {
+            _rootFrame.RecalculateControls();
+            Invalidate();
         }
 
         public FrameStyle Orientation => _rootFrame.Orientation;
@@ -90,9 +97,9 @@ namespace Pla.Lib.UI
             _painter.RequestQuit();
         }
 
-        public Widget FindFirstSelecatableWidget()
+        public Widget FindFirstSelectableWidget()
         {
-            return _rootFrame.FindFirstSelecatableWidget();
+            return _rootFrame.FindFirstSelectableWidget();
         }
 
 

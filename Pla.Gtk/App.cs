@@ -82,9 +82,10 @@ namespace Pla.Gtk
             };
         }
 
-        public bool RequestTransparentWindow()
+        public void SwitchTransparentWindow(bool transaprent)
         {
-            throw new System.NotImplementedException();
+            if(transaprent)
+                throw new System.NotImplementedException();
         }
 
         public void RequestRefresh(){

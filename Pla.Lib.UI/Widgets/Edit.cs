@@ -1,5 +1,8 @@
+using Pla.Lib.UI.DrawingStyles;
+using Pla.Lib.UI.Interfaces;
 using Pla.Lib.UI.Widgets.Base;
 using Pla.Lib.UI.Widgets.Enums;
+using SkiaSharp;
 
 namespace Pla.Lib.UI.Widgets
 {
@@ -8,12 +11,14 @@ namespace Pla.Lib.UI.Widgets
         public Edit() : base(OrnamentType.Modifiable)
         {
             _cursorLocation = 0;
-            ConsmesKeys = true;
+            ConsumeKeys = true;
+
+            _textCursor = new TextCursor(this);
         }
 
         private readonly int _cursorLocation;
-        private bool _hasFocus;
-        
+        private readonly TextCursor _textCursor;
+
         public override void OnKeyDow(uint key)
         {
             switch (key)
@@ -32,14 +37,21 @@ namespace Pla.Lib.UI.Widgets
 
         public override void GotFocus()
         {
-            _hasFocus = true;
+            this._textCursor.Active(true);
             Parent.Invalidate();
         }
 
         public override void LostFocus()
         {
-            _hasFocus = false;
+            this._textCursor.Active(false);
             Parent.Invalidate();
+
+        }
+
+        public override void Draw(SKCanvas canvas, IDesign style)
+        {
+            base.Draw(canvas, style);
+            _textCursor.Draw(new PaintContext(this, canvas, false));
         }
     }
 }

@@ -9,8 +9,21 @@ namespace Pla.Lib.UI.Widgets.Base
 
         public IWidgetContainer Parent { get; set; } = null;
 
-        public bool ConsmesKeys { get;set; } = false;
-
+        /// <summary>
+        /// If this is true, then keyboard events are send to this control. <see cref="OnKeyDow"/> method is called on each keystroke if this widget is currently selected.
+        /// <see cref="Manager.Selected"/> indicates which widget is currently active. Widget can become active when mouse clicks happens.
+        /// </summary>
+        public bool ConsumeKeys { get;set; } = false;
+        
+        /// <summary>
+        /// Helper field to store any information by user. 
+        /// </summary>
+        public object Tag
+        {
+            get;
+            set;
+        }
+        
         public virtual SKPoint CalculateRequestedSize(IDesign style)
         {
             return SKPoint.Empty;

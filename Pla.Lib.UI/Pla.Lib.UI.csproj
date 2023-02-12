@@ -1,20 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-
 	<TargetFramework>netstandard2.0</TargetFramework>
-    
     <PackageId>Pla.Lib.UI</PackageId>
-    <Version>1.0.11</Version>
+    <Version>1.0.18</Version>
     <Authors>Paweł Gałęzowski</Authors>
     <Company>lagcorp</Company>
     <Description>UI based on Pla lib</Description>
-    
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="LCars.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="2.88.3" />
